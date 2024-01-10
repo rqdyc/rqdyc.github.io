@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>图论学习笔记1——最短路（作业表4） | DYC的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="最短路算法Floyd-Warshall求全源最短路径。 流程： 设 $dp_{k,i,j}$ 为经过 $1$ 到 $k$ 点的 $i,j$ 之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程： $$dp_{k,i,j} &#x3D; dp_{k-1,i,k} + dp_{k-1,k,j}$$ 可以滚动掉一维，设 $dp_{i,j}$ 为 $i,j$ 之间的最短路，于是就有： $$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论学习笔记1——最短路（作业表4）">
+<meta property="og:url" content="http://example.com/2024/01/10/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%EF%BC%89/index.html">
+<meta property="og:site_name" content="DYC的Blog">
+<meta property="og:description" content="最短路算法Floyd-Warshall求全源最短路径。 流程： 设 $dp_{k,i,j}$ 为经过 $1$ 到 $k$ 点的 $i,j$ 之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程： $$dp_{k,i,j} &#x3D; dp_{k-1,i,k} + dp_{k-1,k,j}$$ 可以滚动掉一维，设 $dp_{i,j}$ 为 $i,j$ 之间的最短路，于是就有： $$">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png">
+<meta property="article:published_time" content="2024-01-10T04:30:17.000Z">
+<meta property="article:modified_time" content="2024-01-10T04:30:38.779Z">
+<meta property="article:author" content="Yucheng Deng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="DYC的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">DYC的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-图论学习笔记1——最短路（作业表4）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/10/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-01-10T04:30:17.000Z" itemprop="datePublished">2024-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      图论学习笔记1——最短路（作业表4）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h1><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="Floyd-Warshall"><a href="#Floyd-Warshall" class="headerlink" title="Floyd-Warshall"></a>Floyd-Warshall</h3><p>求全源最短路径。</p>
+<p>流程：</p>
+<p>设 $dp_{k,i,j}$ 为经过 $1$ 到 $k$ 点的 $i,j$ 之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程：</p>
+<p>$$dp_{k,i,j} &#x3D; dp_{k-1,i,k} + dp_{k-1,k,j}$$</p>
+<p>可以滚动掉一维，设 $dp_{i,j}$ 为 $i,j$ 之间的最短路，于是就有：</p>
+<p>$$dp_{i,j} &#x3D; \min \limits_{1 \le k \le n} {dp_{i,k} + dp_{k,j}}$$</p>
+<p><strong>注意：顺序为 $k,i,j$，顺序可调换，循环 $6$ 次也能得出答案。</strong></p>
+<p>时间复杂度 $O(n^3)$。</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>求单源最短路径。</p>
+<p>本质：贪心+BFS+DP。</p>
+<p>流程：</p>
+<p>设起点为 $s$，令 $dis_i &#x3D; +\infty(i \in n)$，并将 $dis_s$ 设为 $0$。</p>
+<p>每一次，寻找 $n$ 个点中 $dis_i$ 的最小值，并用这个最小值去更新它周围的边。</p>
+<p>正确性证明：在正权图中，以当前权值最小的点去更新其他点，令有一点去更新会更优而又不是权值最小的点，因为边权为正，他更新一个点所花的花费会大于一个更近且权值更小的点，所以应用权值更小的点去更新，矛盾，故得证。</p>
+<p>时间复杂度 $O(n^2)$（找最小点 $O(n)$，更新 $n$ 次 $O(n)$）。</p>
+<p>可以用优先队列来找 $dis_i$ 的最小值，时间复杂度可以优化到 $O(m \log m)$。</p>
+<p><strong>注意：不能处理含有负权边的图。</strong></p>
+<h3 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h3><p>让起点 $dis_s &#x3D; 0$。对每个点进行 $n-1$ 次松弛操作，可得到关于 $s$ 的单源最短路。</p>
+<p>正确性证明：在图 $G(V,E)$ 中，令一点 $v \neq s$ ，则到达 $v$ 的最短路至多经过 $n-1$ 个点，亦能通过 $n-1$ 次松弛（递推更新）去更新到点 $v$，得证。</p>
+<p>时间复杂度 $O(nm)$。</p>
+<p><strong>注意：可以处理含有负权边的图，且可以找负环。</strong></p>
+<h3 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h3><p>是 Bellman-Ford 算法的优化。</p>
+<p>由于每次松弛操作都会有很多的<strong>不必要</strong>的边被松弛，于是我们可以只松弛<strong>那些被松驰过了的点</strong>的边。</p>
+<p>期望复杂度约为 $O(kE)$，其中 $k$ 是一个常数，但<strong>最坏</strong>复杂度为 $O(nm)$（也就是退化为 Bellman-Ford 算法）。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="C-【USACO4-1-3】Fence-Loops篱笆回路"><a href="#C-【USACO4-1-3】Fence-Loops篱笆回路" class="headerlink" title="C 【USACO4.1.3】Fence Loops篱笆回路"></a>C 【USACO4.1.3】Fence Loops篱笆回路</h3><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2738">Link Luogu</a></p>
+<p>这个题要求最小环，首先将点给离散化出来。要找最小环，因为数据范围很小，考虑 Floyd-Warshall 算法，我们不妨正好在枚举 $k$ 的时候，因为 $dp_{i,j}$ 没有更新，所以当前的 $dp_{i,k}+dp_{k,j}$ 的路线肯定不会是 $dp_{i,j}$ 的路线（如下图），所以我们可以用 $dp_{i,j}+dp_{i,k}+dp_{k,j}$ 去更新最小环长度。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/139791257">AC code</a></p>
+<h3 id="W-最短路"><a href="#W-最短路" class="headerlink" title="W 最短路"></a>W 最短路</h3><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1163/F">Link Codeforces</a> ans <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1163F">Link Luogu</a></p>
+<p>本题求的是在正权图 $G(V,E)$ 中，选择一条边并更新他的边权，并对于每个询问求其修改后 $1 \to n$ 的最短路。</p>
+<p>不妨分类讨论：</p>
+<ol>
+<li>当这条被修改的边不在最短路上时，修改后的答案要么是原先的最短路，要么是从起点或终点到这条边的一端再从另一端出来的路径长度，因为如果我们考虑不经过这条边的路径长度，它们肯定是比原先求出的最短路要大，然后就只能考虑经过这条边。经过这条边显然最短的路径长度就是两端点到起点和终点的距离加上这条边自身的边权（如下图）。</li>
+</ol>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png"></p>
+<ol start="2">
+<li><p>如果这条边本身就在最短路上：</p>
+<ol>
+<li><p>这条边比原来的边要短，那肯定最短路就是原来的最短路减去这条边现在比以前短的长度。</p>
+</li>
+<li><p>这条边比原来的边要长，这个有点难考虑，我会从以下方面说明：</p>
+<ul>
+<li><p>引理一：在正权图 $G(V,E)$ 中最短路一定是一条链</p>
+<p>  证明：最短路因为要保证最短性，且图是正权图，不可能有 $0$ 环或负环，所以在最短路上一定不可能有环，得证。</p>
+</li>
+<li><p>引理二：在正权图 $G(V,E)$ 中，从起点 $s$ 出发，到达点 $t$，则路径 $s \to t$ 必与其他从 $s$ 出发的路径共享一段前缀。</p>
+<p>  证明：假设这条<strong>最短</strong>路径它的共享的前缀中间有间隔，且产生作用与原最短路相等。由于中间间隔的部分又回到了最短路上，所以更新后面的点就无须考虑，而前面的由于一个点的最短路大小固定，所以两条边中必定有一个边权是要大于另一个，所以互相矛盾，得证。</p>
+</li>
+<li><p>引理三：令集合 $S$ 为最短路上的点的点集，则含有两个点的点集 $S’ &#x3D; {u,v}$ 满足 $S \cap S’ &#x3D; \varnothing$，满足在 $1 \to u$ 与最短路的前缀在最短路上的最后一个点和 $v \to n$ 与最短路的后缀在最短路上的最后一个点中间的最短路上的边任删一条而它的删边最短路为 $dis_{1 \to u} + dis_{u \to v} + dis_{v \to n}$，如果有多个就取最小值。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/10/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%EF%BC%89/" data-id="clr7a26mc0007m8f46dlqb22w" data-title="图论学习笔记1——最短路（作业表4）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/01/10/P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          P3736 [HAOI2016] 字符合并 题解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/01/10/P4513-%E5%B0%8F%E7%99%BD%E9%80%9B%E5%85%AC%E5%9B%AD-%E9%A2%98%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">P4513 小白逛公园 题解~</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/10/P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/">P3736 [HAOI2016] 字符合并 题解</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/10/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%EF%BC%89/">图论学习笔记1——最短路（作业表4）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/10/P4513-%E5%B0%8F%E7%99%BD%E9%80%9B%E5%85%AC%E5%9B%AD-%E9%A2%98%E8%A7%A3/">P4513 小白逛公园 题解~</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/10/9-24-10-5-%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/">9.24-10.5 期间总结</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/10/9.24-10.5%20%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Yucheng Deng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
