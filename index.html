@@ -93,26 +93,77 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3736">传送门</a></p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>题目要求一段数<strong>合并</strong>后的最大分数，看到合并，且 $n$ 的范围才 $300$，自然的想到复杂度 $O(n^3)$ 的区间 dp。</p>
-<p>注意到 $k$ 的范围很小，我们就可以想到复杂度为 $O(2^k)$ 状压，状压字符当前的状态。</p>
-<p>结合起来，$dp_{i,j,s}$ 表示区间 <code>[i,j]</code> 合并后状态为 $s$，有 $O(n^3 2^k)$ 的暴力，显然易见会超时，这时我们就要找合并的性质。</p>
-<p>不妨假设一段长度为 $t$ 的 <code>01</code> 序列，显然易见，当 $t &#x3D; k$ 时，合并次数为 $1$。</p>
-<p>假设合并完一次后，得到的长度为 $1$，如果再想合并一次，就要让合并完后的长度 $1$ 加上另一端区间的长度 $t_1$ 的和为 $k$，那显然 $t_1 &#x3D; k-1$。合并后的长度为 $1$。</p>
-<p>然后，再合并一次，那么 $t_2 &#x3D; k-1$。合并后的长度仍为 $1$。</p>
-<p>显然，如果继续合并，那么会有无数个 $k-1$ 被合并，那么就有 $t_n &#x3D; k-1$，那么能够合并为长度为 $1$ 的区间的原长度就为 $\sum \limits_{i &#x3D; 1}^{n}{t_i}+1 \to n(k-1) + 1$。</p>
-<p>扩展一下，如果一个字符串长度为 $l_1$，合并后的长度为 $l_2$，那么根据上述方程，就有合并后的长度 $l_2 &#x3D; (l_1 - 1) \bmod (k-1) + 1$，于是枚举 $l$ 的时候就不用每个都枚举，每次从右往左依次减去 $k-1$。</p>
+        <h1 id="传送门">传送门</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3736">传送门</a></p>
+<h1 id="思路">思路</h1>
+<p>题目要求一段数<strong>合并</strong>后的最大分数，看到合并，且 <span
+class="math inline">\(n\)</span> 的范围才 <span
+class="math inline">\(300\)</span>，自然的想到复杂度 <span
+class="math inline">\(O(n^3)\)</span> 的区间 dp。</p>
+<p>注意到 <span class="math inline">\(k\)</span>
+的范围很小，我们就可以想到复杂度为 <span
+class="math inline">\(O(2^k)\)</span> 状压，状压字符当前的状态。</p>
+<p>结合起来，<span class="math inline">\(dp_{i,j,s}\)</span> 表示区间
+<code>[i,j]</code> 合并后状态为 <span
+class="math inline">\(s\)</span>，有 <span class="math inline">\(O(n^3
+2^k)\)</span> 的暴力，显然易见会超时，这时我们就要找合并的性质。</p>
+<p>不妨假设一段长度为 <span class="math inline">\(t\)</span> 的
+<code>01</code> 序列，显然易见，当 <span class="math inline">\(t =
+k\)</span> 时，合并次数为 <span class="math inline">\(1\)</span>。</p>
+<p>假设合并完一次后，得到的长度为 <span
+class="math inline">\(1\)</span>，如果再想合并一次，就要让合并完后的长度
+<span class="math inline">\(1\)</span> 加上另一端区间的长度 <span
+class="math inline">\(t_1\)</span> 的和为 <span
+class="math inline">\(k\)</span>，那显然 <span class="math inline">\(t_1
+= k-1\)</span>。合并后的长度为 <span
+class="math inline">\(1\)</span>。</p>
+<p>然后，再合并一次，那么 <span class="math inline">\(t_2 =
+k-1\)</span>。合并后的长度仍为 <span
+class="math inline">\(1\)</span>。</p>
+<p>显然，如果继续合并，那么会有无数个 <span
+class="math inline">\(k-1\)</span> 被合并，那么就有 <span
+class="math inline">\(t_n = k-1\)</span>，那么能够合并为长度为 <span
+class="math inline">\(1\)</span> 的区间的原长度就为 <span
+class="math inline">\(\sum \limits_{i = 1}^{n}{t_i}+1 \to n(k-1) +
+1\)</span>。</p>
+<p>扩展一下，如果一个字符串长度为 <span
+class="math inline">\(l_1\)</span>，合并后的长度为 <span
+class="math inline">\(l_2\)</span>，那么根据上述方程，就有合并后的长度
+<span class="math inline">\(l_2 = (l_1 - 1) \bmod (k-1) +
+1\)</span>，于是枚举 <span class="math inline">\(l\)</span>
+的时候就不用每个都枚举，每次从右往左依次减去 <span
+class="math inline">\(k-1\)</span>。</p>
 <p>所以显然易见 dp 方程就为：</p>
-<p>$$<br>\begin{cases}<br>  dp_{i,j,2s} &#x3D; \max \limits_{i \le l &lt; j,(j - 1 - l)\bmod( k - 1) &#x3D; 0} { dp_{i,l,s} + dp_{l+1,j,0} } \<br>  dp_{i,j,(2s) \vee 1} &#x3D; \max \limits_{i \le l &lt; j,(j - 1 - l)\bmod( k - 1) &#x3D; 0} { dp_{i,l,s} + dp_{l+1,j,1} }<br>\end{cases}<br>$$</p>
-<p>特别的，当一段区间合并后的长度为 $1$ 时，可以将所有的状态合并为一个字符，也就是：</p>
-<p>$$<br>\begin{cases}<br>  dp_{i,j,0} &#x3D; \max \limits_{0 \le s \le 2^k-1,r_s &#x3D; 0}{dp_{i,j,s}+w_s } \<br>  dp_{i,j,1} &#x3D; \max \limits_{0 \le s \le 2^k-1,r_s &#x3D; 1}{dp_{i,j,s}+w_s }<br>\end{cases}<br>$$</p>
-<p>这里的 $r_s$ 表示状态为 $s$ 的字符串合并后的答案，$w_s$ 表示合并得到的分数，注意要开辅助数组储存。</p>
-<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="type">const</span> ll N=<span class="number">310</span>;</span><br><span class="line"><span class="type">const</span> ll K=<span class="number">7</span>;</span><br><span class="line"><span class="type">bool</span> sum[N];</span><br><span class="line"><span class="function">ll <span class="title">getsum</span><span class="params">(ll i,ll j)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&gt;j)<span class="built_in">swap</span>(i,j);</span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll k=j,q=<span class="number">0</span>; k&gt;=i; k--,q++) &#123;</span><br><span class="line">		ans+=(sum[k])*(<span class="number">1</span>&lt;&lt;q);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">wes</span><span class="params">(<span class="type">unsigned</span> ll x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">32</span>-__builtin_clz(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调试 </span></span><br><span class="line">ll n,kk;</span><br><span class="line">ll dp[N][N][<span class="number">1</span>&lt;&lt;(K+<span class="number">1</span>)|<span class="number">1</span>];</span><br><span class="line">ll str[<span class="number">1</span>&lt;&lt;(K+<span class="number">1</span>)|<span class="number">1</span>];</span><br><span class="line"><span class="type">bool</span> tr[(<span class="number">1</span>&lt;&lt;(K+<span class="number">1</span>))|<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;kk;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(ll j=<span class="number">1</span>; j&lt;=n; j++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;kk)<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">				dp[i][j][s]=<span class="number">-1145141919810ll</span>;<span class="comment">//初始化 </span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		cin&gt;&gt;sum[i];</span><br><span class="line">		dp[i][i][sum[i]]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=(<span class="number">1</span>&lt;&lt;kk); i++) &#123;</span><br><span class="line">		cin&gt;&gt;tr[i<span class="number">-1</span>]&gt;&gt;str[i<span class="number">-1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll k=<span class="number">2</span>; k&lt;=n; k++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n-k+<span class="number">1</span>; i++) &#123;</span><br><span class="line">			ll j=i+k<span class="number">-1</span>;</span><br><span class="line">			ll sizee=(k<span class="number">-1</span>)%(kk<span class="number">-1</span>);</span><br><span class="line">			<span class="keyword">if</span>(sizee==<span class="number">0</span>) &#123;</span><br><span class="line">				sizee=kk<span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(ll l=j<span class="number">-1</span>; l&gt;=i; l-=(kk<span class="number">-1</span>)) &#123;</span><br><span class="line">				<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;(sizee))<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">					dp[i][j][s&lt;&lt;<span class="number">1</span>]=<span class="built_in">max</span>(dp[i][j][s&lt;&lt;<span class="number">1</span>],dp[i][l][s]+dp[l+<span class="number">1</span>][j][<span class="number">0</span>]);</span><br><span class="line">					dp[i][j][s&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=<span class="built_in">max</span>(dp[i][j][s&lt;&lt;<span class="number">1</span>|<span class="number">1</span>],dp[i][l][s]+dp[l+<span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(sizee==kk<span class="number">-1</span>) &#123;<span class="comment">//合并后的长度为1</span></span><br><span class="line">				ll r[<span class="number">2</span>];</span><br><span class="line">				r[<span class="number">0</span>]=r[<span class="number">1</span>]=<span class="number">-1145141919810ll</span>;</span><br><span class="line">				<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;kk)<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">					r[tr[s]]=<span class="built_in">max</span>(r[tr[s]],dp[i][j][s]+str[s]);</span><br><span class="line">				&#125;</span><br><span class="line">				dp[i][j][<span class="number">0</span>]=<span class="built_in">max</span>(dp[i][j][<span class="number">0</span>],r[<span class="number">0</span>]);</span><br><span class="line">				dp[i][j][<span class="number">1</span>]=<span class="built_in">max</span>(dp[i][j][<span class="number">1</span>],r[<span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ll ans=<span class="number">-1145141919810ll</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;kk)<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,dp[<span class="number">1</span>][n][s]);<span class="comment">//答案</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><span class="math display">\[
+\begin{cases}
+  dp_{i,j,2s} = \max \limits_{i \le l &lt; j,(j - 1 - l)\bmod( k - 1) =
+0} \{ dp_{i,l,s} + dp_{l+1,j,0} \} \\
+  dp_{i,j,(2s) \vee 1} = \max \limits_{i \le l &lt; j,(j - 1 - l)\bmod(
+k - 1) = 0} \{ dp_{i,l,s} + dp_{l+1,j,1} \}
+\end{cases}
+\]</span></p>
+<p>特别的，当一段区间合并后的长度为 <span
+class="math inline">\(1\)</span>
+时，可以将所有的状态合并为一个字符，也就是：</p>
+<p><span class="math display">\[
+\begin{cases}
+  dp_{i,j,0} = \max \limits_{0 \le s \le 2^k-1,r_s = 0}\{dp_{i,j,s}+w_s
+\} \\
+  dp_{i,j,1} = \max \limits_{0 \le s \le 2^k-1,r_s = 1}\{dp_{i,j,s}+w_s
+\}
+\end{cases}
+\]</span></p>
+<p>这里的 <span class="math inline">\(r_s\)</span> 表示状态为 <span
+class="math inline">\(s\)</span> 的字符串合并后的答案，<span
+class="math inline">\(w_s\)</span>
+表示合并得到的分数，注意要开辅助数组储存。</p>
+<h1 id="ac-code">AC code</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="type">const</span> ll N=<span class="number">310</span>;</span><br><span class="line"><span class="type">const</span> ll K=<span class="number">7</span>;</span><br><span class="line"><span class="type">bool</span> sum[N];</span><br><span class="line"><span class="function">ll <span class="title">getsum</span><span class="params">(ll i,ll j)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&gt;j)<span class="built_in">swap</span>(i,j);</span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll k=j,q=<span class="number">0</span>; k&gt;=i; k--,q++) &#123;</span><br><span class="line">		ans+=(sum[k])*(<span class="number">1</span>&lt;&lt;q);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">wes</span><span class="params">(<span class="type">unsigned</span> ll x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">32</span>-__builtin_clz(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调试 </span></span><br><span class="line">ll n,kk;</span><br><span class="line">ll dp[N][N][<span class="number">1</span>&lt;&lt;(K+<span class="number">1</span>)|<span class="number">1</span>];</span><br><span class="line">ll str[<span class="number">1</span>&lt;&lt;(K+<span class="number">1</span>)|<span class="number">1</span>];</span><br><span class="line"><span class="type">bool</span> tr[(<span class="number">1</span>&lt;&lt;(K+<span class="number">1</span>))|<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;kk;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(ll j=<span class="number">1</span>; j&lt;=n; j++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;kk)<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">				dp[i][j][s]=<span class="number">-1145141919810ll</span>;<span class="comment">//初始化 </span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		cin&gt;&gt;sum[i];</span><br><span class="line">		dp[i][i][sum[i]]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=(<span class="number">1</span>&lt;&lt;kk); i++) &#123;</span><br><span class="line">		cin&gt;&gt;tr[i<span class="number">-1</span>]&gt;&gt;str[i<span class="number">-1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll k=<span class="number">2</span>; k&lt;=n; k++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n-k+<span class="number">1</span>; i++) &#123;</span><br><span class="line">			ll j=i+k<span class="number">-1</span>;</span><br><span class="line">			ll sizee=(k<span class="number">-1</span>)%(kk<span class="number">-1</span>);</span><br><span class="line">			<span class="keyword">if</span>(sizee==<span class="number">0</span>) &#123;</span><br><span class="line">				sizee=kk<span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(ll l=j<span class="number">-1</span>; l&gt;=i; l-=(kk<span class="number">-1</span>)) &#123;</span><br><span class="line">				<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;(sizee))<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">					dp[i][j][s&lt;&lt;<span class="number">1</span>]=<span class="built_in">max</span>(dp[i][j][s&lt;&lt;<span class="number">1</span>],dp[i][l][s]+dp[l+<span class="number">1</span>][j][<span class="number">0</span>]);</span><br><span class="line">					dp[i][j][s&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=<span class="built_in">max</span>(dp[i][j][s&lt;&lt;<span class="number">1</span>|<span class="number">1</span>],dp[i][l][s]+dp[l+<span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(sizee==kk<span class="number">-1</span>) &#123;<span class="comment">//合并后的长度为1</span></span><br><span class="line">				ll r[<span class="number">2</span>];</span><br><span class="line">				r[<span class="number">0</span>]=r[<span class="number">1</span>]=<span class="number">-1145141919810ll</span>;</span><br><span class="line">				<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;kk)<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">					r[tr[s]]=<span class="built_in">max</span>(r[tr[s]],dp[i][j][s]+str[s]);</span><br><span class="line">				&#125;</span><br><span class="line">				dp[i][j][<span class="number">0</span>]=<span class="built_in">max</span>(dp[i][j][<span class="number">0</span>],r[<span class="number">0</span>]);</span><br><span class="line">				dp[i][j][<span class="number">1</span>]=<span class="built_in">max</span>(dp[i][j][<span class="number">1</span>],r[<span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ll ans=<span class="number">-1145141919810ll</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll s=(<span class="number">1</span>&lt;&lt;kk)<span class="number">-1</span>; s&gt;=<span class="number">0</span>; s--) &#123;</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,dp[<span class="number">1</span>][n][s]);<span class="comment">//答案</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/" data-id="clr7a9weh0001asf46qnqbo8x" data-title="P3736 [HAOI2016] 字符合并 题解" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/01/10/P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/" data-id="clr7e00r900020wf4dfg9hz80" data-title="P3736 [HAOI2016] 字符合并 题解" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -146,66 +197,135 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h1><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="Floyd-Warshall"><a href="#Floyd-Warshall" class="headerlink" title="Floyd-Warshall"></a>Floyd-Warshall</h3><p>求全源最短路径。</p>
+        <h1 id="最短路">最短路</h1>
+<h2 id="算法">算法</h2>
+<h3 id="floyd-warshall">Floyd-Warshall</h3>
+<p>求全源最短路径。</p>
 <p>流程：</p>
-<p>设 $dp_{k,i,j}$ 为经过 $1$ 到 $k$ 点的 $i,j$ 之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程：</p>
-<p>$$dp_{k,i,j} &#x3D; dp_{k-1,i,k} + dp_{k-1,k,j}$$</p>
-<p>可以滚动掉一维，设 $dp_{i,j}$ 为 $i,j$ 之间的最短路，于是就有：</p>
-<p>$$dp_{i,j} &#x3D; \min \limits_{1 \le k \le n} {dp_{i,k} + dp_{k,j}}$$</p>
-<p><strong>注意：顺序为 $k,i,j$，顺序可调换，循环 $6$ 次也能得出答案。</strong></p>
-<p>时间复杂度 $O(n^3)$。</p>
-<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>求单源最短路径。</p>
+<p>设 <span class="math inline">\(dp_{k,i,j}\)</span> 为经过 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(k\)</span> 点的 <span
+class="math inline">\(i,j\)</span>
+之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程：</p>
+<p><span class="math display">\[dp_{k,i,j} = dp_{k-1,i,k} +
+dp_{k-1,k,j}\]</span></p>
+<p>可以滚动掉一维，设 <span class="math inline">\(dp_{i,j}\)</span> 为
+<span class="math inline">\(i,j\)</span> 之间的最短路，于是就有：</p>
+<p><span class="math display">\[dp_{i,j} = \min \limits_{1 \le k \le n}
+\{dp_{i,k} + dp_{k,j}\}\]</span></p>
+<p><strong>注意：顺序为 <span
+class="math inline">\(k,i,j\)</span>，顺序可调换，循环 <span
+class="math inline">\(6\)</span> 次也能得出答案。</strong></p>
+<p>时间复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h3 id="dijkstra">Dijkstra</h3>
+<p>求单源最短路径。</p>
 <p>本质：贪心+BFS+DP。</p>
 <p>流程：</p>
-<p>设起点为 $s$，令 $dis_i &#x3D; +\infty(i \in n)$，并将 $dis_s$ 设为 $0$。</p>
-<p>每一次，寻找 $n$ 个点中 $dis_i$ 的最小值，并用这个最小值去更新它周围的边。</p>
+<p>设起点为 <span class="math inline">\(s\)</span>，令 <span
+class="math inline">\(dis_i = +\infty(i \in n)\)</span>，并将 <span
+class="math inline">\(dis_s\)</span> 设为 <span
+class="math inline">\(0\)</span>。</p>
+<p>每一次，寻找 <span class="math inline">\(n\)</span> 个点中 <span
+class="math inline">\(dis_i\)</span>
+的最小值，并用这个最小值去更新它周围的边。</p>
 <p>正确性证明：在正权图中，以当前权值最小的点去更新其他点，令有一点去更新会更优而又不是权值最小的点，因为边权为正，他更新一个点所花的花费会大于一个更近且权值更小的点，所以应用权值更小的点去更新，矛盾，故得证。</p>
-<p>时间复杂度 $O(n^2)$（找最小点 $O(n)$，更新 $n$ 次 $O(n)$）。</p>
-<p>可以用优先队列来找 $dis_i$ 的最小值，时间复杂度可以优化到 $O(m \log m)$。</p>
+<p>时间复杂度 <span class="math inline">\(O(n^2)\)</span>（找最小点
+<span class="math inline">\(O(n)\)</span>，更新 <span
+class="math inline">\(n\)</span> 次 <span
+class="math inline">\(O(n)\)</span>）。</p>
+<p>可以用优先队列来找 <span class="math inline">\(dis_i\)</span>
+的最小值，时间复杂度可以优化到 <span class="math inline">\(O(m \log
+m)\)</span>。</p>
 <p><strong>注意：不能处理含有负权边的图。</strong></p>
-<h3 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h3><p>让起点 $dis_s &#x3D; 0$。对每个点进行 $n-1$ 次松弛操作，可得到关于 $s$ 的单源最短路。</p>
-<p>正确性证明：在图 $G(V,E)$ 中，令一点 $v \neq s$ ，则到达 $v$ 的最短路至多经过 $n-1$ 个点，亦能通过 $n-1$ 次松弛（递推更新）去更新到点 $v$，得证。</p>
-<p>时间复杂度 $O(nm)$。</p>
+<h3 id="bellman-ford">Bellman-Ford</h3>
+<p>让起点 <span class="math inline">\(dis_s = 0\)</span>。对每个点进行
+<span class="math inline">\(n-1\)</span> 次松弛操作，可得到关于 <span
+class="math inline">\(s\)</span> 的单源最短路。</p>
+<p>正确性证明：在图 <span class="math inline">\(G(V,E)\)</span>
+中，令一点 <span class="math inline">\(v \neq s\)</span> ，则到达 <span
+class="math inline">\(v\)</span> 的最短路至多经过 <span
+class="math inline">\(n-1\)</span> 个点，亦能通过 <span
+class="math inline">\(n-1\)</span> 次松弛（递推更新）去更新到点 <span
+class="math inline">\(v\)</span>，得证。</p>
+<p>时间复杂度 <span class="math inline">\(O(nm)\)</span>。</p>
 <p><strong>注意：可以处理含有负权边的图，且可以找负环。</strong></p>
-<h3 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h3><p>是 Bellman-Ford 算法的优化。</p>
+<h3 id="spfa">SPFA</h3>
+<p>是 Bellman-Ford 算法的优化。</p>
 <p>由于每次松弛操作都会有很多的<strong>不必要</strong>的边被松弛，于是我们可以只松弛<strong>那些被松驰过了的点</strong>的边。</p>
-<p>期望复杂度约为 $O(kE)$，其中 $k$ 是一个常数，但<strong>最坏</strong>复杂度为 $O(nm)$（也就是退化为 Bellman-Ford 算法）。</p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="C-【USACO4-1-3】Fence-Loops篱笆回路"><a href="#C-【USACO4-1-3】Fence-Loops篱笆回路" class="headerlink" title="C 【USACO4.1.3】Fence Loops篱笆回路"></a>C 【USACO4.1.3】Fence Loops篱笆回路</h3><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2738">Link Luogu</a></p>
-<p>这个题要求最小环，首先将点给离散化出来。要找最小环，因为数据范围很小，考虑 Floyd-Warshall 算法，我们不妨正好在枚举 $k$ 的时候，因为 $dp_{i,j}$ 没有更新，所以当前的 $dp_{i,k}+dp_{k,j}$ 的路线肯定不会是 $dp_{i,j}$ 的路线（如下图），所以我们可以用 $dp_{i,j}+dp_{i,k}+dp_{k,j}$ 去更新最小环长度。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png"></p>
+<p>期望复杂度约为 <span class="math inline">\(O(kE)\)</span>，其中 <span
+class="math inline">\(k\)</span>
+是一个常数，但<strong>最坏</strong>复杂度为 <span
+class="math inline">\(O(nm)\)</span>（也就是退化为 Bellman-Ford
+算法）。</p>
+<h2 id="例题">例题</h2>
+<h3 id="c-usaco4.1.3fence-loops篱笆回路">C 【USACO4.1.3】Fence
+Loops篱笆回路</h3>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2738">Link
+Luogu</a></p>
+<p>这个题要求最小环，首先将点给离散化出来。要找最小环，因为数据范围很小，考虑
+Floyd-Warshall 算法，我们不妨正好在枚举 <span
+class="math inline">\(k\)</span> 的时候，因为 <span
+class="math inline">\(dp_{i,j}\)</span> 没有更新，所以当前的 <span
+class="math inline">\(dp_{i,k}+dp_{k,j}\)</span> 的路线肯定不会是 <span
+class="math inline">\(dp_{i,j}\)</span> 的路线（如下图），所以我们可以用
+<span class="math inline">\(dp_{i,j}+dp_{i,k}+dp_{k,j}\)</span>
+去更新最小环长度。</p>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png" /></p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/139791257">AC code</a></p>
-<h3 id="W-最短路"><a href="#W-最短路" class="headerlink" title="W 最短路"></a>W 最短路</h3><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1163/F">Link Codeforces</a> ans <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1163F">Link Luogu</a></p>
-<p>本题求的是在正权图 $G(V,E)$ 中，选择一条边并更新他的边权，并对于每个询问求其修改后 $1 \to n$ 的最短路。</p>
+<h3 id="w-最短路">W 最短路</h3>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link
+NKOJ</a> and <a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1163/F">Link
+Codeforces</a> ans <a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1163F">Link Luogu</a></p>
+<p>本题求的是在正权图 <span class="math inline">\(G(V,E)\)</span>
+中，选择一条边并更新他的边权，并对于每个询问求其修改后 <span
+class="math inline">\(1 \to n\)</span> 的最短路。</p>
 <p>不妨分类讨论：</p>
-<ol>
+<ol type="1">
 <li>当这条被修改的边不在最短路上时，修改后的答案要么是原先的最短路，要么是从起点或终点到这条边的一端再从另一端出来的路径长度，因为如果我们考虑不经过这条边的路径长度，它们肯定是比原先求出的最短路要大，然后就只能考虑经过这条边。经过这条边显然最短的路径长度就是两端点到起点和终点的距离加上这条边自身的边权（如下图）。</li>
 </ol>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png"></p>
-<ol start="2">
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png" /></p>
+<ol start="2" type="1">
 <li><p>如果这条边本身就在最短路上：</p>
-<ol>
-<li><p>这条边比原来的边要短，那肯定最短路就是原来的最短路减去这条边现在比以前短的长度。</p>
-</li>
+<ol type="1">
+<li><p>这条边比原来的边要短，那肯定最短路就是原来的最短路减去这条边现在比以前短的长度。</p></li>
 <li><p>这条边比原来的边要长，这个有点难考虑，我会从以下方面说明：</p>
 <ul>
-<li><p>引理一：在正权图 $G(V,E)$ 中最短路一定是一条链</p>
-<p>  证明：最短路因为要保证最短性，且图是正权图，不可能有 $0$ 环或负环，所以在最短路上一定不可能有环，得证。</p>
-</li>
-<li><p>引理二：在正权图 $G(V,E)$ 中，从起点 $s$ 出发，到达点 $t$，则路径 $s \to t$ 必与其他从 $s$ 出发的路径共享一段前缀。</p>
-<p>  证明：假设这条<strong>最短</strong>路径它的共享的前缀中间有间隔，且产生作用与原最短路相等。由于中间间隔的部分又回到了最短路上，所以更新后面的点就无须考虑，而前面的由于一个点的最短路大小固定，所以两条边中必定有一个边权是要大于另一个，所以互相矛盾，得证。</p>
-</li>
-<li><p>引理三：令集合 $S$ 为最短路上的点的点集，则含有两个点的点集 $S’ &#x3D; {u,v}$ 满足 $S \cap S’ &#x3D; \varnothing$，满足在 $1 \to u$ 与最短路的前缀在最短路上的最后一个点和 $v \to n$ 与最短路的后缀在最短路上的最后一个点中间的最短路上的边任删一条而它的删边最短路为 $dis_{1 \to u} + dis_{u \to v} + dis_{v \to n}$，如果有多个就取最小值。</p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
+<li><p>引理一：在正权图 <span class="math inline">\(G(V,E)\)</span>
+中最短路一定是一条链</p>
+<p>证明：最短路因为要保证最短性，且图是正权图，不可能有 <span
+class="math inline">\(0\)</span>
+环或负环，所以在最短路上一定不可能有环，得证。</p></li>
+<li><p>引理二：在正权图 <span class="math inline">\(G(V,E)\)</span>
+中，从起点 <span class="math inline">\(s\)</span> 出发，到达点 <span
+class="math inline">\(t\)</span>，则路径 <span class="math inline">\(s
+\to t\)</span> 必与其他从 <span class="math inline">\(s\)</span>
+出发的路径共享一段前缀。</p>
+<p>证明：假设这条<strong>最短</strong>路径它的共享的前缀中间有间隔，且产生作用与原最短路相等。由于中间间隔的部分又回到了最短路上，所以更新后面的点就无须考虑，而前面的由于一个点的最短路大小固定，所以两条边中必定有一个边权是要大于另一个，所以互相矛盾，得证。</p></li>
+<li><p>引理三：令集合 <span class="math inline">\(S\)</span>
+为最短路上的点的点集，则含有两个点的点集 <span
+class="math inline">\(S&#39; = \{u,v\}\)</span> 满足 <span
+class="math inline">\(S \cap S&#39; = \varnothing\)</span>，满足在 <span
+class="math inline">\(1 \to u\)</span>
+与最短路的前缀在最短路上的最后一个点和 <span class="math inline">\(v \to
+n\)</span>
+与最短路的后缀在最短路上的最后一个点中间的最短路上的边任删一条而它的删边最短路为
+<span class="math inline">\(dis_{1 \to u} + dis_{u \to v} + dis_{v \to
+n}\)</span>，如果有多个就取最小值。</p></li>
+</ul></li>
+</ol></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%EF%BC%89/" data-id="clr7a26mc0007m8f46dlqb22w" data-title="图论学习笔记1——最短路（作业表4）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/01/10/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%EF%BC%89/" data-id="clr7e00rf00040wf4bggsg4e1" data-title="图论学习笔记1——最短路（作业表4）" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -239,78 +359,92 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="前置芝士"><a href="#前置芝士" class="headerlink" title="前置芝士"></a>前置芝士</h1><ul>
-<li><p>线段树</p>
-</li>
-<li><p><del>一定量的大脑</del></p>
-</li>
+        <h1 id="前置芝士">前置芝士</h1>
+<ul>
+<li><p>线段树</p></li>
+<li><p><del>一定量的大脑</del></p></li>
 </ul>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yL411K7CP/"><del>链 接 地 址 (大雾</del></a></p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4513">真 正 的 链 接</a></p>
-<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>给定一段共有 $n$ 个点的线段，每个点都有一个值，现有 $m$ 次，$2$ 种操作：</p>
-<ol>
-<li><p>形如 $ 1\ a\ b $，求值操作，求 $[\ a ,b\ ]$ 区间内最大子序列和。</p>
-</li>
-<li><p>形如 $ 2\ p\ s $，修改操作，将点 $p$ 的值修改为 $s$ 。</p>
-</li>
+<h1 id="题目">题目</h1>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yL411K7CP/"><del>链 接 地
+址 (大雾</del></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4513">真 正 的 链
+接</a></p>
+<h1 id="简述">简述</h1>
+<p>给定一段共有 <span class="math inline">\(n\)</span>
+个点的线段，每个点都有一个值，现有 <span
+class="math inline">\(m\)</span> 次，<span
+class="math inline">\(2\)</span> 种操作：</p>
+<ol type="1">
+<li><p>形如 $ 1 a b $，求值操作，求 <span class="math inline">\([\ a ,b\
+]\)</span> 区间内最大子序列和。</p></li>
+<li><p>形如 $ 2 p s $，修改操作，将点 <span
+class="math inline">\(p\)</span> 的值修改为 <span
+class="math inline">\(s\)</span> 。</p></li>
 </ol>
-<p>对于每次 $1$ 号操作，输出其区间内最大子序列和 $ans$。</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>如果我们用正常的方法求区间最大值，时间复杂度为 $O(N)$，显然如果执行 $m$ 次肯定会超时，我们就可以用一种高端大气时间复杂度仅为 $O(log_2N)$ 复杂度的算法：线段树。</p>
-<h2 id="建树"><a href="#建树" class="headerlink" title="建树"></a>建树</h2><p>不用多解释，上代码。</p>
+<p>对于每次 <span class="math inline">\(1\)</span>
+号操作，输出其区间内最大子序列和 <span
+class="math inline">\(ans\)</span>。</p>
+<h1 id="思考">思考</h1>
+<p>如果我们用正常的方法求区间最大值，时间复杂度为 <span
+class="math inline">\(O(N)\)</span>，显然如果执行 <span
+class="math inline">\(m\)</span>
+次肯定会超时，我们就可以用一种高端大气时间复杂度仅为 <span
+class="math inline">\(O(log_2N)\)</span> 复杂度的算法：线段树。</p>
+<h2 id="建树">建树</h2>
+<p>不用多解释，上代码。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(ll id)</span></span>&#123;<span class="comment">//上提操作</span></span><br><span class="line">	Tree[id].sum=Tree[id*<span class="number">2</span>].sum+Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum;</span><br><span class="line">	Tree[id].l1=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>].sum+Tree[id*<span class="number">2</span>+<span class="number">1</span>].l1,Tree[id*<span class="number">2</span>].l1);<span class="comment">//l1，r1作用下文会提及。</span></span><br><span class="line">	Tree[id].r1=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum+Tree[id*<span class="number">2</span>].r1,Tree[id*<span class="number">2</span>+<span class="number">1</span>].r1);</span><br><span class="line">	Tree[id].max=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].max,<span class="built_in">max</span>(Tree[id*<span class="number">2</span>].max,Tree[id*<span class="number">2</span>].r1+Tree[id*<span class="number">2</span>+<span class="number">1</span>].l1));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(ll id,ll l,ll r)</span></span>&#123;<span class="comment">//建树过程</span></span><br><span class="line">	Tree[id].l=l;Tree[id].r=r;</span><br><span class="line">	<span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">		Tree[id].max=Tree[id].l1=Tree[id].r1=Tree[id].sum=a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">build</span>(id*<span class="number">2</span>,l,mid);</span><br><span class="line">	<span class="built_in">build</span>(id*<span class="number">2</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="built_in">up</span>(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="修改操作"><a href="#修改操作" class="headerlink" title="修改操作"></a>修改操作</h2><p>既然只修改一个点的值，那肯定就用线段树的单点修改就 $OK$ 了。</p>
+<h2 id="修改操作">修改操作</h2>
+<p>既然只修改一个点的值，那肯定就用线段树的单点修改就 <span
+class="math inline">\(OK\)</span> 了。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(ll id,ll x,ll num)</span></span>&#123;<span class="comment">//单点修改</span></span><br><span class="line">	<span class="keyword">if</span>(Tree[id].l==Tree[id].r)&#123;</span><br><span class="line">		Tree[id].max=Tree[id].l1=Tree[id].r1=Tree[id].sum=num;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=mid)<span class="built_in">change</span>(id*<span class="number">2</span>,x,num);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">change</span>(id*<span class="number">2</span>+<span class="number">1</span>,x,num);</span><br><span class="line">	<span class="built_in">up</span>(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="求和操作"><a href="#求和操作" class="headerlink" title="求和操作"></a>求和操作</h2><p>枚举到一个节点时有如下几种情况：</p>
-<ol>
+<h2 id="求和操作">求和操作</h2>
+<p>枚举到一个节点时有如下几种情况：</p>
+<ol type="1">
 <li>该节点位于所求区间内，返回。</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(l&lt;=Tree[id].l&amp;&amp;r&gt;=Tree[id].r)&#123;<span class="comment">//位于区间内</span></span><br><span class="line">	<span class="keyword">return</span> Tree[id].max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol start="2" type="1">
 <li>区间位于该节点左儿子内部，枚举该节点左儿子。</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll anss=<span class="number">-1e17</span>;<span class="comment">//答案</span></span><br><span class="line"><span class="keyword">if</span>(Tree[id*<span class="number">2</span>].l&lt;=r&amp;&amp;Tree[id*<span class="number">2</span>].r&gt;=l)anss=<span class="built_in">max</span>(<span class="built_in">GetSum</span>(id*<span class="number">2</span>,l,r),anss);<span class="comment">//左儿子包含所求区间</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol start="3" type="1">
 <li>区间位于该节点右儿子内部，枚举该节点右儿子。</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].l&lt;=r&amp;&amp;Tree[id*<span class="number">2</span>+<span class="number">1</span>].r&gt;=l)anss=<span class="built_in">max</span>(<span class="built_in">GetSum</span>(id*<span class="number">2</span>+<span class="number">1</span>,l,r),anss);<span class="comment">//右儿子包含所求区间</span></span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>区间与左儿子，右儿子都有交集，则我们设一个节点的 $l1$ 为从左起的一段最大值， $r1$ 为从右起的一段最大值。随后可以用递归来求最大的从中间部分起左、右边部分区间和最大值，再合并求得最大值。</li>
+<ol start="4" type="1">
+<li>区间与左儿子，右儿子都有交集，则我们设一个节点的 <span
+class="math inline">\(l1\)</span> 为从左起的一段最大值， <span
+class="math inline">\(r1\)</span>
+为从右起的一段最大值。随后可以用递归来求最大的从中间部分起左、右边部分区间和最大值，再合并求得最大值。</li>
 </ol>
-<h3 id="递归过程"><a href="#递归过程" class="headerlink" title="递归过程"></a>递归过程</h3><p>有两侧的递归，这里分开来讲。</p>
-<h4 id="左递归"><a href="#左递归" class="headerlink" title="左递归"></a>左递归</h4><p>首先先看左儿子有如下情况：</p>
-<ol>
-<li><p>如果这个节点的左儿子在所要求区间的左侧要小，递归结束，代表这个节点的 $r1$ 值即是其目前递归的值，返回。</p>
-</li>
-<li><p>如果该节点的右儿子是被其要求区间完全覆盖（即所要求区间的左、右端点与其右儿子的左、右端点重合），则其最大值要么是其右儿子的 $r1$ 值，要么是右儿子的总和加上其左儿子的递归结果，从中取最大即可。</p>
-</li>
-<li><p>如果该节点的右儿子是被其要求区间覆盖（但所要求区间的左端点与其右儿子的左端点不重合，也就是说该节点的左儿子并没有包含所要求区间），递归右儿子，取其值。</p>
-</li>
+<h3 id="递归过程">递归过程</h3>
+<p>有两侧的递归，这里分开来讲。</p>
+<h4 id="左递归">左递归</h4>
+<p>首先先看左儿子有如下情况：</p>
+<ol type="1">
+<li><p>如果这个节点的左儿子在所要求区间的左侧要小，递归结束，代表这个节点的
+<span class="math inline">\(r1\)</span>
+值即是其目前递归的值，返回。</p></li>
+<li><p>如果该节点的右儿子是被其要求区间完全覆盖（即所要求区间的左、右端点与其右儿子的左、右端点重合），则其最大值要么是其右儿子的
+<span class="math inline">\(r1\)</span>
+值，要么是右儿子的总和加上其左儿子的递归结果，从中取最大即可。</p></li>
+<li><p>如果该节点的右儿子是被其要求区间覆盖（但所要求区间的左端点与其右儿子的左端点不重合，也就是说该节点的左儿子并没有包含所要求区间），递归右儿子，取其值。</p></li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Tree_num_l</span><span class="params">(ll id,ll l)</span></span>&#123;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id].l)&#123;<span class="comment">//情况1</span></span><br><span class="line">		<span class="keyword">return</span> Tree[id].r1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(l&lt;=mid)&#123;<span class="comment">//情况2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].r1,Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum+<span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>,l));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;<span class="comment">//情况3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>+<span class="number">1</span>,l);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="右递归"><a href="#右递归" class="headerlink" title="右递归"></a>右递归</h4><p>和左递归差不多，不过要改点细节。</p>
+<h4 id="右递归">右递归</h4>
+<p>和左递归差不多，不过要改点细节。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Tree_num_r</span><span class="params">(ll id,ll r)</span></span>&#123;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;=Tree[id].r)&#123;<span class="comment">//情况1</span></span><br><span class="line">		<span class="keyword">return</span> Tree[id].l1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;=mid)&#123;<span class="comment">//情况2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(Tree[id*<span class="number">2</span>].l1,Tree[id*<span class="number">2</span>].sum+<span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>+<span class="number">1</span>,r));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;<span class="comment">//情况3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>,r);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
+<hr />
 <p>这是递归过程的代码：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(l&lt;=Tree[id*<span class="number">2</span>].r&amp;&amp;Tree[id*<span class="number">2</span>+<span class="number">1</span>].l&lt;=r)&#123;</span><br><span class="line">	ll ansss=<span class="number">0</span>;</span><br><span class="line">	ansss+=<span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>,l);</span><br><span class="line">	ansss+=<span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>+<span class="number">1</span>,r);</span><br><span class="line">	anss=<span class="built_in">max</span>(ansss,anss);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="type">const</span> ll N=<span class="number">500000</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll l,r,l1,r1,max,sum;</span><br><span class="line">&#125;Tree[<span class="number">16</span>*N];</span><br><span class="line">ll a[N],n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(ll id)</span></span>&#123;<span class="comment">//上提操作</span></span><br><span class="line">	Tree[id].sum=Tree[id*<span class="number">2</span>].sum+Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum;</span><br><span class="line">	Tree[id].l1=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>].sum+Tree[id*<span class="number">2</span>+<span class="number">1</span>].l1,Tree[id*<span class="number">2</span>].l1);<span class="comment">//l1，r1作用下文会提及。</span></span><br><span class="line">	Tree[id].r1=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum+Tree[id*<span class="number">2</span>].r1,Tree[id*<span class="number">2</span>+<span class="number">1</span>].r1);</span><br><span class="line">	Tree[id].max=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].max,<span class="built_in">max</span>(Tree[id*<span class="number">2</span>].max,Tree[id*<span class="number">2</span>].r1+Tree[id*<span class="number">2</span>+<span class="number">1</span>].l1));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(ll id,ll l,ll r)</span></span>&#123;<span class="comment">//建树过程</span></span><br><span class="line">	Tree[id].l=l;Tree[id].r=r;</span><br><span class="line">	<span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">		Tree[id].max=Tree[id].l1=Tree[id].r1=Tree[id].sum=a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">build</span>(id*<span class="number">2</span>,l,mid);</span><br><span class="line">	<span class="built_in">build</span>(id*<span class="number">2</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="built_in">up</span>(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(ll id,ll x,ll num)</span></span>&#123;<span class="comment">//单点修改</span></span><br><span class="line">	<span class="keyword">if</span>(Tree[id].l==Tree[id].r)&#123;</span><br><span class="line">		Tree[id].max=Tree[id].l1=Tree[id].r1=Tree[id].sum=num;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=mid)<span class="built_in">change</span>(id*<span class="number">2</span>,x,num);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">change</span>(id*<span class="number">2</span>+<span class="number">1</span>,x,num);</span><br><span class="line">	<span class="built_in">up</span>(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">Tree_num_l</span><span class="params">(ll id,ll l)</span></span>&#123;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id].l)&#123;<span class="comment">//情况1</span></span><br><span class="line">		<span class="keyword">return</span> Tree[id].r1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(l&lt;=mid)&#123;<span class="comment">//情况2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].r1,Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum+<span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>,l));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;<span class="comment">//情况3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>+<span class="number">1</span>,l);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">Tree_num_r</span><span class="params">(ll id,ll r)</span></span>&#123;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;=Tree[id].r)&#123;<span class="comment">//情况1</span></span><br><span class="line">		<span class="keyword">return</span> Tree[id].l1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;=mid)&#123;<span class="comment">//情况2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(Tree[id*<span class="number">2</span>].l1,Tree[id*<span class="number">2</span>].sum+<span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>+<span class="number">1</span>,r));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;<span class="comment">//情况3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>,r);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">GetSum</span><span class="params">(ll id,ll l,ll r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id].l&amp;&amp;r&gt;=Tree[id].r)&#123;</span><br><span class="line">		</span><br><span class="line">		ll ansss=Tree[id].max;</span><br><span class="line">		<span class="keyword">return</span> ansss;</span><br><span class="line">	&#125;</span><br><span class="line">	ll anss=<span class="number">-1e17</span>;</span><br><span class="line">	<span class="keyword">if</span>(Tree[id*<span class="number">2</span>].l&lt;=r&amp;&amp;Tree[id*<span class="number">2</span>].r&gt;=l)anss=<span class="built_in">max</span>(<span class="built_in">GetSum</span>(id*<span class="number">2</span>,l,r),anss);</span><br><span class="line">	<span class="keyword">if</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].l&lt;=r&amp;&amp;Tree[id*<span class="number">2</span>+<span class="number">1</span>].r&gt;=l)anss=<span class="built_in">max</span>(<span class="built_in">GetSum</span>(id*<span class="number">2</span>+<span class="number">1</span>,l,r),anss);</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id*<span class="number">2</span>].r&amp;&amp;Tree[id*<span class="number">2</span>+<span class="number">1</span>].l&lt;=r)&#123;</span><br><span class="line">		ll ansss=<span class="number">0</span>;</span><br><span class="line">		ansss+=<span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>,l);</span><br><span class="line">		ansss+=<span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>+<span class="number">1</span>,r);</span><br><span class="line">		anss=<span class="built_in">max</span>(ansss,anss);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> anss;</span><br><span class="line">&#125;</span><br><span class="line">ll x,l,r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">build</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>)&#123;</span><br><span class="line">			cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">			cout&lt;&lt;<span class="built_in">GetSum</span>(<span class="number">1</span>,<span class="built_in">min</span>(l,r),<span class="built_in">max</span>(l,r))&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">			<span class="built_in">change</span>(<span class="number">1</span>,l,r);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="ac-code">AC code</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="type">const</span> ll N=<span class="number">500000</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll l,r,l1,r1,max,sum;</span><br><span class="line">&#125;Tree[<span class="number">16</span>*N];</span><br><span class="line">ll a[N],n,m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(ll id)</span></span>&#123;<span class="comment">//上提操作</span></span><br><span class="line">	Tree[id].sum=Tree[id*<span class="number">2</span>].sum+Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum;</span><br><span class="line">	Tree[id].l1=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>].sum+Tree[id*<span class="number">2</span>+<span class="number">1</span>].l1,Tree[id*<span class="number">2</span>].l1);<span class="comment">//l1，r1作用下文会提及。</span></span><br><span class="line">	Tree[id].r1=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum+Tree[id*<span class="number">2</span>].r1,Tree[id*<span class="number">2</span>+<span class="number">1</span>].r1);</span><br><span class="line">	Tree[id].max=<span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].max,<span class="built_in">max</span>(Tree[id*<span class="number">2</span>].max,Tree[id*<span class="number">2</span>].r1+Tree[id*<span class="number">2</span>+<span class="number">1</span>].l1));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(ll id,ll l,ll r)</span></span>&#123;<span class="comment">//建树过程</span></span><br><span class="line">	Tree[id].l=l;Tree[id].r=r;</span><br><span class="line">	<span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">		Tree[id].max=Tree[id].l1=Tree[id].r1=Tree[id].sum=a[l];</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">build</span>(id*<span class="number">2</span>,l,mid);</span><br><span class="line">	<span class="built_in">build</span>(id*<span class="number">2</span>+<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="built_in">up</span>(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">(ll id,ll x,ll num)</span></span>&#123;<span class="comment">//单点修改</span></span><br><span class="line">	<span class="keyword">if</span>(Tree[id].l==Tree[id].r)&#123;</span><br><span class="line">		Tree[id].max=Tree[id].l1=Tree[id].r1=Tree[id].sum=num;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=mid)<span class="built_in">change</span>(id*<span class="number">2</span>,x,num);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">change</span>(id*<span class="number">2</span>+<span class="number">1</span>,x,num);</span><br><span class="line">	<span class="built_in">up</span>(id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">Tree_num_l</span><span class="params">(ll id,ll l)</span></span>&#123;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id].l)&#123;<span class="comment">//情况1</span></span><br><span class="line">		<span class="keyword">return</span> Tree[id].r1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(l&lt;=mid)&#123;<span class="comment">//情况2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].r1,Tree[id*<span class="number">2</span>+<span class="number">1</span>].sum+<span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>,l));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;<span class="comment">//情况3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>+<span class="number">1</span>,l);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">Tree_num_r</span><span class="params">(ll id,ll r)</span></span>&#123;</span><br><span class="line">	ll mid=(Tree[id].l+Tree[id].r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;=Tree[id].r)&#123;<span class="comment">//情况1</span></span><br><span class="line">		<span class="keyword">return</span> Tree[id].l1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;=mid)&#123;<span class="comment">//情况2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(Tree[id*<span class="number">2</span>].l1,Tree[id*<span class="number">2</span>].sum+<span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>+<span class="number">1</span>,r));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;<span class="comment">//情况3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>,r);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">GetSum</span><span class="params">(ll id,ll l,ll r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id].l&amp;&amp;r&gt;=Tree[id].r)&#123;</span><br><span class="line">		</span><br><span class="line">		ll ansss=Tree[id].max;</span><br><span class="line">		<span class="keyword">return</span> ansss;</span><br><span class="line">	&#125;</span><br><span class="line">	ll anss=<span class="number">-1e17</span>;</span><br><span class="line">	<span class="keyword">if</span>(Tree[id*<span class="number">2</span>].l&lt;=r&amp;&amp;Tree[id*<span class="number">2</span>].r&gt;=l)anss=<span class="built_in">max</span>(<span class="built_in">GetSum</span>(id*<span class="number">2</span>,l,r),anss);</span><br><span class="line">	<span class="keyword">if</span>(Tree[id*<span class="number">2</span>+<span class="number">1</span>].l&lt;=r&amp;&amp;Tree[id*<span class="number">2</span>+<span class="number">1</span>].r&gt;=l)anss=<span class="built_in">max</span>(<span class="built_in">GetSum</span>(id*<span class="number">2</span>+<span class="number">1</span>,l,r),anss);</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=Tree[id*<span class="number">2</span>].r&amp;&amp;Tree[id*<span class="number">2</span>+<span class="number">1</span>].l&lt;=r)&#123;</span><br><span class="line">		ll ansss=<span class="number">0</span>;</span><br><span class="line">		ansss+=<span class="built_in">Tree_num_l</span>(id*<span class="number">2</span>,l);</span><br><span class="line">		ansss+=<span class="built_in">Tree_num_r</span>(id*<span class="number">2</span>+<span class="number">1</span>,r);</span><br><span class="line">		anss=<span class="built_in">max</span>(ansss,anss);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> anss;</span><br><span class="line">&#125;</span><br><span class="line">ll x,l,r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">build</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>)&#123;</span><br><span class="line">			cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">			cout&lt;&lt;<span class="built_in">GetSum</span>(<span class="number">1</span>,<span class="built_in">min</span>(l,r),<span class="built_in">max</span>(l,r))&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">			<span class="built_in">change</span>(<span class="number">1</span>,l,r);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/P4513-%E5%B0%8F%E7%99%BD%E9%80%9B%E5%85%AC%E5%9B%AD-%E9%A2%98%E8%A7%A3/" data-id="clr7a9wej0002asf47xlkgtf4" data-title="P4513 小白逛公园 题解~" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/01/10/P4513-%E5%B0%8F%E7%99%BD%E9%80%9B%E5%85%AC%E5%9B%AD-%E9%A2%98%E8%A7%A3/" data-id="clr7e00ra00030wf4honqh2sc" data-title="P4513 小白逛公园 题解~" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -344,112 +478,67 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="9-24-10-5-期间总结"><a href="#9-24-10-5-期间总结" class="headerlink" title="9.24 - 10.5 期间总结"></a>9.24 - 10.5 期间总结</h1><h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>深窥自己的心，而后发觉一切的奇迹在你自己。 </p>
+        <h1 id="期间总结">9.24 - 10.5 期间总结</h1>
+<h2 id="序言">序言</h2>
+<p>深窥自己的心，而后发觉一切的奇迹在你自己。</p>
 <p>——<strong>培根</strong></p>
-<h2 id="9-24-摸底考试"><a href="#9-24-摸底考试" class="headerlink" title="9.24 摸底考试"></a>9.24 摸底考试</h2><p>这可能是我 <strong>OI</strong> 生涯中经历的最糟糕的一场考试，考前时因为肚子不舒服，有点虚，加之CSP第一轮后状态直线下降，让我对这次考试有所担忧。考试中我先开了 $A$ 题，$A$ 题是一道关于位运算的题。我当时以为很水，敲了下手打高精度，以为就过了，但不曾想因为没有考虑到溢出的问题，${\color{red}WA\ (0)}$ 了。然后开了 $C$ 题，$C$ 题是构造题，构造一个相邻两数之差或和的绝对值为质数的内部元素从 $1$ 到 $n$ 的序列。当时的方向想错了，以为是通过质数表暴搜得到，但时间会超，于是我想到了个自以为还行的<strong>伪解法</strong>， 显然又 ${\color{red}WA\ (0)}$ 了。其他两道基本没想。最后的结果也<strong>爆零</strong>了。</p>
-<h2 id="DP-1阶段-LCS-LIS"><a href="#DP-1阶段-LCS-LIS" class="headerlink" title="DP 1阶段 (LCS &amp; LIS)"></a>DP 1阶段 (LCS &amp; LIS)</h2><p>在摸底考后几天时间里，老师和一些同学将作业表中 $A$ 到 $E$ 题以及考试题讲述了一下，这里我见到了各种 <strong>dalao</strong> 的各种方法，让我<del>大为</del>有所震惊。随后到国庆节又是一段空窗期，老师加了很多关于 <strong>LIS</strong> 和 <strong>LCS</strong> 的题，国庆节上课前两天也讲述了后面几道题的各种解法，让我的思维深度有了质的飞跃。但我 ${\color{green} A}$ 的题还是很少，其中的 $M$ 题死活过不去，这点我也无法理解。</p>
-<h2 id="10-5-的小测试"><a href="#10-5-的小测试" class="headerlink" title="10.5 的小测试"></a>10.5 的小测试</h2><p>赛前张老师说不希望我们爆零，于是我也为此提心吊胆，因为第一次我爆零了。考试的时候，又发生了一点小插曲，让我有点担忧。我先看了 $A$ 题，$A$ 题问纯色三角形的个数有多少。我第一时间想到了排列与组合，但想了很久也无法找到复杂度允许的算法，最后打了个 $O(n^3)$ 的暴力骗点分。结果是 ${\color{red}WA\ (30)}$。随后我开了 $B$ 题，$B$ 题有些难想，从体面上顺向思维是大概不会很轻松就想出来的，我发现反转操作是可逆的，于是我就想到从全 $0$ 给还原到图像，代码写完后算了下复杂度是 $O(n^2)$，可以过掉。结果是 ${\color{green} AC\ (100)}$。$C$ 题我当时没多想，最后才匆忙码，然后就成为全班唯一一个 ${\color{purplr} MLE\ (0)}$的人。$D$ 题原本我是推了 $dp$ 公式，最后检查时发现读错题面了，这是一个重大失误，考场上出现非常致命。所以白白挂掉，时间又不够了，最后输出 $1$ 想骗分，顺利 ${\color{red}WA\ (0)}$。总分 $130$，不能说很好，但是有所进步。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这几天的表现并不好，或许是对环境的不适应，还是对自己过多的忧虑，希望可以将状态找回。</p>
+<h2 id="摸底考试">9.24 摸底考试</h2>
+<p>这可能是我 <strong>OI</strong>
+生涯中经历的最糟糕的一场考试，考前时因为肚子不舒服，有点虚，加之CSP第一轮后状态直线下降，让我对这次考试有所担忧。考试中我先开了
+<span class="math inline">\(A\)</span> 题，<span
+class="math inline">\(A\)</span>
+题是一道关于位运算的题。我当时以为很水，敲了下手打高精度，以为就过了，但不曾想因为没有考虑到溢出的问题，<span
+class="math inline">\({\color{red}WA\ (0)}\)</span> 了。然后开了 <span
+class="math inline">\(C\)</span> 题，<span
+class="math inline">\(C\)</span>
+题是构造题，构造一个相邻两数之差或和的绝对值为质数的内部元素从 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span>
+的序列。当时的方向想错了，以为是通过质数表暴搜得到，但时间会超，于是我想到了个自以为还行的<strong>伪解法</strong>，
+显然又 <span class="math inline">\({\color{red}WA\ (0)}\)</span>
+了。其他两道基本没想。最后的结果也<strong>爆零</strong>了。</p>
+<h2 id="dp-1阶段-lcs-lis">DP 1阶段 (LCS &amp; LIS)</h2>
+<p>在摸底考后几天时间里，老师和一些同学将作业表中 <span
+class="math inline">\(A\)</span> 到 <span
+class="math inline">\(E\)</span>
+题以及考试题讲述了一下，这里我见到了各种 <strong>dalao</strong>
+的各种方法，让我<del>大为</del>有所震惊。随后到国庆节又是一段空窗期，老师加了很多关于
+<strong>LIS</strong> 和 <strong>LCS</strong>
+的题，国庆节上课前两天也讲述了后面几道题的各种解法，让我的思维深度有了质的飞跃。但我
+<span class="math inline">\({\color{green} A}\)</span>
+的题还是很少，其中的 <span class="math inline">\(M\)</span>
+题死活过不去，这点我也无法理解。</p>
+<h2 id="的小测试">10.5 的小测试</h2>
+<p>赛前张老师说不希望我们爆零，于是我也为此提心吊胆，因为第一次我爆零了。考试的时候，又发生了一点小插曲，让我有点担忧。我先看了
+<span class="math inline">\(A\)</span> 题，<span
+class="math inline">\(A\)</span>
+题问纯色三角形的个数有多少。我第一时间想到了排列与组合，但想了很久也无法找到复杂度允许的算法，最后打了个
+<span class="math inline">\(O(n^3)\)</span> 的暴力骗点分。结果是 <span
+class="math inline">\({\color{red}WA\ (30)}\)</span>。随后我开了 <span
+class="math inline">\(B\)</span> 题，<span
+class="math inline">\(B\)</span>
+题有些难想，从体面上顺向思维是大概不会很轻松就想出来的，我发现反转操作是可逆的，于是我就想到从全
+<span class="math inline">\(0\)</span>
+给还原到图像，代码写完后算了下复杂度是 <span
+class="math inline">\(O(n^2)\)</span>，可以过掉。结果是 <span
+class="math inline">\({\color{green} AC\ (100)}\)</span>。<span
+class="math inline">\(C\)</span>
+题我当时没多想，最后才匆忙码，然后就成为全班唯一一个 <span
+class="math inline">\({\color{purplr} MLE\ (0)}\)</span>的人。<span
+class="math inline">\(D\)</span> 题原本我是推了 <span
+class="math inline">\(dp\)</span>
+公式，最后检查时发现读错题面了，这是一个重大失误，考场上出现非常致命。所以白白挂掉，时间又不够了，最后输出
+<span class="math inline">\(1\)</span> 想骗分，顺利 <span
+class="math inline">\({\color{red}WA\ (0)}\)</span>。总分 <span
+class="math inline">\(130\)</span>，不能说很好，但是有所进步。</p>
+<h2 id="总结">总结</h2>
+<p>这几天的表现并不好，或许是对环境的不适应，还是对自己过多的忧虑，希望可以将状态找回。</p>
 <p>保持自信，相信自己，你会达成你的目标的！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/9-24-10-5-%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/" data-id="clr7a9wed0000asf4e0wzcpgl" data-title="9.24-10.5 期间总结" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-9.24-10.5 期间总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/10/9.24-10.5%20%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2024-01-10T04:23:43.558Z" itemprop="datePublished">2024-01-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="9-24-10-5-期间总结"><a href="#9-24-10-5-期间总结" class="headerlink" title="9.24 - 10.5 期间总结"></a>9.24 - 10.5 期间总结</h1><h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>深窥自己的心，而后发觉一切的奇迹在你自己。 </p>
-<p>——<strong>培根</strong></p>
-<h2 id="9-24-摸底考试"><a href="#9-24-摸底考试" class="headerlink" title="9.24 摸底考试"></a>9.24 摸底考试</h2><p>这可能是我 <strong>OI</strong> 生涯中经历的最糟糕的一场考试，考前时因为肚子不舒服，有点虚，加之CSP第一轮后状态直线下降，让我对这次考试有所担忧。考试中我先开了 $A$ 题，$A$ 题是一道关于位运算的题。我当时以为很水，敲了下手打高精度，以为就过了，但不曾想因为没有考虑到溢出的问题，${\color{red}WA\ (0)}$ 了。然后开了 $C$ 题，$C$ 题是构造题，构造一个相邻两数之差或和的绝对值为质数的内部元素从 $1$ 到 $n$ 的序列。当时的方向想错了，以为是通过质数表暴搜得到，但时间会超，于是我想到了个自以为还行的<strong>伪解法</strong>， 显然又 ${\color{red}WA\ (0)}$ 了。其他两道基本没想。最后的结果也<strong>爆零</strong>了。</p>
-<h2 id="DP-1阶段-LCS-LIS"><a href="#DP-1阶段-LCS-LIS" class="headerlink" title="DP 1阶段 (LCS &amp; LIS)"></a>DP 1阶段 (LCS &amp; LIS)</h2><p>在摸底考后几天时间里，老师和一些同学将作业表中 $A$ 到 $E$ 题以及考试题讲述了一下，这里我见到了各种 <strong>dalao</strong> 的各种方法，让我<del>大为</del>有所震惊。随后到国庆节又是一段空窗期，老师加了很多关于 <strong>LIS</strong> 和 <strong>LCS</strong> 的题，国庆节上课前两天也讲述了后面几道题的各种解法，让我的思维深度有了质的飞跃。但我 ${\color{green} A}$ 的题还是很少，其中的 $M$ 题死活过不去，这点我也无法理解。</p>
-<h2 id="10-5-的小测试"><a href="#10-5-的小测试" class="headerlink" title="10.5 的小测试"></a>10.5 的小测试</h2><p>赛前张老师说不希望我们爆零，于是我也为此提心吊胆，因为第一次我爆零了。考试的时候，又发生了一点小插曲，让我有点担忧。我先看了 $A$ 题，$A$ 题问纯色三角形的个数有多少。我第一时间想到了排列与组合，但想了很久也无法找到复杂度允许的算法，最后打了个 $O(n^3)$ 的暴力骗点分。结果是 ${\color{red}WA\ (30)}$。随后我开了 $B$ 题，$B$ 题有些难想，从体面上顺向思维是大概不会很轻松就想出来的，我发现反转操作是可逆的，于是我就想到从全 $0$ 给还原到图像，代码写完后算了下复杂度是 $O(n^2)$，可以过掉。结果是 ${\color{green} AC\ (100)}$。$C$ 题我当时没多想，最后才匆忙码，然后就成为全班唯一一个 ${\color{purplr} MLE\ (0)}$的人。$D$ 题原本我是推了 $dp$ 公式，最后检查时发现读错题面了，这是一个重大失误，考场上出现非常致命。所以白白挂掉，时间又不够了，最后输出 $1$ 想骗分，顺利 ${\color{red}WA\ (0)}$。总分 $130$，不能说很好，但是有所进步。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这几天的表现并不好，或许是对环境的不适应，还是对自己过多的忧虑，希望可以将状态找回。</p>
-<p>保持自信，相信自己，你会达成你的目标的！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/9.24-10.5%20%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/" data-id="clr7a46wx000228f4g1z65djf" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-CF896C-Willem,Chtholly,and,Seniorious 详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/10/CF896C-Willem,Chtholly,and,Seniorious%20%E8%AF%A6%E8%A7%A3/" class="article-date">
-  <time class="dt-published" datetime="2024-01-10T04:23:24.581Z" itemprop="datePublished">2024-01-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>一道模板题。</p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF896C">传送门</a></p>
-<h1 id="关于珂朵莉树"><a href="#关于珂朵莉树" class="headerlink" title="关于珂朵莉树"></a>关于珂朵莉树</h1><h2 id="1-你需要知道以下内容"><a href="#1-你需要知道以下内容" class="headerlink" title="1.你需要知道以下内容"></a>1.你需要知道以下内容</h2><ul>
-<li>关于 <code>set</code> 的部分知识</li>
-</ul>
-<h2 id="2-什么是珂朵莉树"><a href="#2-什么是珂朵莉树" class="headerlink" title="2.什么是珂朵莉树"></a>2.什么是珂朵莉树</h2><p>一种<strong>暴力</strong>数据结构，适用于随机生成的数据结构题以及<strong>骗分</strong>，主要有两种操作。</p>
-<h2 id="3-初始化"><a href="#3-初始化" class="headerlink" title="3.初始化"></a>3.初始化</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll l,r;<span class="comment">//左、右端点</span></span><br><span class="line">	<span class="keyword">mutable</span> ll v;</span><br><span class="line">	<span class="built_in">node</span>(ll l,ll r=<span class="number">0</span>,ll v=<span class="number">0</span>):<span class="built_in">l</span>(l),<span class="built_in">r</span>(r),<span class="built_in">v</span>(v) &#123;&#125; </span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp;a) <span class="type">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> l&lt;a.l; <span class="comment">//根据左端点进行排序</span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
-
-<p>在这段代码中，我们用 $l$ 和 $r$ 变量储存当前区间的左端点和右端点。$v$ 是所需要储存的内容，注意到 $v$ 前有关键字 <code>mutable</code>。意思是“可变的”，因为 <code>set</code> 中储存的 $v$ 是一个常量，如果不加这个关键字会报错 <code>error:cannot assign to return value because function &#39;operator-&gt;&#39; returns a const value</code>。</p>
-<p>然后，我们用一个 <code>set</code> 来进行维护，为了后面的操作，我们会根据左端点来进行排序。最终维护下来就是下图所展示的。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png" alt="odt1"></p>
-<h2 id="4-split-操作"><a href="#4-split-操作" class="headerlink" title="4. split 操作"></a>4. split 操作</h2><p>当一段区间需要被分开时，我们就需要 <code>split</code> 操作。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">set&lt;node&gt;::<span class="function">iterator <span class="title">split</span><span class="params">(ll pos)</span></span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator it=s.<span class="built_in">lower_bound</span>(<span class="built_in">node</span>(pos));</span><br><span class="line">	<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()&amp;&amp;(it-&gt;l)==pos)&#123;</span><br><span class="line">		<span class="keyword">return</span> it;</span><br><span class="line">	&#125;</span><br><span class="line">	it--;</span><br><span class="line">	ll l=it-&gt;l,r=it-&gt;r,v=it-&gt;v;</span><br><span class="line">	<span class="keyword">if</span>(r&lt;pos)<span class="keyword">return</span> s.<span class="built_in">end</span>();</span><br><span class="line">	s.<span class="built_in">erase</span>(it);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,pos<span class="number">-1</span>,v));</span><br><span class="line">	<span class="keyword">return</span> s.<span class="built_in">insert</span>(<span class="built_in">node</span>(pos,r,v)).first;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在此前，我们对 $l$ 端点进行了排序，所以我们就可以二分查找 <code>pos</code> 所在的区间，再将这个区间分割为 <code>[l,pos-1]</code> 和 <code>[pos,r]</code> 两个区间。如果说 <code>pos</code> 正好在这段区间的开头的话，显然易见就不用分割了。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png" alt="odt2"></p>
-<h2 id="5-assign-操作"><a href="#5-assign-操作" class="headerlink" title="5. assign 操作"></a>5. assign 操作</h2><p>当一段区间需要合并时，我们就需要 <code>assign</code> 操作。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">assign</span><span class="params">(ll l,ll r,ll v)</span></span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	s.<span class="built_in">erase</span>(itl,itr);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,r,v));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在这个操作中，我们先将 <code>[l,r]</code> 区间分割出来，<code>erase</code> 将 <code>[l,r]</code> 区间都给清空了，然后再插入一段新的区间，值为 $v$。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png" alt="odt3"></p>
-<h1 id="关于本题的分析"><a href="#关于本题的分析" class="headerlink" title="关于本题的分析"></a>关于本题的分析</h1><h2 id="1-操作"><a href="#1-操作" class="headerlink" title="1 操作"></a>1 操作</h2><p>将区间 <code>[l,r]</code> 的值全部增加 $v$，只需要暴力将 <code>[l,r]</code> 内所有的区间的值都增加 $v$ 即可。（这也是为什么要有 <code>mutable</code> 的原因）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(ll l,ll r,ll x)</span> </span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;</span><br><span class="line">		(it-&gt;v)+=x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h2><p>就是 <code>assign</code> 操作。</p>
-<h2 id="3-操作"><a href="#3-操作" class="headerlink" title="3 操作"></a>3 操作</h2><p>将区间 <code>[l,r]</code> 内的所有区间的 $v$ 值排序，记录多少个，然后枚举到 $x$ 个为止。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node2</span> &#123;<span class="comment">//排序所用的结构体</span></span><br><span class="line">	ll v,cnt;</span><br><span class="line">	<span class="built_in">node2</span>(ll v,ll cnt):<span class="built_in">v</span>(v),<span class="built_in">cnt</span>(cnt) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node2 a,node2 b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.v&lt;b.v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">search</span><span class="params">(ll l,ll r,ll x)</span> </span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	vector&lt;node2&gt;v;</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;</span><br><span class="line">		v.<span class="built_in">push_back</span>(<span class="built_in">node2</span>(it-&gt;v,(it-&gt;r)-(it-&gt;l)+<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>(),cmp);</span><br><span class="line">	ll i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;v.<span class="built_in">size</span>(); i++) &#123;<span class="comment">//从小到大枚举</span></span><br><span class="line">		<span class="keyword">if</span>(v[i].cnt&lt;x)x-=v[i].cnt;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> v[i].v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-操作"><a href="#4-操作" class="headerlink" title="4 操作"></a>4 操作</h2><p>答案就为区间 <code>[l,r]</code> 内所有区间的值的 $x$ 次方再乘上区间长度。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll a_,ll n_,ll p_)</span> </span>&#123;</span><br><span class="line">	ll ans_=<span class="number">1</span>;</span><br><span class="line">	a_%=p_;</span><br><span class="line">	<span class="keyword">while</span>(n_) &#123;</span><br><span class="line">		<span class="keyword">if</span>(n_&amp;<span class="number">1</span>)ans_=ans_*a_%p_;</span><br><span class="line">		n_/=<span class="number">2</span>;</span><br><span class="line">		a_=a_*a_%p_;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans_;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">getans_pow</span><span class="params">(ll l,ll r,ll x,ll y)</span> </span>&#123;</span><br><span class="line">	ll ans_=<span class="number">0</span>;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;</span><br><span class="line">		ans_+=(<span class="built_in">qpow</span>(it-&gt;v,x,y)*(((it-&gt;r)-(it-&gt;l)+<span class="number">1</span>)%y))%y;<span class="comment">//区间长度乘区间值的 x 次方</span></span><br><span class="line">		ans_%=y;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans_%y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>在分割区间时，要先分割右边，在分割左边，也就是先 <code>split(r+1)</code>，再 <code>split(l)</code>。不然顺序不对在分割时可能会找不到分割区间。</p>
-<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll unsigned long long</span></span><br><span class="line"><span class="type">const</span> ll P=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">const</span> ll N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line">ll n,m,seed,vmax;</span><br><span class="line"><span class="function">ll <span class="title">rnd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ll seedd=seed;</span><br><span class="line">	seed=(seed*<span class="number">7</span>+<span class="number">13</span>)%P;</span><br><span class="line">	<span class="keyword">return</span> seedd;</span><br><span class="line">&#125;</span><br><span class="line">ll a[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">question</span> &#123;</span><br><span class="line">	ll op,l,r,x,y;</span><br><span class="line">&#125; q[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">random_</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		a[i]=(<span class="built_in">rnd</span>()%vmax)+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=m; i++) &#123;</span><br><span class="line">		q[i].op=(<span class="built_in">rnd</span>()%<span class="number">4</span>)+<span class="number">1</span>;</span><br><span class="line">		q[i].l=(<span class="built_in">rnd</span>()%n)+<span class="number">1</span>;</span><br><span class="line">		q[i].r=(<span class="built_in">rnd</span>()%n)+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(q[i].l&gt;q[i].r) &#123;</span><br><span class="line">			<span class="built_in">swap</span>(q[i].l,q[i].r);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">3</span>) &#123;</span><br><span class="line">			q[i].x=(<span class="built_in">rnd</span>()%(q[i].r-q[i].l+<span class="number">1</span>))+<span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			q[i].x=(<span class="built_in">rnd</span>()%vmax)+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">4</span>) &#123;</span><br><span class="line">			q[i].y=(<span class="built_in">rnd</span>()%vmax)+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">	ll l,r;</span><br><span class="line">	<span class="keyword">mutable</span> ll v;</span><br><span class="line">	<span class="built_in">node</span>(ll l,ll r=<span class="number">0</span>,ll v=<span class="number">0</span>):<span class="built_in">l</span>(l),<span class="built_in">r</span>(r),<span class="built_in">v</span>(v) &#123;&#125;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp;a) <span class="type">const</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> l&lt;a.l;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">set&lt;node&gt;s;</span><br><span class="line">set&lt;node&gt;::<span class="function">iterator <span class="title">split</span><span class="params">(ll pos)</span> </span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator it=s.<span class="built_in">lower_bound</span>(<span class="built_in">node</span>(pos));;</span><br><span class="line">	<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()&amp;&amp;(it-&gt;l)==pos) &#123;</span><br><span class="line">		<span class="keyword">return</span> it;</span><br><span class="line">	&#125;</span><br><span class="line">	it--;</span><br><span class="line">	ll l=it-&gt;l,r=it-&gt;r,v=it-&gt;v;</span><br><span class="line">	<span class="keyword">if</span>(r&lt;pos)<span class="keyword">return</span> s.<span class="built_in">end</span>();</span><br><span class="line">	s.<span class="built_in">erase</span>(it);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,pos<span class="number">-1</span>,v));</span><br><span class="line">	<span class="keyword">return</span> s.<span class="built_in">insert</span>(<span class="built_in">node</span>(pos,r,v)).first;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">assign</span><span class="params">(ll l,ll r,ll x)</span> </span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);;</span><br><span class="line">	s.<span class="built_in">erase</span>(itl,itr);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,r,x));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(ll l,ll r,ll x)</span> </span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;</span><br><span class="line">		(it-&gt;v)+=x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node2</span> &#123;</span><br><span class="line">	ll v,cnt;</span><br><span class="line">	<span class="built_in">node2</span>(ll v,ll cnt):<span class="built_in">v</span>(v),<span class="built_in">cnt</span>(cnt) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node2 a,node2 b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.v&lt;b.v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">search</span><span class="params">(ll l,ll r,ll x)</span> </span>&#123;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	vector&lt;node2&gt;v;</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;</span><br><span class="line">		v.<span class="built_in">push_back</span>(<span class="built_in">node2</span>(it-&gt;v,(it-&gt;r)-(it-&gt;l)+<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>(),cmp);</span><br><span class="line">	ll i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;v.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(v[i].cnt&lt;x)x-=v[i].cnt;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> v[i].v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll a_,ll n_,ll p_)</span> </span>&#123;</span><br><span class="line">	ll ans_=<span class="number">1</span>;</span><br><span class="line">	a_%=p_;</span><br><span class="line">	<span class="keyword">while</span>(n_) &#123;</span><br><span class="line">		<span class="keyword">if</span>(n_&amp;<span class="number">1</span>)ans_=ans_*a_%p_;</span><br><span class="line">		n_/=<span class="number">2</span>;</span><br><span class="line">		a_=a_*a_%p_;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans_;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">getans_pow</span><span class="params">(ll l,ll r,ll x,ll y)</span> </span>&#123;</span><br><span class="line">	ll ans_=<span class="number">0</span>;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;</span><br><span class="line">		ans_+=(<span class="built_in">qpow</span>(it-&gt;v,x,y)*(((it-&gt;r)-(it-&gt;l)+<span class="number">1</span>)%y))%y;</span><br><span class="line">		ans_%=y;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans_%y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;seed&gt;&gt;vmax;</span><br><span class="line">	<span class="built_in">random_</span>();</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		s.<span class="built_in">insert</span>(<span class="built_in">node</span>(i,i,a[i]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=m; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="built_in">add</span>(q[i].l,q[i].r,q[i].x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">2</span>) &#123;</span><br><span class="line">			<span class="built_in">assign</span>(q[i].l,q[i].r,q[i].x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">3</span>) &#123;</span><br><span class="line">			cout&lt;&lt;<span class="built_in">search</span>(q[i].l,q[i].r,q[i].x)&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">4</span>) &#123;</span><br><span class="line">			cout&lt;&lt;(<span class="built_in">getans_pow</span>(q[i].l,q[i].r,q[i].x,q[i].y)+q[i].y)%q[i].y&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/CF896C-Willem,Chtholly,and,Seniorious%20%E8%AF%A6%E8%A7%A3/" data-id="clr7a3zee000128f4354m1poc" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/01/10/9-24-10-5-%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/" data-id="clr7e00qx00000wf4acrh2fvo" data-title="9.24-10.5 期间总结" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -483,8 +572,11 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1971">P1971 [NOI2011] 兔兔与蛋蛋游戏</a></p>
-<h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><p>对于每次移动，我们可以将它理解为空格在移动，同时有一个结论，空格的移动不可能出现环，即不重复的经过部分点，证明如下：</p>
+        <h1 id="传送门">传送门</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1971">P1971 [NOI2011]
+兔兔与蛋蛋游戏</a></p>
+<h1 id="解决思路">解决思路</h1>
+<p>对于每次移动，我们可以将它理解为空格在移动，同时有一个结论，空格的移动不可能出现环，即不重复的经过部分点，证明如下：</p>
         
           <p class="article-more-link">
             <a href="/2024/01/10/Luogu-P1971-NOI2011-%E5%85%94%E5%85%94%E4%B8%8E%E8%9B%8B%E8%9B%8B%E6%B8%B8%E6%88%8F-%E9%A2%98%E8%A7%A3/#more">Read More</a>
@@ -493,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/10/Luogu-P1971-NOI2011-%E5%85%94%E5%85%94%E4%B8%8E%E8%9B%8B%E8%9B%8B%E6%B8%B8%E6%88%8F-%E9%A2%98%E8%A7%A3/" data-id="clr79ticn00009of43ono358g" data-title="Luogu P1971 [NOI2011] 兔兔与蛋蛋游戏 题解" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/01/10/Luogu-P1971-NOI2011-%E5%85%94%E5%85%94%E4%B8%8E%E8%9B%8B%E8%9B%8B%E6%B8%B8%E6%88%8F-%E9%A2%98%E8%A7%A3/" data-id="clr7e00r400010wf40mk2abdd" data-title="Luogu P1971 [NOI2011] 兔兔与蛋蛋游戏 题解" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -552,7 +644,7 @@
           </li>
         
           <li>
-            <a href="/2024/01/10/9.24-10.5%20%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/">(no title)</a>
+            <a href="/2024/01/10/Luogu-P1971-NOI2011-%E5%85%94%E5%85%94%E4%B8%8E%E8%9B%8B%E8%9B%8B%E6%B8%B8%E6%88%8F-%E9%A2%98%E8%A7%A3/">Luogu P1971 [NOI2011] 兔兔与蛋蛋游戏 题解</a>
           </li>
         
       </ul>
