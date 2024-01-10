@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一道模板题。 传送门 关于珂朵莉树1.你需要知道以下内容 关于 set 的部分知识  2.什么是珂朵莉树一种暴力数据结构，适用于随机生成的数据结构题以及骗分，主要有两种操作。 3.初始化12345678struct node{	ll l,r;&#x2F;&#x2F;左、右端点	mutable ll v;	node(ll l,ll r&#x3D;0,ll v&#x3D;0):l(l),r(r),v(v) {} 	bool operator">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces CF896C Willem, Chtholly and Seniorious 详解">
+<meta property="og:url" content="http://example.com/2024/01/10/Codeforces-CF896C-Willem-Chtholly-and-Seniorious-%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="DYC的Blog">
+<meta property="og:description" content="一道模板题。 传送门 关于珂朵莉树1.你需要知道以下内容 关于 set 的部分知识  2.什么是珂朵莉树一种暴力数据结构，适用于随机生成的数据结构题以及骗分，主要有两种操作。 3.初始化12345678struct node{	ll l,r;&#x2F;&#x2F;左、右端点	mutable ll v;	node(ll l,ll r&#x3D;0,ll v&#x3D;0):l(l),r(r),v(v) {} 	bool operator">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png">
+<meta property="article:published_time" content="2024-01-10T06:59:39.000Z">
+<meta property="article:modified_time" content="2024-01-10T07:00:11.471Z">
+<meta property="article:author" content="Yucheng Deng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png">
+
+<link rel="canonical" href="http://example.com/2024/01/10/Codeforces-CF896C-Willem-Chtholly-and-Seniorious-%E8%AF%A6%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Codeforces CF896C Willem, Chtholly and Seniorious 详解 | DYC的Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">DYC的Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/10/Codeforces-CF896C-Willem-Chtholly-and-Seniorious-%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yucheng Deng">
+      <meta itemprop="description" content="DYC的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DYC的Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Codeforces CF896C Willem, Chtholly and Seniorious 详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-10 14:59:39 / 修改时间：15:00:11" itemprop="dateCreated datePublished" datetime="2024-01-10T14:59:39+08:00">2024-01-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一道模板题。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF896C">传送门</a></p>
+<h1 id="关于珂朵莉树"><a href="#关于珂朵莉树" class="headerlink" title="关于珂朵莉树"></a>关于珂朵莉树</h1><h2 id="1-你需要知道以下内容"><a href="#1-你需要知道以下内容" class="headerlink" title="1.你需要知道以下内容"></a>1.你需要知道以下内容</h2><ul>
+<li>关于 <code>set</code> 的部分知识</li>
+</ul>
+<h2 id="2-什么是珂朵莉树"><a href="#2-什么是珂朵莉树" class="headerlink" title="2.什么是珂朵莉树"></a>2.什么是珂朵莉树</h2><p>一种<strong>暴力</strong>数据结构，适用于随机生成的数据结构题以及<strong>骗分</strong>，主要有两种操作。</p>
+<h2 id="3-初始化"><a href="#3-初始化" class="headerlink" title="3.初始化"></a>3.初始化</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>{</span><br><span class="line">	ll l,r;<span class="comment">//左、右端点</span></span><br><span class="line">	<span class="keyword">mutable</span> ll v;</span><br><span class="line">	<span class="built_in">node</span>(ll l,ll r=<span class="number">0</span>,ll v=<span class="number">0</span>):<span class="built_in">l</span>(l),<span class="built_in">r</span>(r),<span class="built_in">v</span>(v) {} </span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp;a) <span class="type">const</span>{</span><br><span class="line">		<span class="keyword">return</span> l&lt;a.l; <span class="comment">//根据左端点进行排序</span></span><br><span class="line">	} </span><br><span class="line">}; </span><br></pre></td></tr></table></figure>
+<p>在这段代码中，我们用 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="0.674ex" height="1.595ex" role="img" focusable="false" viewBox="0 -694 298 705"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g></g></g></svg></mjx-container> 和 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.02ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 451 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container> 变量储存当前区间的左端点和右端点。<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container> 是所需要储存的内容，注意到 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container> 前有关键字 <code>mutable</code>。意思是“可变的”，因为 <code>set</code> 中储存的 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container> 是一个常量，如果不加这个关键字会报错 <code>error:cannot assign to return value because function 'operator-&gt;' returns a const value</code>。</p>
+<p>然后，我们用一个 <code>set</code> 来进行维护，为了后面的操作，我们会根据左端点来进行排序。最终维护下来就是下图所展示的。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png" alt="odt1"></p>
+<h2 id="4-split-操作"><a href="#4-split-操作" class="headerlink" title="4. split 操作"></a>4. split 操作</h2><p>当一段区间需要被分开时，我们就需要 <code>split</code> 操作。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">set&lt;node&gt;::<span class="function">iterator <span class="title">split</span><span class="params">(ll pos)</span></span>{</span><br><span class="line">	set&lt;node&gt;::iterator it=s.<span class="built_in">lower_bound</span>(<span class="built_in">node</span>(pos));</span><br><span class="line">	<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()&amp;&amp;(it-&gt;l)==pos){</span><br><span class="line">		<span class="keyword">return</span> it;</span><br><span class="line">	}</span><br><span class="line">	it--;</span><br><span class="line">	ll l=it-&gt;l,r=it-&gt;r,v=it-&gt;v;</span><br><span class="line">	<span class="keyword">if</span>(r&lt;pos)<span class="keyword">return</span> s.<span class="built_in">end</span>();</span><br><span class="line">	s.<span class="built_in">erase</span>(it);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,pos<span class="number">-1</span>,v));</span><br><span class="line">	<span class="keyword">return</span> s.<span class="built_in">insert</span>(<span class="built_in">node</span>(pos,r,v)).first;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>在此前，我们对 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="0.674ex" height="1.595ex" role="img" focusable="false" viewBox="0 -694 298 705"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g></g></g></svg></mjx-container> 端点进行了排序，所以我们就可以二分查找 <code>pos</code> 所在的区间，再将这个区间分割为 <code>[l,pos-1]</code> 和 <code>[pos,r]</code> 两个区间。如果说 <code>pos</code> 正好在这段区间的开头的话，显然易见就不用分割了。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png" alt="odt2"></p>
+<h2 id="5-assign-操作"><a href="#5-assign-操作" class="headerlink" title="5. assign 操作"></a>5. assign 操作</h2><p>当一段区间需要合并时，我们就需要 <code>assign</code> 操作。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">assign</span><span class="params">(ll l,ll r,ll v)</span></span>{</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	s.<span class="built_in">erase</span>(itl,itr);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,r,v));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>在这个操作中，我们先将 <code>[l,r]</code> 区间分割出来，<code>erase</code> 将 <code>[l,r]</code> 区间都给清空了，然后再插入一段新的区间，值为 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container>。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png" alt="odt3"></p>
+<h1 id="关于本题的分析"><a href="#关于本题的分析" class="headerlink" title="关于本题的分析"></a>关于本题的分析</h1><h2 id="1-操作"><a href="#1-操作" class="headerlink" title="1 操作"></a>1 操作</h2><p>将区间 <code>[l,r]</code> 的值全部增加 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container>，只需要暴力将 <code>[l,r]</code> 内所有的区间的值都增加 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container> 即可。（这也是为什么要有 <code>mutable</code> 的原因）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(ll l,ll r,ll x)</span> </span>{</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) {</span><br><span class="line">		(it-&gt;v)+=x;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h2><p>就是 <code>assign</code> 操作。</p>
+<h2 id="3-操作"><a href="#3-操作" class="headerlink" title="3 操作"></a>3 操作</h2><p>将区间 <code>[l,r]</code> 内的所有区间的 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.097ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 485 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g></g></g></svg></mjx-container> 值排序，记录多少个，然后枚举到 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.294ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 572 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></svg></mjx-container> 个为止。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node2</span> {<span class="comment">//排序所用的结构体</span></span><br><span class="line">	ll v,cnt;</span><br><span class="line">	<span class="built_in">node2</span>(ll v,ll cnt):<span class="built_in">v</span>(v),<span class="built_in">cnt</span>(cnt) {}</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node2 a,node2 b)</span> </span>{</span><br><span class="line">	<span class="keyword">return</span> a.v&lt;b.v;</span><br><span class="line">}</span><br><span class="line"><span class="function">ll <span class="title">search</span><span class="params">(ll l,ll r,ll x)</span> </span>{</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	vector&lt;node2&gt;v;</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) {</span><br><span class="line">		v.<span class="built_in">push_back</span>(<span class="built_in">node2</span>(it-&gt;v,(it-&gt;r)-(it-&gt;l)+<span class="number">1</span>));</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">sort</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>(),cmp);</span><br><span class="line">	ll i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;v.<span class="built_in">size</span>(); i++) {<span class="comment">//从小到大枚举</span></span><br><span class="line">		<span class="keyword">if</span>(v[i].cnt&lt;x)x-=v[i].cnt;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> v[i].v;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="4-操作"><a href="#4-操作" class="headerlink" title="4 操作"></a>4 操作</h2><p>答案就为区间 <code>[l,r]</code> 内所有区间的值的 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.294ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 572 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></svg></mjx-container> 次方再乘上区间长度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll a_,ll n_,ll p_)</span> </span>{</span><br><span class="line">	ll ans_=<span class="number">1</span>;</span><br><span class="line">	a_%=p_;</span><br><span class="line">	<span class="keyword">while</span>(n_) {</span><br><span class="line">		<span class="keyword">if</span>(n_&amp;<span class="number">1</span>)ans_=ans_*a_%p_;</span><br><span class="line">		n_/=<span class="number">2</span>;</span><br><span class="line">		a_=a_*a_%p_;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans_;</span><br><span class="line">}</span><br><span class="line"><span class="function">ll <span class="title">getans_pow</span><span class="params">(ll l,ll r,ll x,ll y)</span> </span>{</span><br><span class="line">	ll ans_=<span class="number">0</span>;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) {</span><br><span class="line">		ans_+=(<span class="built_in">qpow</span>(it-&gt;v,x,y)*(((it-&gt;r)-(it-&gt;l)+<span class="number">1</span>)%y))%y;<span class="comment">//区间长度乘区间值的 x 次方</span></span><br><span class="line">		ans_%=y;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans_%y;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>在分割区间时，要先分割右边，在分割左边，也就是先 <code>split(r+1)</code>，再 <code>split(l)</code>。不然顺序不对在分割时可能会找不到分割区间。</p>
+<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll unsigned long long</span></span><br><span class="line"><span class="type">const</span> ll P=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">const</span> ll N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line">ll n,m,seed,vmax;</span><br><span class="line"><span class="function">ll <span class="title">rnd</span><span class="params">()</span> </span>{</span><br><span class="line">	ll seedd=seed;</span><br><span class="line">	seed=(seed*<span class="number">7</span>+<span class="number">13</span>)%P;</span><br><span class="line">	<span class="keyword">return</span> seedd;</span><br><span class="line">}</span><br><span class="line">ll a[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">question</span> {</span><br><span class="line">	ll op,l,r,x,y;</span><br><span class="line">} q[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">random_</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) {</span><br><span class="line">		a[i]=(<span class="built_in">rnd</span>()%vmax)+<span class="number">1</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=m; i++) {</span><br><span class="line">		q[i].op=(<span class="built_in">rnd</span>()%<span class="number">4</span>)+<span class="number">1</span>;</span><br><span class="line">		q[i].l=(<span class="built_in">rnd</span>()%n)+<span class="number">1</span>;</span><br><span class="line">		q[i].r=(<span class="built_in">rnd</span>()%n)+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(q[i].l&gt;q[i].r) {</span><br><span class="line">			<span class="built_in">swap</span>(q[i].l,q[i].r);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">3</span>) {</span><br><span class="line">			q[i].x=(<span class="built_in">rnd</span>()%(q[i].r-q[i].l+<span class="number">1</span>))+<span class="number">1</span>;</span><br><span class="line">		} <span class="keyword">else</span> {</span><br><span class="line">			q[i].x=(<span class="built_in">rnd</span>()%vmax)+<span class="number">1</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">4</span>) {</span><br><span class="line">			q[i].y=(<span class="built_in">rnd</span>()%vmax)+<span class="number">1</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> {</span><br><span class="line">	ll l,r;</span><br><span class="line">	<span class="keyword">mutable</span> ll v;</span><br><span class="line">	<span class="built_in">node</span>(ll l,ll r=<span class="number">0</span>,ll v=<span class="number">0</span>):<span class="built_in">l</span>(l),<span class="built_in">r</span>(r),<span class="built_in">v</span>(v) {}</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp;a) <span class="type">const</span> {</span><br><span class="line">		<span class="keyword">return</span> l&lt;a.l;</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line">set&lt;node&gt;s;</span><br><span class="line">set&lt;node&gt;::<span class="function">iterator <span class="title">split</span><span class="params">(ll pos)</span> </span>{</span><br><span class="line">	set&lt;node&gt;::iterator it=s.<span class="built_in">lower_bound</span>(<span class="built_in">node</span>(pos));;</span><br><span class="line">	<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()&amp;&amp;(it-&gt;l)==pos) {</span><br><span class="line">		<span class="keyword">return</span> it;</span><br><span class="line">	}</span><br><span class="line">	it--;</span><br><span class="line">	ll l=it-&gt;l,r=it-&gt;r,v=it-&gt;v;</span><br><span class="line">	<span class="keyword">if</span>(r&lt;pos)<span class="keyword">return</span> s.<span class="built_in">end</span>();</span><br><span class="line">	s.<span class="built_in">erase</span>(it);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,pos<span class="number">-1</span>,v));</span><br><span class="line">	<span class="keyword">return</span> s.<span class="built_in">insert</span>(<span class="built_in">node</span>(pos,r,v)).first;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">assign</span><span class="params">(ll l,ll r,ll x)</span> </span>{</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);;</span><br><span class="line">	s.<span class="built_in">erase</span>(itl,itr);</span><br><span class="line">	s.<span class="built_in">insert</span>(<span class="built_in">node</span>(l,r,x));</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(ll l,ll r,ll x)</span> </span>{</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) {</span><br><span class="line">		(it-&gt;v)+=x;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node2</span> {</span><br><span class="line">	ll v,cnt;</span><br><span class="line">	<span class="built_in">node2</span>(ll v,ll cnt):<span class="built_in">v</span>(v),<span class="built_in">cnt</span>(cnt) {}</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node2 a,node2 b)</span> </span>{</span><br><span class="line">	<span class="keyword">return</span> a.v&lt;b.v;</span><br><span class="line">}</span><br><span class="line"><span class="function">ll <span class="title">search</span><span class="params">(ll l,ll r,ll x)</span> </span>{</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	vector&lt;node2&gt;v;</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) {</span><br><span class="line">		v.<span class="built_in">push_back</span>(<span class="built_in">node2</span>(it-&gt;v,(it-&gt;r)-(it-&gt;l)+<span class="number">1</span>));</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">sort</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>(),cmp);</span><br><span class="line">	ll i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;v.<span class="built_in">size</span>(); i++) {</span><br><span class="line">		<span class="keyword">if</span>(v[i].cnt&lt;x)x-=v[i].cnt;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> v[i].v;</span><br><span class="line">}</span><br><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll a_,ll n_,ll p_)</span> </span>{</span><br><span class="line">	ll ans_=<span class="number">1</span>;</span><br><span class="line">	a_%=p_;</span><br><span class="line">	<span class="keyword">while</span>(n_) {</span><br><span class="line">		<span class="keyword">if</span>(n_&amp;<span class="number">1</span>)ans_=ans_*a_%p_;</span><br><span class="line">		n_/=<span class="number">2</span>;</span><br><span class="line">		a_=a_*a_%p_;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans_;</span><br><span class="line">}</span><br><span class="line"><span class="function">ll <span class="title">getans_pow</span><span class="params">(ll l,ll r,ll x,ll y)</span> </span>{</span><br><span class="line">	ll ans_=<span class="number">0</span>;</span><br><span class="line">	set&lt;node&gt;::iterator itr=<span class="built_in">split</span>(r+<span class="number">1</span>),itl=<span class="built_in">split</span>(l);</span><br><span class="line">	<span class="keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) {</span><br><span class="line">		ans_+=(<span class="built_in">qpow</span>(it-&gt;v,x,y)*(((it-&gt;r)-(it-&gt;l)+<span class="number">1</span>)%y))%y;</span><br><span class="line">		ans_%=y;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans_%y;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;seed&gt;&gt;vmax;</span><br><span class="line">	<span class="built_in">random_</span>();</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i++) {</span><br><span class="line">		s.<span class="built_in">insert</span>(<span class="built_in">node</span>(i,i,a[i]));</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=m; i++) {</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">1</span>) {</span><br><span class="line">			<span class="built_in">add</span>(q[i].l,q[i].r,q[i].x);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">2</span>) {</span><br><span class="line">			<span class="built_in">assign</span>(q[i].l,q[i].r,q[i].x);</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">3</span>) {</span><br><span class="line">			cout&lt;&lt;<span class="built_in">search</span>(q[i].l,q[i].r,q[i].x)&lt;&lt;endl;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span>(q[i].op==<span class="number">4</span>) {</span><br><span class="line">			cout&lt;&lt;(<span class="built_in">getans_pow</span>(q[i].l,q[i].r,q[i].x,q[i].y)+q[i].y)%q[i].y&lt;&lt;endl;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/10/Luogu-P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/" rel="prev" title="Luogu P3736 [HAOI2016] 字符合并 题解">
+      <i class="fa fa-chevron-left"></i> Luogu P3736 [HAOI2016] 字符合并 题解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/10/Luogu-P6995-NEERC2014-Knockout-Racing-%E9%A2%98%E8%A7%A3/" rel="next" title="Luogu P6995 [NEERC2014] Knockout Racing 题解">
+      Luogu P6995 [NEERC2014] Knockout Racing 题解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%8F%82%E6%9C%B5%E8%8E%89%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">关于珂朵莉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.你需要知道以下内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E7%8F%82%E6%9C%B5%E8%8E%89%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">2.什么是珂朵莉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">3.初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-split-%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">4. split 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-assign-%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.</span> <span class="nav-text">5. assign 操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E9%A2%98%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">关于本题的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">1 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">2 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">3 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.4.</span> <span class="nav-text">4 操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AC-code"><span class="nav-number">4.</span> <span class="nav-text">AC code</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yucheng Deng</p>
+  <div class="site-description" itemprop="description">DYC的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yucheng Deng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
