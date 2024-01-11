@@ -75,7 +75,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":"/img/w700h350z1l10t10746.png","image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":"/img/w700h350z1l10t10746.png","image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -324,15 +324,15 @@
 <h2 id="3-初始化"><a href="#3-初始化" class="headerlink" title="3.初始化"></a>3.初始化</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span>&#123;<br>	ll l,r;<span class="hljs-comment">//左、右端点</span><br>	<span class="hljs-keyword">mutable</span> ll v;<br>	<span class="hljs-built_in">node</span>(ll l,ll r=<span class="hljs-number">0</span>,ll v=<span class="hljs-number">0</span>):<span class="hljs-built_in">l</span>(l),<span class="hljs-built_in">r</span>(r),<span class="hljs-built_in">v</span>(v) &#123;&#125; <br>	<span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span> &lt; (<span class="hljs-type">const</span> node &amp;a) <span class="hljs-type">const</span>&#123;<br>		<span class="hljs-keyword">return</span> l&lt;a.l; <span class="hljs-comment">//根据左端点进行排序</span><br>	&#125; <br>&#125;; <br></code></pre></td></tr></table></figure>
 <p>在这段代码中，我们用 $l$ 和 $r$ 变量储存当前区间的左端点和右端点。$v$ 是所需要储存的内容，注意到 $v$ 前有关键字 <code>mutable</code>。意思是“可变的”，因为 <code>set</code> 中储存的 $v$ 是一个常量，如果不加这个关键字会报错 <code>error:cannot assign to return value because function &#39;operator-&gt;&#39; returns a const value</code>。</p>
 <p>然后，我们用一个 <code>set</code> 来进行维护，为了后面的操作，我们会根据左端点来进行排序。最终维护下来就是下图所展示的。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png" srcset="/img/loading.gif" lazyload alt="odt1"></p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png" alt="odt1"></p>
 <h2 id="4-split-操作"><a href="#4-split-操作" class="headerlink" title="4. split 操作"></a>4. split 操作</h2><p>当一段区间需要被分开时，我们就需要 <code>split</code> 操作。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp">set&lt;node&gt;::<span class="hljs-function">iterator <span class="hljs-title">split</span><span class="hljs-params">(ll pos)</span></span>&#123;<br>	set&lt;node&gt;::iterator it=s.<span class="hljs-built_in">lower_bound</span>(<span class="hljs-built_in">node</span>(pos));<br>	<span class="hljs-keyword">if</span>(it!=s.<span class="hljs-built_in">end</span>()&amp;&amp;(it-&gt;l)==pos)&#123;<br>		<span class="hljs-keyword">return</span> it;<br>	&#125;<br>	it--;<br>	ll l=it-&gt;l,r=it-&gt;r,v=it-&gt;v;<br>	<span class="hljs-keyword">if</span>(r&lt;pos)<span class="hljs-keyword">return</span> s.<span class="hljs-built_in">end</span>();<br>	s.<span class="hljs-built_in">erase</span>(it);<br>	s.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">node</span>(l,pos<span class="hljs-number">-1</span>,v));<br>	<span class="hljs-keyword">return</span> s.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">node</span>(pos,r,v)).first;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>在此前，我们对 $l$ 端点进行了排序，所以我们就可以二分查找 <code>pos</code> 所在的区间，再将这个区间分割为 <code>[l,pos-1]</code> 和 <code>[pos,r]</code> 两个区间。如果说 <code>pos</code> 正好在这段区间的开头的话，显然易见就不用分割了。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png" srcset="/img/loading.gif" lazyload alt="odt2"></p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png" alt="odt2"></p>
 <h2 id="5-assign-操作"><a href="#5-assign-操作" class="headerlink" title="5. assign 操作"></a>5. assign 操作</h2><p>当一段区间需要合并时，我们就需要 <code>assign</code> 操作。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">(ll l,ll r,ll v)</span></span>&#123;<br>	set&lt;node&gt;::iterator itr=<span class="hljs-built_in">split</span>(r+<span class="hljs-number">1</span>),itl=<span class="hljs-built_in">split</span>(l);<br>	s.<span class="hljs-built_in">erase</span>(itl,itr);<br>	s.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">node</span>(l,r,v));<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>在这个操作中，我们先将 <code>[l,r]</code> 区间分割出来，<code>erase</code> 将 <code>[l,r]</code> 区间都给清空了，然后再插入一段新的区间，值为 $v$。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png" srcset="/img/loading.gif" lazyload alt="odt3"></p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png" alt="odt3"></p>
 <h1 id="关于本题的分析"><a href="#关于本题的分析" class="headerlink" title="关于本题的分析"></a>关于本题的分析</h1><h2 id="1-操作"><a href="#1-操作" class="headerlink" title="1 操作"></a>1 操作</h2><p>将区间 <code>[l,r]</code> 的值全部增加 $v$，只需要暴力将 <code>[l,r]</code> 内所有的区间的值都增加 $v$ 即可。（这也是为什么要有 <code>mutable</code> 的原因）</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(ll l,ll r,ll x)</span> </span>&#123;<br>	set&lt;node&gt;::iterator itr=<span class="hljs-built_in">split</span>(r+<span class="hljs-number">1</span>),itl=<span class="hljs-built_in">split</span>(l);<br>	<span class="hljs-keyword">for</span>(set&lt;node&gt;::iterator it=itl; it!=itr; it++) &#123;<br>		(it-&gt;v)+=x;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h2><p>就是 <code>assign</code> 操作。</p>
@@ -558,10 +558,6 @@
 
 
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
 
 
 
@@ -664,7 +660,7 @@
               inlineMath: { '[+]': [['$', '$']] }
             },
             loader : {
-              load: ['ui/lazy']
+              
             },
             options: {
               renderActions: {
