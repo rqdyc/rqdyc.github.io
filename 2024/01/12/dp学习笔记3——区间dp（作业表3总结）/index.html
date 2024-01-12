@@ -16,24 +16,24 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="传送门 传送门 思路 题目要求一段数合并后的最大分数，看到合并，且 \(n\) 的范围才 \(300\)，自然的想到复杂度 \(O(n^3)\) 的区间 dp。 注意到 \(k\) 的范围很小，我们就可以想到复杂度为 \(O(2^k)\) 状压，状压字符当前的状态。">
+    <meta name="description" content="主要针对于区间 dp 的总结。 比较拿手（感觉有一种抽象的无从下手但又很智慧的美） 原理 对于一个大区间，如果我们可以解决他的子区间问题，并且答案还能合并到大区间里，那这个问题就可以用区间 dp 解决。 就这么简单，但是扩展出去有亿点复杂。 例题 K 祖玛游戏 Link NKOJ and Link Lougu 一道经典题目（也开始难了）。 首先，我们现设 \(dp_{i,j">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Luogu P3736 [HAOI2016] 字符合并 题解">
-<meta property="og:url" content="http://example.com/2023/11/25/Luogu-P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:title" content="dp学习笔记3——区间dp（作业表3总结）">
+<meta property="og:url" content="http://example.com/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E5%8C%BA%E9%97%B4dp%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A83%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="传送门 传送门 思路 题目要求一段数合并后的最大分数，看到合并，且 \(n\) 的范围才 \(300\)，自然的想到复杂度 \(O(n^3)\) 的区间 dp。 注意到 \(k\) 的范围很小，我们就可以想到复杂度为 \(O(2^k)\) 状压，状压字符当前的状态。">
+<meta property="og:description" content="主要针对于区间 dp 的总结。 比较拿手（感觉有一种抽象的无从下手但又很智慧的美） 原理 对于一个大区间，如果我们可以解决他的子区间问题，并且答案还能合并到大区间里，那这个问题就可以用区间 dp 解决。 就这么简单，但是扩展出去有亿点复杂。 例题 K 祖玛游戏 Link NKOJ and Link Lougu 一道经典题目（也开始难了）。 首先，我们现设 \(dp_{i,j">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-11-25T00:52:06.000Z">
-<meta property="article:modified_time" content="2024-01-12T06:20:17.840Z">
+<meta property="article:published_time" content="2024-01-12T06:45:12.000Z">
+<meta property="article:modified_time" content="2024-01-12T08:14:24.632Z">
 <meta property="article:author" content="Yucheng Deng">
-<meta property="article:tag" content="题解">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Luogu P3736 [HAOI2016] 字符合并 题解 - DYC的Blog</title>
+  <title>dp学习笔记3——区间dp（作业表3总结） - DYC的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -258,7 +258,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Luogu P3736 [HAOI2016] 字符合并 题解"></span>
+            <span id="subtitle" data-typed-text="dp学习笔记3——区间dp（作业表3总结）"></span>
           
         </div>
 
@@ -269,8 +269,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-25 08:52" pubdate>
-          2023年11月25日 早上
+        <time datetime="2024-01-12 14:45" pubdate>
+          2024年1月12日 下午
         </time>
       </span>
     
@@ -281,7 +281,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          943 字
+          1.3k 字
         
       </span>
     
@@ -292,7 +292,7 @@
         
         
         
-          8 分钟
+          12 分钟
         
       </span>
     
@@ -337,77 +337,87 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Luogu P3736 [HAOI2016] 字符合并 题解</h1>
+            <h1 id="seo-header">dp学习笔记3——区间dp（作业表3总结）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="传送门">传送门</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3736">传送门</a></p>
-<h1 id="思路">思路</h1>
-<p>题目要求一段数<strong>合并</strong>后的最大分数，看到合并，且 <span
-class="math inline">\(n\)</span> 的范围才 <span
-class="math inline">\(300\)</span>，自然的想到复杂度 <span
-class="math inline">\(O(n^3)\)</span> 的区间 dp。</p>
-<p>注意到 <span class="math inline">\(k\)</span>
-的范围很小，我们就可以想到复杂度为 <span
-class="math inline">\(O(2^k)\)</span> 状压，状压字符当前的状态。</p>
-<span id="more"></span>
-<p>结合起来，<span class="math inline">\(dp_{i,j,s}\)</span> 表示区间
-<code>[i,j]</code> 合并后状态为 <span
-class="math inline">\(s\)</span>，有 <span class="math inline">\(O(n^3
-2^k)\)</span> 的暴力，显然易见会超时，这时我们就要找合并的性质。</p>
-<p>不妨假设一段长度为 <span class="math inline">\(t\)</span> 的
-<code>01</code> 序列，显然易见，当 <span class="math inline">\(t =
-k\)</span> 时，合并次数为 <span class="math inline">\(1\)</span>。</p>
-<p>假设合并完一次后，得到的长度为 <span
-class="math inline">\(1\)</span>，如果再想合并一次，就要让合并完后的长度
-<span class="math inline">\(1\)</span> 加上另一端区间的长度 <span
-class="math inline">\(t_1\)</span> 的和为 <span
-class="math inline">\(k\)</span>，那显然 <span class="math inline">\(t_1
-= k-1\)</span>。合并后的长度为 <span
-class="math inline">\(1\)</span>。</p>
-<p>然后，再合并一次，那么 <span class="math inline">\(t_2 =
-k-1\)</span>。合并后的长度仍为 <span
-class="math inline">\(1\)</span>。</p>
-<p>显然，如果继续合并，那么会有无数个 <span
-class="math inline">\(k-1\)</span> 被合并，那么就有 <span
-class="math inline">\(t_n = k-1\)</span>，那么能够合并为长度为 <span
-class="math inline">\(1\)</span> 的区间的原长度就为 <span
-class="math inline">\(\sum \limits_{i = 1}^{n}{t_i}+1 \to n(k-1) +
-1\)</span>。</p>
-<p>扩展一下，如果一个字符串长度为 <span
-class="math inline">\(l_1\)</span>，合并后的长度为 <span
-class="math inline">\(l_2\)</span>，那么根据上述方程，就有合并后的长度
-<span class="math inline">\(l_2 = (l_1 - 1) \bmod (k-1) +
-1\)</span>，于是枚举 <span class="math inline">\(l\)</span>
-的时候就不用每个都枚举，每次从右往左依次减去 <span
-class="math inline">\(k-1\)</span>。</p>
-<p>所以显然易见 dp 方程就为：</p>
-<p><span class="math display">\[
-\begin{cases}
-  dp_{i,j,2s} = \max \limits_{i \le l &lt; j,(j - 1 - l)\bmod( k - 1) =
-0} \{ dp_{i,l,s} + dp_{l+1,j,0} \} \\
-  dp_{i,j,(2s) \vee 1} = \max \limits_{i \le l &lt; j,(j - 1 - l)\bmod(
-k - 1) = 0} \{ dp_{i,l,s} + dp_{l+1,j,1} \}
-\end{cases}
-\]</span></p>
-<p>特别的，当一段区间合并后的长度为 <span
-class="math inline">\(1\)</span>
-时，可以将所有的状态合并为一个字符，也就是：</p>
-<p><span class="math display">\[
-\begin{cases}
-  dp_{i,j,0} = \max \limits_{0 \le s \le 2^k-1,r_s =
-0}\{dp_{i,j,s}+w_s\} \\
-  dp_{i,j,1} = \max \limits_{0 \le s \le 2^k-1,r_s =
-1}\{dp_{i,j,s}+w_s\}
-\end{cases}
-\]</span></p>
-<p>这里的 <span class="math inline">\(r_s\)</span> 表示状态为 <span
-class="math inline">\(s\)</span> 的字符串合并后的答案，<span
-class="math inline">\(w_s\)</span>
-表示合并得到的分数，注意要开辅助数组储存。</p>
-<h1 id="ac-code">AC code</h1>
+                <p>主要针对于区间 dp 的总结。</p>
+<p>比较拿手（感觉有一种抽象的无从下手但又很智慧的美）</p>
+<h1 id="原理">原理</h1>
+<p>对于一个大区间，如果我们可以解决他的子区间问题，并且答案还能合并到大区间里，那这个问题就可以用区间
+dp 解决。</p>
+<p>就这么简单，但是扩展出去有亿点复杂。</p>
+<h1 id="例题">例题</h1>
+<h2 id="k-祖玛游戏">K 祖玛游戏</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2572&amp;tid=K">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5189">Link
+Lougu</a></p>
+<p>一道经典题目（也开始难了）。</p>
+<p>首先，我们现设 <span class="math inline">\(dp_{i,j}\)</span>
+是消除区间 <code>[i,j]</code>
+所用的最小弹珠数，如果直接开始枚举断点，我们会发现两个区间可能会有多次的不相邻的消除，是比
+<span class="math inline">\(dp_{i,j}\)</span> 只消一次的结果更优。</p>
+<p>我们考虑增加一个维度：设 <span
+class="math inline">\(dp_{i,j,k}\)</span> 是消除区间 <code>[i,j]</code>
+以及前面有 <span class="math inline">\(k\)</span>
+个相同的弹珠所用的最小弹珠数。</p>
+<p>开始分类讨论：</p>
+<ul>
+<li>情况一：第 <span class="math inline">\(i\)</span> 个弹珠与第 <span
+class="math inline">\(i+1\)</span> 个弹珠颜色相同，那显然消除
+<code>[i,j]</code> 的弹珠花费比消除 <code>[i+1,j]</code> 的花费少 <span
+class="math inline">\(1\)</span>，所以 <span
+class="math inline">\(dp_{i,j,k}\)</span> 可以更新为 <span
+class="math inline">\(dp_{i+1,j,k+1}\)</span>。</li>
+<li>情况二：我们在第 <span class="math inline">\(i\)</span>
+个弹珠的前面再放一个与其同色的弹珠，花费增加了 <span
+class="math inline">\(1\)</span>，所以 <span
+class="math inline">\(dp_{i,j,k}\)</span> 可以更新为 <span
+class="math inline">\(dp_{i,j,k+1}+1\)</span>。</li>
+<li>情况三：我们考虑枚举一个断点 <span
+class="math inline">\(l\)</span>，如果说 <span
+class="math inline">\(l+1\)</span> 的颜色与 <span
+class="math inline">\(i\)</span> 的颜色相等，我们可以将区间
+<code>[i+1,l]</code> 的弹珠全部消完，再将 <span
+class="math inline">\(i\)</span> 与 <span
+class="math inline">\(l+1\)</span> 连接起来消，所以 <span
+class="math inline">\(dp_{i,j,k}\)</span> 可以被更新为 <span
+class="math inline">\(dp_{i+1,j,0}+dp_{l+1,j,l+1}\)</span>。</li>
+</ul>
+<p>注意要对 <span class="math inline">\(k = K - 1\)</span>
+时特殊处理，因为它在添加 <span class="math inline">\(1\)</span>
+个弹珠就可以消完了。</p>
+<h3 id="ac-code">AC code</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br><span class="hljs-type">const</span> ll N=<span class="hljs-number">110</span>;<br><span class="hljs-type">const</span> ll K=<span class="hljs-number">5</span>+<span class="hljs-number">10</span>;<br>ll n,kk;<br>ll a[N];<br>ll dp[N][N][K];<span class="hljs-comment">//[i,j],前跟k</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>	cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>	cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>	cin&gt;&gt;n&gt;&gt;kk;<br>	<span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0x3f</span>,<span class="hljs-built_in">sizeof</span>(dp));<br>	<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>; i&lt;=n; i++) &#123;<br>		cin&gt;&gt;a[i];<br>		<span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">0</span>; j&lt;kk; j++) &#123;<br>			dp[i][i][j]=kk-j<span class="hljs-number">-1</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(ll k=<span class="hljs-number">2</span>; k&lt;=n; k++) &#123;<br>		<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>; i&lt;=n-k+<span class="hljs-number">1</span>; i++) &#123;<br>			ll j=i+k<span class="hljs-number">-1</span>;<br>			<span class="hljs-keyword">for</span>(ll l=kk<span class="hljs-number">-1</span>; l&gt;=<span class="hljs-number">0</span>; l--) &#123;<span class="hljs-comment">//前跟多少</span><br>				<span class="hljs-keyword">if</span>(a[i]==a[i+<span class="hljs-number">1</span>]) &#123;<span class="hljs-comment">//情况一</span><br>					dp[i][j][l]=<span class="hljs-built_in">min</span>(dp[i][j][l],dp[i+<span class="hljs-number">1</span>][j][<span class="hljs-built_in">min</span>(l+<span class="hljs-number">1</span>,kk<span class="hljs-number">-1</span>)]);<br>				&#125;<br>                 <span class="hljs-keyword">if</span>(l==kk<span class="hljs-number">-1</span>) &#123;<span class="hljs-comment">//对于 k-1 的特殊考虑</span><br>					dp[i][j][l]=<span class="hljs-built_in">min</span>(dp[i][j][l],dp[i+<span class="hljs-number">1</span>][j][<span class="hljs-number">0</span>]);<br>				&#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//情况二</span><br>					dp[i][j][l]=<span class="hljs-built_in">min</span>(dp[i][j][l],dp[i][j][<span class="hljs-built_in">min</span>(l+<span class="hljs-number">1</span>,kk<span class="hljs-number">-1</span>)]+<span class="hljs-number">1</span>);<br>				&#125;<br>				<span class="hljs-keyword">for</span>(ll l_=i+<span class="hljs-number">1</span>; l_&lt;j; l_++) &#123;<br>					<span class="hljs-keyword">if</span>(a[i]==a[l_+<span class="hljs-number">1</span>]) &#123;<span class="hljs-comment">//情况三</span><br>						dp[i][j][l]=<span class="hljs-built_in">min</span>(dp[i][j][l],dp[i+<span class="hljs-number">1</span>][l_][<span class="hljs-number">0</span>]+dp[l_+<span class="hljs-number">1</span>][j][<span class="hljs-built_in">min</span>(l+<span class="hljs-number">1</span>,kk<span class="hljs-number">-1</span>)]);<br>					&#125;<br>				&#125;<br>			&#125;<br>		&#125;<br>	&#125;<br>	cout&lt;&lt;dp[<span class="hljs-number">1</span>][n][<span class="hljs-number">0</span>]&lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="o-haoi2016字符合并">O [HAOI2016]字符合并</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2572&amp;tid=O">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3736">Link
+Lougu</a></p>
+<p>一道状压+区间。</p>
+<p>我们看到一个叫<strong>合并</strong>的操作，很明显就想到了可以用区间
+dp 来做，而且 <span class="math inline">\(k\)</span>
+小的不能再小了，干脆直接枚举其合并后的状态（小于等于 <span
+class="math inline">\(k\)</span> 位，<span
+class="math inline">\(2^k\)</span> 就行）。</p>
+<p>我们设 <span class="math inline">\(dp_{i,j,S}\)</span> 为
+<code>[i,j]</code> 区间合并后所得到的字符串为 <span
+class="math inline">\(S\)</span>
+的最大分数，然后有一个性质，见我之前写的<a
+target="_blank" rel="noopener" href="https://rqdyc.github.io/2023/11/25/Luogu-P3736-HAOI2016-字符合并-题解/">题解</a>，可以来进行优化，然后
+dp 方程就很简单了，如果说我要合并 <code>[i,k]</code> 和
+<code>[k,j]</code>，我就用 <code>[i,k]</code> 的状态合并
+<code>[k,j]</code> 的状态，然后因为 <code>[i,k]</code>
+的信息足够丰富了，我们就可以将 <code>[k,j]</code> 合并为了 <span
+class="math inline">\(1\)</span> 或 <span
+class="math inline">\(0\)</span> 的情况，效果都一样。然后长度到 <span
+class="math inline">\(k\)</span> 之后就可以合并为 <span
+class="math inline">\(1\)</span> 或 <span
+class="math inline">\(0\)</span>，要看其具体数值。</p>
+<p>总体而言思维难度比 K 题简单太多。</p>
+<h3 id="ac-code-1">AC code</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br><span class="hljs-type">const</span> ll N=<span class="hljs-number">310</span>;<br><span class="hljs-type">const</span> ll K=<span class="hljs-number">7</span>;<br><span class="hljs-type">bool</span> sum[N];<br><span class="hljs-function">ll <span class="hljs-title">getsum</span><span class="hljs-params">(ll i,ll j)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span>(i&gt;j)<span class="hljs-built_in">swap</span>(i,j);<br>	ll ans=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(ll k=j,q=<span class="hljs-number">0</span>; k&gt;=i; k--,q++) &#123;<br>		ans+=(sum[k])*(<span class="hljs-number">1</span>&lt;&lt;q);<br>	&#125;<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">wes</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> ll x)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">32</span>-__builtin_clz(x);<br>&#125;<br><span class="hljs-comment">//调试 </span><br>ll n,kk;<br>ll dp[N][N][<span class="hljs-number">1</span>&lt;&lt;(K+<span class="hljs-number">1</span>)|<span class="hljs-number">1</span>];<br>ll str[<span class="hljs-number">1</span>&lt;&lt;(K+<span class="hljs-number">1</span>)|<span class="hljs-number">1</span>];<br><span class="hljs-type">bool</span> tr[(<span class="hljs-number">1</span>&lt;&lt;(K+<span class="hljs-number">1</span>))|<span class="hljs-number">1</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	cin&gt;&gt;n&gt;&gt;kk;<br>	<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>; i&lt;=n; i++) &#123;<br>		<span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">1</span>; j&lt;=n; j++) &#123;<br>			<span class="hljs-keyword">for</span>(ll s=(<span class="hljs-number">1</span>&lt;&lt;kk)<span class="hljs-number">-1</span>; s&gt;=<span class="hljs-number">0</span>; s--) &#123;<br>				dp[i][j][s]=<span class="hljs-number">-1145141919810ll</span>;<span class="hljs-comment">//初始化 </span><br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>; i&lt;=n; i++) &#123;<br>		cin&gt;&gt;sum[i];<br>		dp[i][i][sum[i]]=<span class="hljs-number">0</span>;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>; i&lt;=(<span class="hljs-number">1</span>&lt;&lt;kk); i++) &#123;<br>		cin&gt;&gt;tr[i<span class="hljs-number">-1</span>]&gt;&gt;str[i<span class="hljs-number">-1</span>];<br>	&#125;<br>	<span class="hljs-keyword">for</span>(ll k=<span class="hljs-number">2</span>; k&lt;=n; k++) &#123;<br>		<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>; i&lt;=n-k+<span class="hljs-number">1</span>; i++) &#123;<br>			ll j=i+k<span class="hljs-number">-1</span>;<br>			ll sizee=(k<span class="hljs-number">-1</span>)%(kk<span class="hljs-number">-1</span>);<br>			<span class="hljs-keyword">if</span>(sizee==<span class="hljs-number">0</span>) &#123;<br>				sizee=kk<span class="hljs-number">-1</span>;<br>			&#125;<br>			<span class="hljs-keyword">for</span>(ll l=j<span class="hljs-number">-1</span>; l&gt;=i; l-=(kk<span class="hljs-number">-1</span>)) &#123;<br>				<span class="hljs-keyword">for</span>(ll s=(<span class="hljs-number">1</span>&lt;&lt;(sizee))<span class="hljs-number">-1</span>; s&gt;=<span class="hljs-number">0</span>; s--) &#123;<br>					dp[i][j][s&lt;&lt;<span class="hljs-number">1</span>]=<span class="hljs-built_in">max</span>(dp[i][j][s&lt;&lt;<span class="hljs-number">1</span>],dp[i][l][s]+dp[l+<span class="hljs-number">1</span>][j][<span class="hljs-number">0</span>]);<br>					dp[i][j][s&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>]=<span class="hljs-built_in">max</span>(dp[i][j][s&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>],dp[i][l][s]+dp[l+<span class="hljs-number">1</span>][j][<span class="hljs-number">1</span>]);<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">if</span>(sizee==kk<span class="hljs-number">-1</span>) &#123;<span class="hljs-comment">//合并后的长度为1</span><br>				ll r[<span class="hljs-number">2</span>];<br>				r[<span class="hljs-number">0</span>]=r[<span class="hljs-number">1</span>]=<span class="hljs-number">-1145141919810ll</span>;<br>				<span class="hljs-keyword">for</span>(ll s=(<span class="hljs-number">1</span>&lt;&lt;kk)<span class="hljs-number">-1</span>; s&gt;=<span class="hljs-number">0</span>; s--) &#123;<br>					r[tr[s]]=<span class="hljs-built_in">max</span>(r[tr[s]],dp[i][j][s]+str[s]);<br>				&#125;<br>				dp[i][j][<span class="hljs-number">0</span>]=<span class="hljs-built_in">max</span>(dp[i][j][<span class="hljs-number">0</span>],r[<span class="hljs-number">0</span>]);<br>				dp[i][j][<span class="hljs-number">1</span>]=<span class="hljs-built_in">max</span>(dp[i][j][<span class="hljs-number">1</span>],r[<span class="hljs-number">1</span>]);<br>			&#125;<br>		&#125;<br>	&#125;<br>	ll ans=<span class="hljs-number">-1145141919810ll</span>;<br>	<span class="hljs-keyword">for</span>(ll s=(<span class="hljs-number">1</span>&lt;&lt;kk)<span class="hljs-number">-1</span>; s&gt;=<span class="hljs-number">0</span>; s--) &#123;<br>		ans=<span class="hljs-built_in">max</span>(ans,dp[<span class="hljs-number">1</span>][n][s]);<span class="hljs-comment">//答案</span><br>	&#125;<br>	cout&lt;&lt;ans&lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
@@ -427,7 +437,7 @@ class="math inline">\(w_s\)</span>
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%A7%A3%E9%A2%98%E9%A2%98%E8%A7%A3/" class="category-chain-item">解题题解</a>
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
   
   
 
@@ -442,7 +452,7 @@ class="math inline">\(w_s\)</span>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%A2%98%E8%A7%A3/" class="print-no-link">#题解</a>
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
       
     </div>
   
@@ -456,18 +466,12 @@ class="math inline">\(w_s\)</span>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/30/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%E6%80%BB%E7%BB%93%EF%BC%89/" title="图论学习笔记1——最短路（作业表4总结）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">图论学习笔记1——最短路（作业表4总结）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/05/Codeforces-CF896C-Willem-Chtholly-and-Seniorious-%E8%AF%A6%E8%A7%A3/" title="Codeforces CF896C Willem, Chtholly and Seniorious 详解">
-                        <span class="hidden-mobile">Codeforces CF896C Willem, Chtholly and Seniorious 详解</span>
+                      <a href="/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E8%83%8C%E5%8C%85%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A82%E6%80%BB%E7%BB%93%EF%BC%89/" title="dp学习笔记2——背包（作业表2总结）">
+                        <span class="hidden-mobile">dp学习笔记2——背包（作业表2总结）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
