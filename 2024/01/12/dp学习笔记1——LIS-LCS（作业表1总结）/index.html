@@ -24,7 +24,7 @@
 <meta property="og:description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 做法二 考虑优化做法一，我">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-11T23:28:12.000Z">
-<meta property="article:modified_time" content="2024-01-12T02:21:09.185Z">
+<meta property="article:modified_time" content="2024-01-12T02:22:44.537Z">
 <meta property="article:author" content="Yucheng Deng">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -370,13 +370,13 @@ class="math inline">\(i\)</span> 个字符串与 <span
 class="math inline">\(b\)</span> 的前 <span
 class="math inline">\(j\)</span>
 个字符串的最长上升子序列，要么相等或不相等，所以 dp 递推式就为：</p>
-<p>$$ dp_{i,j} =</p>
-<span class="math display">\[\begin{cases}
+<p><span class="math display">\[
+dp_{i,j} = \begin{cases}
    dp_{i-1,j-1} + 1\ (a_i = b_j)
    \\
    \max(dp_{i-1,j},dp_{i,j-1})\ (a_i  \neq b_j)
-\end{cases}\]</span>
-<p>$$</p>
+\end{cases}
+\]</span></p>
 <p>同样是枚举两维，时间复杂度 <span
 class="math inline">\(O(n^2)\)</span>。</p>
 <h2 id="做法二-1">做法二</h2>
