@@ -16,24 +16,24 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 12345678910for">
+    <meta name="description" content="9.24 - 10.5 期间总结 序言 深窥自己的心，而后发觉一切的奇迹在你自己。 ——培根">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dp学习笔记1——LCS &amp; LIS（作业表1总结）">
-<meta property="og:url" content="http://example.com/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
+<meta property="og:title" content="9.24-10.5 期间总结">
+<meta property="og:url" content="http://example.com/2023/10/05/9-24-10-5-%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 12345678910for">
+<meta property="og:description" content="9.24 - 10.5 期间总结 序言 深窥自己的心，而后发觉一切的奇迹在你自己。 ——培根">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-11T23:28:12.000Z">
-<meta property="article:modified_time" content="2024-01-12T02:42:03.130Z">
+<meta property="article:published_time" content="2023-10-05T11:28:21.000Z">
+<meta property="article:modified_time" content="2024-01-12T02:44:31.337Z">
 <meta property="article:author" content="Yucheng Deng">
-<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>dp学习笔记1——LCS &amp; LIS（作业表1总结） - DYC的Blog</title>
+  <title>9.24-10.5 期间总结 - DYC的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -258,7 +258,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="dp学习笔记1——LCS &amp; LIS（作业表1总结）"></span>
+            <span id="subtitle" data-typed-text="9.24-10.5 期间总结"></span>
           
         </div>
 
@@ -269,8 +269,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-12 07:28" pubdate>
-          2024年1月12日 早上
+        <time datetime="2023-10-05 19:28" pubdate>
+          2023年10月5日 晚上
         </time>
       </span>
     
@@ -281,7 +281,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          727 字
+          801 字
         
       </span>
     
@@ -337,76 +337,68 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">dp学习笔记1——LCS &amp; LIS（作业表1总结）</h1>
+            <h1 id="seo-header">9.24-10.5 期间总结</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="lis">LIS</h1>
-<p>全名最长上升子序列。</p>
-<h2 id="做法一">做法一</h2>
-<p>设 <span class="math inline">\(dp_i\)</span> 为字符串 <span
-class="math inline">\(a\)</span> 中以 <span
-class="math inline">\(a_i\)</span> 结尾的 LIS，当前的 <span
-class="math inline">\(dp_i\)</span> 肯定要从比他小的地方枚举，所以 dp
-方程可以简单推出来：</p>
-<p><span class="math display">\[dp_i = \max (1,dp_j+1)\ (i &gt; j,a_i
-&gt; a_j)\]</span></p>
-<p>枚举两维，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    <span class="hljs-keyword">for</span> (ll j = i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">1</span>; j--)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (a[i] &gt; a[j])<br>        &#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j] + <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="做法二">做法二</h2>
-<p>考虑修改做法一，我们发现上述 dp
-方程是一个<strong>二位偏序</strong>问题，所以考虑用树状数组来优化。每次去寻找比当前字符更小的最大
-<span class="math inline">\(dp\)</span> 值。</p>
-<p>第二维用树状数组优化掉了，时间复杂度 <span class="math inline">\(O(n
-\log n)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    dp[i] = <span class="hljs-built_in">getmax</span>((ll)(a[i]) - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;<span class="hljs-comment">//树状数组优化</span><br>    <span class="hljs-built_in">modify</span>(a[i], dp[i]);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="做法三">做法三</h2>
-<p>考虑另一种做法，设 <span class="math inline">\(dp_i\)</span> 为长度为
-<span class="math inline">\(i\)</span> 的 LIS
-中最后出现的最小的值，显然其具有单调性。对于 <span
-class="math inline">\(a\)</span>
-的每一个字符，我们可以二分找到比其大的第一个，然后用这个字符去更新。</p>
-<p>有一个二分查找的过程，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    *<span class="hljs-built_in">upper_bound</span>(dp + <span class="hljs-number">1</span>, dp + n + <span class="hljs-number">1</span>, a[i]) = a[i];<br>&#125;<br></code></pre></td></tr></table></figure>
-<h1 id="lcs">LCS</h1>
-<p>全名最长公共子序列。</p>
-<h2 id="做法一-1">做法一</h2>
-<p>设 <span class="math inline">\(dp_{i,j}\)</span> 为两个串 <span
-class="math inline">\(a,b\)</span> 其中 <span
-class="math inline">\(a\)</span> 的前 <span
-class="math inline">\(i\)</span> 个字符串与 <span
-class="math inline">\(b\)</span> 的前 <span
-class="math inline">\(j\)</span>
-个字符串的最长上升子序列，要么相等或不相等，所以 dp 递推式就为：</p>
-<p><span class="math display">\[
-dp_{i,j} = \begin{cases}
-   dp_{i-1,j-1} + 1\ (a_i = b_j)
-   \\
-   \max(dp_{i-1,j},dp_{i,j-1})\ (a_i  \neq b_j)
-\end{cases}
-\]</span></p>
-<p>同样是枚举两维，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    <span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">1</span>; j &lt;= m; j++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (a[i] == b[j])<br>        &#123;<br>            dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            dp[i][j] = <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]) + <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="做法二-1">做法二</h2>
-<p><span class="math inline">\(O(n \log n)\)</span> 做法：</p>
-<p>我们考虑将其转化为 LIS 来做。</p>
-<p>我们将串 <span class="math inline">\(a\)</span>
-里的每个元素按顺序依次编号，那么我们不妨假设其 LCS 为 <span
-class="math inline">\(c\)</span>。那么 <span
-class="math inline">\(c\)</span> 的元素按照编号重新计算就是一个
-IS，那么我们将 <span class="math inline">\(b\)</span>
-的元素重新编号，找到其中的 IS，它在 <span
-class="math inline">\(a\)</span> 中也必定存在一个 IS
-与之对应且是其转换后的字符为之前的
-CS。所以我们只需要将其离散化重新编号后在 <span
-class="math inline">\(b\)</span> 串里找其 LIS 即可求出答案。</p>
-<p>时间复杂度同 LIS 做法二或三，<span class="math inline">\(O(n \log
-n)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    cin &gt;&gt; x;<br>    d[x] = i;<br>&#125;<br><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= m; i++)<br>&#123;<br>    cin &gt;&gt; x;<br>    last[d[x]] = i;<br>&#125;<br>last[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<span class="hljs-comment">//离散化</span><br><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    dp[i] = <span class="hljs-number">1e17</span>;<br>&#125;<span class="hljs-comment">//初始化</span><br><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    <span class="hljs-keyword">if</span> (last[i])<br>    &#123;<br>        *<span class="hljs-built_in">upper_bound</span>(dp + <span class="hljs-number">1</span>, dp + n + <span class="hljs-number">1</span>, last[i]) = last[i];<br>    &#125;<br>&#125;<span class="hljs-comment">//LIS 做法三</span><br></code></pre></td></tr></table></figure>
+                <h1 id="期间总结">9.24 - 10.5 期间总结</h1>
+<h2 id="序言">序言</h2>
+<p>深窥自己的心，而后发觉一切的奇迹在你自己。</p>
+<p>——<strong>培根</strong></p>
+<span id="more"></span>
+<h2 id="摸底考试">9.24 摸底考试</h2>
+<p>这可能是我 <strong>OI</strong>
+生涯中经历的最糟糕的一场考试，考前时因为肚子不舒服，有点虚，加之CSP第一轮后状态直线下降，让我对这次考试有所担忧。考试中我先开了
+<span class="math inline">\(A\)</span> 题，<span
+class="math inline">\(A\)</span>
+题是一道关于位运算的题。我当时以为很水，敲了下手打高精度，以为就过了，但不曾想因为没有考虑到溢出的问题，<span
+class="math inline">\({\color{red}WA\ (0)}\)</span> 了。然后开了 <span
+class="math inline">\(C\)</span> 题，<span
+class="math inline">\(C\)</span>
+题是构造题，构造一个相邻两数之差或和的绝对值为质数的内部元素从 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span>
+的序列。当时的方向想错了，以为是通过质数表暴搜得到，但时间会超，于是我想到了个自以为还行的<strong>伪解法</strong>，
+显然又 <span class="math inline">\({\color{red}WA\ (0)}\)</span>
+了。其他两道基本没想。最后的结果也<strong>爆零</strong>了。</p>
+<h2 id="dp-1阶段-lcs-lis">DP 1阶段 (LCS &amp; LIS)</h2>
+<p>在摸底考后几天时间里，老师和一些同学将作业表中 <span
+class="math inline">\(A\)</span> 到 <span
+class="math inline">\(E\)</span>
+题以及考试题讲述了一下，这里我见到了各种 <strong>dalao</strong>
+的各种方法，让我<del>大为</del>有所震惊。随后到国庆节又是一段空窗期，老师加了很多关于
+<strong>LIS</strong> 和 <strong>LCS</strong>
+的题，国庆节上课前两天也讲述了后面几道题的各种解法，让我的思维深度有了质的飞跃。但我
+<span class="math inline">\({\color{green} A}\)</span>
+的题还是很少，其中的 <span class="math inline">\(M\)</span>
+题死活过不去，这点我也无法理解。</p>
+<h2 id="的小测试">10.5 的小测试</h2>
+<p>赛前张老师说不希望我们爆零，于是我也为此提心吊胆，因为第一次我爆零了。考试的时候，又发生了一点小插曲，让我有点担忧。我先看了
+<span class="math inline">\(A\)</span> 题，<span
+class="math inline">\(A\)</span>
+题问纯色三角形的个数有多少。我第一时间想到了排列与组合，但想了很久也无法找到复杂度允许的算法，最后打了个
+<span class="math inline">\(O(n^3)\)</span> 的暴力骗点分。结果是 <span
+class="math inline">\({\color{red}WA\ (30)}\)</span>。随后我开了 <span
+class="math inline">\(B\)</span> 题，<span
+class="math inline">\(B\)</span>
+题有些难想，从体面上顺向思维是大概不会很轻松就想出来的，我发现反转操作是可逆的，于是我就想到从全
+<span class="math inline">\(0\)</span>
+给还原到图像，代码写完后算了下复杂度是 <span
+class="math inline">\(O(n^2)\)</span>，可以过掉。结果是 <span
+class="math inline">\({\color{green} AC\ (100)}\)</span>。<span
+class="math inline">\(C\)</span>
+题我当时没多想，最后才匆忙码，然后就成为全班唯一一个 <span
+class="math inline">\({\color{purplr} MLE\ (0)}\)</span>的人。<span
+class="math inline">\(D\)</span> 题原本我是推了 <span
+class="math inline">\(dp\)</span>
+公式，最后检查时发现读错题面了，这是一个重大失误，考场上出现非常致命。所以白白挂掉，时间又不够了，最后输出
+<span class="math inline">\(1\)</span> 想骗分，顺利 <span
+class="math inline">\({\color{red}WA\ (0)}\)</span>。总分 <span
+class="math inline">\(130\)</span>，不能说很好，但是有所进步。</p>
+<h2 id="总结">总结</h2>
+<p>这几天的表现并不好，或许是对环境的不适应，还是对自己过多的忧虑，希望可以将状态找回。</p>
+<p>保持自信，相信自己，你会达成你的目标的！</p>
 
                 
               </div>
@@ -425,7 +417,7 @@ n)\)</span>。</p>
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="category-chain-item">学习总结</a>
   
   
 
@@ -440,7 +432,7 @@ n)\)</span>。</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
+        <a href="/tags/%E6%80%BB%E7%BB%93/" class="print-no-link">#总结</a>
       
     </div>
   
@@ -454,12 +446,18 @@ n)\)</span>。</p>
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/11/05/Codeforces-CF896C-Willem-Chtholly-and-Seniorious-%E8%AF%A6%E8%A7%A3/" title="Codeforces CF896C Willem, Chtholly and Seniorious 详解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Codeforces CF896C Willem, Chtholly and Seniorious 详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/07/2024-1-6-%E6%9C%AC%E9%83%A8%E6%9C%88%E8%80%83%E6%80%BB%E7%BB%93/" title="2024.1.6 本部月考总结">
-                        <span class="hidden-mobile">2024.1.6 本部月考总结</span>
+                      <a href="/2023/09/15/Luogu-P1971-NOI2011-%E5%85%94%E5%85%94%E4%B8%8E%E8%9B%8B%E8%9B%8B%E6%B8%B8%E6%88%8F-%E9%A2%98%E8%A7%A3/" title="Luogu P1971 [NOI2011] 兔兔与蛋蛋游戏 题解">
+                        <span class="hidden-mobile">Luogu P1971 [NOI2011] 兔兔与蛋蛋游戏 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

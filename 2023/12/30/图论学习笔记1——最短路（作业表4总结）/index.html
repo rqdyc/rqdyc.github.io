@@ -16,15 +16,15 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 12345678910for">
+    <meta name="description" content="算法 Floyd-Warshall 求全源最短路径。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dp学习笔记1——LCS &amp; LIS（作业表1总结）">
-<meta property="og:url" content="http://example.com/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
+<meta property="og:title" content="图论学习笔记1——最短路（作业表4总结）">
+<meta property="og:url" content="http://example.com/2023/12/30/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 12345678910for">
+<meta property="og:description" content="算法 Floyd-Warshall 求全源最短路径。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-11T23:28:12.000Z">
-<meta property="article:modified_time" content="2024-01-12T02:42:03.130Z">
+<meta property="article:published_time" content="2023-12-30T00:58:46.000Z">
+<meta property="article:modified_time" content="2024-01-12T02:48:32.067Z">
 <meta property="article:author" content="Yucheng Deng">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>dp学习笔记1——LCS &amp; LIS（作业表1总结） - DYC的Blog</title>
+  <title>图论学习笔记1——最短路（作业表4总结） - DYC的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -258,7 +258,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="dp学习笔记1——LCS &amp; LIS（作业表1总结）"></span>
+            <span id="subtitle" data-typed-text="图论学习笔记1——最短路（作业表4总结）"></span>
           
         </div>
 
@@ -269,8 +269,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-12 07:28" pubdate>
-          2024年1月12日 早上
+        <time datetime="2023-12-30 08:58" pubdate>
+          2023年12月30日 早上
         </time>
       </span>
     
@@ -281,7 +281,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          727 字
+          1.6k 字
         
       </span>
     
@@ -292,7 +292,7 @@
         
         
         
-          7 分钟
+          14 分钟
         
       </span>
     
@@ -337,76 +337,163 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">dp学习笔记1——LCS &amp; LIS（作业表1总结）</h1>
+            <h1 id="seo-header">图论学习笔记1——最短路（作业表4总结）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="lis">LIS</h1>
-<p>全名最长上升子序列。</p>
-<h2 id="做法一">做法一</h2>
-<p>设 <span class="math inline">\(dp_i\)</span> 为字符串 <span
-class="math inline">\(a\)</span> 中以 <span
-class="math inline">\(a_i\)</span> 结尾的 LIS，当前的 <span
-class="math inline">\(dp_i\)</span> 肯定要从比他小的地方枚举，所以 dp
-方程可以简单推出来：</p>
-<p><span class="math display">\[dp_i = \max (1,dp_j+1)\ (i &gt; j,a_i
-&gt; a_j)\]</span></p>
-<p>枚举两维，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    <span class="hljs-keyword">for</span> (ll j = i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">1</span>; j--)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (a[i] &gt; a[j])<br>        &#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j] + <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="做法二">做法二</h2>
-<p>考虑修改做法一，我们发现上述 dp
-方程是一个<strong>二位偏序</strong>问题，所以考虑用树状数组来优化。每次去寻找比当前字符更小的最大
-<span class="math inline">\(dp\)</span> 值。</p>
-<p>第二维用树状数组优化掉了，时间复杂度 <span class="math inline">\(O(n
-\log n)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    dp[i] = <span class="hljs-built_in">getmax</span>((ll)(a[i]) - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;<span class="hljs-comment">//树状数组优化</span><br>    <span class="hljs-built_in">modify</span>(a[i], dp[i]);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="做法三">做法三</h2>
-<p>考虑另一种做法，设 <span class="math inline">\(dp_i\)</span> 为长度为
-<span class="math inline">\(i\)</span> 的 LIS
-中最后出现的最小的值，显然其具有单调性。对于 <span
-class="math inline">\(a\)</span>
-的每一个字符，我们可以二分找到比其大的第一个，然后用这个字符去更新。</p>
-<p>有一个二分查找的过程，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    *<span class="hljs-built_in">upper_bound</span>(dp + <span class="hljs-number">1</span>, dp + n + <span class="hljs-number">1</span>, a[i]) = a[i];<br>&#125;<br></code></pre></td></tr></table></figure>
-<h1 id="lcs">LCS</h1>
-<p>全名最长公共子序列。</p>
-<h2 id="做法一-1">做法一</h2>
-<p>设 <span class="math inline">\(dp_{i,j}\)</span> 为两个串 <span
-class="math inline">\(a,b\)</span> 其中 <span
-class="math inline">\(a\)</span> 的前 <span
-class="math inline">\(i\)</span> 个字符串与 <span
-class="math inline">\(b\)</span> 的前 <span
-class="math inline">\(j\)</span>
-个字符串的最长上升子序列，要么相等或不相等，所以 dp 递推式就为：</p>
-<p><span class="math display">\[
-dp_{i,j} = \begin{cases}
-   dp_{i-1,j-1} + 1\ (a_i = b_j)
-   \\
-   \max(dp_{i-1,j},dp_{i,j-1})\ (a_i  \neq b_j)
-\end{cases}
-\]</span></p>
-<p>同样是枚举两维，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    <span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">1</span>; j &lt;= m; j++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (a[i] == b[j])<br>        &#123;<br>            dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            dp[i][j] = <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]) + <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="做法二-1">做法二</h2>
-<p><span class="math inline">\(O(n \log n)\)</span> 做法：</p>
-<p>我们考虑将其转化为 LIS 来做。</p>
-<p>我们将串 <span class="math inline">\(a\)</span>
-里的每个元素按顺序依次编号，那么我们不妨假设其 LCS 为 <span
-class="math inline">\(c\)</span>。那么 <span
-class="math inline">\(c\)</span> 的元素按照编号重新计算就是一个
-IS，那么我们将 <span class="math inline">\(b\)</span>
-的元素重新编号，找到其中的 IS，它在 <span
-class="math inline">\(a\)</span> 中也必定存在一个 IS
-与之对应且是其转换后的字符为之前的
-CS。所以我们只需要将其离散化重新编号后在 <span
-class="math inline">\(b\)</span> 串里找其 LIS 即可求出答案。</p>
-<p>时间复杂度同 LIS 做法二或三，<span class="math inline">\(O(n \log
-n)\)</span>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    cin &gt;&gt; x;<br>    d[x] = i;<br>&#125;<br><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= m; i++)<br>&#123;<br>    cin &gt;&gt; x;<br>    last[d[x]] = i;<br>&#125;<br>last[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<span class="hljs-comment">//离散化</span><br><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    dp[i] = <span class="hljs-number">1e17</span>;<br>&#125;<span class="hljs-comment">//初始化</span><br><span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>&#123;<br>    <span class="hljs-keyword">if</span> (last[i])<br>    &#123;<br>        *<span class="hljs-built_in">upper_bound</span>(dp + <span class="hljs-number">1</span>, dp + n + <span class="hljs-number">1</span>, last[i]) = last[i];<br>    &#125;<br>&#125;<span class="hljs-comment">//LIS 做法三</span><br></code></pre></td></tr></table></figure>
+                <h1 id="算法">算法</h1>
+<h2 id="floyd-warshall">Floyd-Warshall</h2>
+<p>求全源最短路径。</p>
+<span id="more"></span>
+<p>流程：</p>
+<p>设 <span class="math inline">\(dp_{k,i,j}\)</span> 为经过 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(k\)</span> 点的 <span
+class="math inline">\(i,j\)</span>
+之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程：</p>
+<p><span class="math display">\[dp_{k,i,j} = dp_{k-1,i,k} +
+dp_{k-1,k,j}\]</span></p>
+<p>可以滚动掉一维，设 <span class="math inline">\(dp_{i,j}\)</span> 为
+<span class="math inline">\(i,j\)</span> 之间的最短路，于是就有：</p>
+<p><span class="math display">\[dp_{i,j} = \min \limits_{1 \le k \le n}
+\{dp_{i,k} + dp_{k,j}\}\]</span></p>
+<p><strong>注意：顺序为 <span
+class="math inline">\(k,i,j\)</span>，顺序可调换，循环 <span
+class="math inline">\(6\)</span> 次也能得出答案。</strong></p>
+<p>时间复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<h2 id="dijkstra">Dijkstra</h2>
+<p>求单源最短路径。</p>
+<p>本质：贪心+BFS+DP。</p>
+<p>流程：</p>
+<p>设起点为 <span class="math inline">\(s\)</span>，令 <span
+class="math inline">\(dis_i = +\infty(i \in n)\)</span>，并将 <span
+class="math inline">\(dis_s\)</span> 设为 <span
+class="math inline">\(0\)</span>。</p>
+<p>每一次，寻找 <span class="math inline">\(n\)</span> 个点中 <span
+class="math inline">\(dis_i\)</span>
+的最小值，并用这个最小值去更新它周围的边。</p>
+<p>正确性证明：在正权图中，以当前权值最小的点去更新其他点，令有一点去更新会更优而又不是权值最小的点，因为边权为正，他更新一个点所花的花费会大于一个更近且权值更小的点，所以应用权值更小的点去更新，矛盾，故得证。</p>
+<p>时间复杂度 <span class="math inline">\(O(n^2)\)</span>（找最小点
+<span class="math inline">\(O(n)\)</span>，更新 <span
+class="math inline">\(n\)</span> 次 <span
+class="math inline">\(O(n)\)</span>）。</p>
+<p>可以用优先队列来找 <span class="math inline">\(dis_i\)</span>
+的最小值，时间复杂度可以优化到 <span class="math inline">\(O(m \log
+m)\)</span>。</p>
+<p><strong>注意：不能处理含有负权边的图。</strong></p>
+<h2 id="bellman-ford">Bellman-Ford</h2>
+<p>让起点 <span class="math inline">\(dis_s = 0\)</span>。对每个点进行
+<span class="math inline">\(n-1\)</span> 次松弛操作，可得到关于 <span
+class="math inline">\(s\)</span> 的单源最短路。</p>
+<p>正确性证明：在图 <span class="math inline">\(G(V,E)\)</span>
+中，令一点 <span class="math inline">\(v \neq s\)</span> ，则到达 <span
+class="math inline">\(v\)</span> 的最短路至多经过 <span
+class="math inline">\(n-1\)</span> 个点，亦能通过 <span
+class="math inline">\(n-1\)</span> 次松弛（递推更新）去更新到点 <span
+class="math inline">\(v\)</span>，得证。</p>
+<p>时间复杂度 <span class="math inline">\(O(nm)\)</span>。</p>
+<p><strong>注意：可以处理含有负权边的图，且可以找负环。</strong></p>
+<h2 id="spfa">SPFA</h2>
+<p>是 Bellman-Ford 算法的优化。</p>
+<p>由于每次松弛操作都会有很多的<strong>不必要</strong>的边被松弛，于是我们可以只松弛<strong>那些被松驰过了的点</strong>的边。</p>
+<p>期望复杂度约为 <span class="math inline">\(O(kE)\)</span>，其中 <span
+class="math inline">\(k\)</span>
+是一个常数，但<strong>最坏</strong>复杂度为 <span
+class="math inline">\(O(nm)\)</span>（也就是退化为 Bellman-Ford
+算法）。</p>
+<h1 id="例题">例题</h1>
+<h2 id="c-usaco4.1.3fence-loops篱笆回路">C 【USACO4.1.3】Fence
+Loops篱笆回路</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2738">Link
+Luogu</a></p>
+<p>这个题要求最小环，首先将点给离散化出来。要找最小环，因为数据范围很小，考虑
+Floyd-Warshall 算法，我们不妨正好在枚举 <span
+class="math inline">\(k\)</span> 的时候，因为 <span
+class="math inline">\(dp_{i,j}\)</span> 没有更新，所以当前的 <span
+class="math inline">\(dp_{i,k}+dp_{k,j}\)</span> 的路线肯定不会是 <span
+class="math inline">\(dp_{i,j}\)</span> 的路线（如下图），所以我们可以用
+<span class="math inline">\(dp_{i,j}+dp_{i,k}+dp_{k,j}\)</span>
+去更新最小环长度。</p>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png" /></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/139791257">AC code</a></p>
+<h2 id="w-最短路">W 最短路</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link
+NKOJ</a> and <a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1163/F">Link
+Codeforces</a> anf <a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1163F">Link Luogu</a></p>
+<p>本题求的是在正权图 <span class="math inline">\(G(V,E)\)</span>
+中，选择一条边并更新他的边权，并对于每个询问求其修改后 <span
+class="math inline">\(1 \to n\)</span> 的最短路。</p>
+<p>不妨分类讨论：</p>
+<ol type="1">
+<li>当这条被修改的边不在最短路上时，修改后的答案要么是原先的最短路，要么是从起点或终点到这条边的一端再从另一端出来的路径长度，因为如果我们考虑不经过这条边的路径长度，它们肯定是比原先求出的最短路要大，然后就只能考虑经过这条边。经过这条边显然最短的路径长度就是两端点到起点和终点的距离加上这条边自身的边权（如下图）。</li>
+</ol>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png" /></p>
+<ol start="2" type="1">
+<li><p>如果这条边本身就在最短路上：</p>
+<ol type="1">
+<li>这条边比原来的边要短，那肯定最短路就是原来的最短路减去这条边现在比以前短的长度。</li>
+<li>这条边比原来的边要长，这个有点难考虑，我会从以下方面说明：</li>
+</ol>
+<ul>
+<li>引理一：在正权图 <span class="math inline">\(G(V,E)\)</span>
+中最短路一定是一条链。</li>
+</ul>
+<p>证明：最短路因为要保证最短性，且图是正权图，不可能有 <span
+class="math inline">\(0\)</span>
+环或负环，所以在最短路上一定不可能有环，得证。</p>
+<ul>
+<li>引理二：在正权图 <span class="math inline">\(G(V,E)\)</span>
+中，从起点 <span class="math inline">\(s\)</span> 出发，到达点 <span
+class="math inline">\(t\)</span>，则路径 <span class="math inline">\(s
+\to t\)</span> <strong>用 dijkstra 算法找到的最短路</strong>必与其他从
+<span class="math inline">\(s\)</span> 出发的路径共享一段前缀。</li>
+</ul>
+<p>证明：假设这条<strong>最短</strong>路径它的共享的前缀中间有间隔，且产生作用与原最短路相等。由于中间间隔的部分又回到了最短路上，所以更新后面的点就无须考虑。而且由于
+dijkstra 算法的特性，这种两条相等的最短路的终点 <span
+class="math inline">\(v\)</span>
+只会访问一次，而假设的情况确是两次，矛盾，得证。</p>
+<ul>
+<li>引理三：令集合 <span class="math inline">\(S\)</span>
+为最短路上的点的点集，则含有两个点的点集 <span
+class="math inline">\(S&#39; = \{u,v\}\)</span> 满足 <span
+class="math inline">\(S \cap S&#39; = \varnothing\)</span>，满足在 <span
+class="math inline">\(1 \to u\)</span>
+与最短路的前缀在最短路上的最后一个点和 <span class="math inline">\(v \to
+n\)</span>
+与最短路的后缀在最短路上的最后一个点中间的最短路上的边任删一条而它的删边最短路为
+<span class="math inline">\(dis_{1 \to u} + dis_{u \to v} + dis_{v \to
+n}\)</span>，如果有多个就取最小值。</li>
+</ul>
+<p>证明：由引理二得，假设在最短路上的最后一个前缀和最后一个后缀的点分别记作
+<span class="math inline">\(x,y\)</span>。那么，假设有一条边 <span
+class="math inline">\((o,p)\)</span>
+删掉之后所根据引理三得出的答案是比正确答案更大的。那么一定有一条路径
+<span class="math inline">\(1 \to u_1 \to v_1 \to n\)</span>
+原来中间的最短路上的边并不经过 <span
+class="math inline">\((o,p)\)</span>
+但是有另一条路径使其从该路径中脱离出来并回到最短路时中间是有 <span
+class="math inline">\((o,p)\)</span>
+边的，并且答案肯定是最小的，那么这条路径肯定存在一条边，满足其与最短路上的前缀和后缀中间必经过
+<span
+class="math inline">\((o,p)\)</span>，而后用其去更新答案一定比之前更优，而与之前的假设相悖，得证。</p>
+<ul>
+<li>引理四：引理三中所设的 <span class="math inline">\(\{u,v\}\)</span>
+可以在一条边上而引理三依旧成立。</li>
+</ul>
+<p>证明：可以用引理三的证明过程来证明。</p></li>
+</ol>
+<p>所以，综上所述，利用引理四，我们可以枚举每一条<strong>不在最短路上</strong>的边。然后因为其两点前后缀在同一最短路上且连续，我们可以给每条边编上号，用数据结构来维护其删掉这条边后路径长度的最小值。</p>
+<p><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/submission/1163/240331475">AC
+code</a></p>
 
                 
               </div>
@@ -454,12 +541,18 @@ n)\)</span>。</p>
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/01/07/2024-1-6-%E6%9C%AC%E9%83%A8%E6%9C%88%E8%80%83%E6%80%BB%E7%BB%93/" title="2024.1.6 本部月考总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2024.1.6 本部月考总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/07/2024-1-6-%E6%9C%AC%E9%83%A8%E6%9C%88%E8%80%83%E6%80%BB%E7%BB%93/" title="2024.1.6 本部月考总结">
-                        <span class="hidden-mobile">2024.1.6 本部月考总结</span>
+                      <a href="/2023/11/25/Luogu-P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/" title="Luogu P3736 [HAOI2016] 字符合并 题解">
+                        <span class="hidden-mobile">Luogu P3736 [HAOI2016] 字符合并 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
