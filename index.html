@@ -287,15 +287,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/01/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%BA%BF%E6%AE%B5%E6%A0%91/" target="_self">
-          数据结构学习笔记1——线段树
+        <a href="/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/" target="_self">
+          dp学习笔记1——LCS &amp; LIS（作业表1总结）
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%BA%BF%E6%AE%B5%E6%A0%91/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/" target="_self">
         <div>
-          一种数据结构，适用于在线修改区间，求区间最值，区间求和问题等。 本质上是一棵二叉树。 优点：维护内容多样，易于理解。 缺点：常数太大，码量较大，空间较大。 算法 储存+建树 线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（照理来说应该取名为区间树但为啥要叫线段树），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈
+          LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i = \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 做法二 考虑优化做法一，我
         </div>
       </a>
 
@@ -303,8 +303,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-01-11 17:12" pubdate>
-              2024-01-11
+            <time datetime="2024-01-12 07:28" pubdate>
+              2024-01-12
             </time>
           </div>
         
@@ -348,15 +348,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/01/11/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/" target="_self">
-          dp学习笔记1——LCS &amp; LIS（作业表1总结）
+        <a href="/2024/01/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%BA%BF%E6%AE%B5%E6%A0%91/" target="_self">
+          数据结构学习笔记1——线段树
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/11/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%BA%BF%E6%AE%B5%E6%A0%91/" target="_self">
         <div>
-          LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i = \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 做法二 考虑优化做法一，我
+          一种数据结构，适用于在线修改区间，求区间最值，区间求和问题等。 本质上是一棵二叉树。 优点：维护内容多样，易于理解。 缺点：常数太大，码量较大，空间较大。 算法 储存+建树 线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（照理来说应该取名为区间树但为啥要叫线段树），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈
         </div>
       </a>
 
@@ -364,7 +364,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-01-11 07:28" pubdate>
+            <time datetime="2024-01-11 17:12" pubdate>
               2024-01-11
             </time>
           </div>
