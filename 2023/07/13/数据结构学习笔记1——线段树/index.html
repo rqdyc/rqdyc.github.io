@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一种数据结构，适用于在线修改区间，求区间最值，区间求和问题等。 本质上是一棵二叉树。 优点：维护内容多样，易于理解。 缺点：常数太大，码量较大，空间较大。 算法储存+建树线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（照理来说应该取名为区间树但为啥要叫线段树），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈成两半。 &#x2F;&#x2F;结">
+    <meta name="description" content="一种数据结构，适用于在线修改区间，求区间最值，区间求和问题等。 本质上是一棵二叉树。 优点：维护内容多样，易于理解。 缺点：常数太大，码量较大，空间较大。 算法 储存+建树 线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（照理来说应该取名为区间树但为啥要叫线段树），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构学习笔记1——线段树">
 <meta property="og:url" content="http://example.com/2023/07/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="一种数据结构，适用于在线修改区间，求区间最值，区间求和问题等。 本质上是一棵二叉树。 优点：维护内容多样，易于理解。 缺点：常数太大，码量较大，空间较大。 算法储存+建树线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（照理来说应该取名为区间树但为啥要叫线段树），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈成两半。 &#x2F;&#x2F;结">
+<meta property="og:description" content="一种数据结构，适用于在线修改区间，求区间最值，区间求和问题等。 本质上是一棵二叉树。 优点：维护内容多样，易于理解。 缺点：常数太大，码量较大，空间较大。 算法 储存+建树 线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（照理来说应该取名为区间树但为啥要叫线段树），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-13T10:16:44.000Z">
 <meta property="article:modified_time" content="2024-01-12T06:20:47.656Z">
@@ -361,7 +361,9 @@
 <p>本质上是一棵二叉树。</p>
 <p><strong>优点：维护内容多样，易于理解。</strong></p>
 <p><strong>缺点：常数太大，码量较大，空间较大。</strong></p>
-<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="储存-建树"><a href="#储存-建树" class="headerlink" title="储存+建树"></a>储存+建树</h2><p>线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（<del>照理来说应该取名为区间树但为啥要叫线段树</del>），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈成两半。</p>
+<h1 id="算法">算法</h1>
+<h2 id="储存建树">储存+建树</h2>
+<p>线段树之所以叫线段树，是因为它里面的每个节点存储了一部分区间（<del>照理来说应该取名为区间树但为啥要叫线段树</del>），储存了这一段区间的一些信息。前面提到，线段树本质上是一棵二叉树，于是每一个父节点被劈成两半，它的区间也要被劈成两半。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//结构体定义</span>
 <span class="token keyword">struct</span> <span class="token class-name">tree</span>
 <span class="token punctuation">&#123;</span>
@@ -386,9 +388,11 @@
     <span class="token comment">//Tree[id].v = Tree[id * 2].v + Tree[id * 2 + 1];</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>这里就是一个建树的过程，大区间被劈开成为小的区间。</p>
-<p>建树的时间复杂度就是树的节点数，复杂度为 $O(n)$。</p>
+<p>建树的时间复杂度就是树的节点数，复杂度为 <span
+class="math inline">\(O(n)\)</span>。</p>
 <p><strong>注意：假若你要在建树时初始化部分内容，初始化后要将初始化的东西上提到它的父节点（上面的注释）。</strong></p>
-<h2 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h2><p>我们可以通过递归，找到要修改的点的有且只有该点的区间，然后上提。</p>
+<h2 id="单点修改">单点修改</h2>
+<p>我们可以通过递归，找到要修改的点的有且只有该点的区间，然后上提。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//单点修改 k 增加 x。</span>
 <span class="token keyword">void</span> <span class="token function">change</span><span class="token punctuation">(</span>ll id<span class="token punctuation">,</span> ll k<span class="token punctuation">,</span> ll x<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -408,8 +412,15 @@
     <span class="token punctuation">&#125;</span>
     Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>v <span class="token operator">=</span> Tree<span class="token punctuation">[</span>id <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>v <span class="token operator">+</span> Tree<span class="token punctuation">[</span>id <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">;</span><span class="token comment">//上提</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<p>单点修改所经过的点数为树的深度，也就是说时间复杂度为 $O(\log n)$。</p>
-<h2 id="区间修改"><a href="#区间修改" class="headerlink" title="区间修改"></a>区间修改</h2><p>这是，我们就要引入一个新的东西，$lazy$ 标记，如果我们像单点修改一样直接将所有的区间点更改，会牵扯到很多的点，使复杂度原地爆炸，而 $lazy$ 标记则是为了来降低时间复杂度（当然也让常数飙升），到了我们需要再求的时候，再用 $lazy$ 更新儿子，并且传递下去。</p>
+<p>单点修改所经过的点数为树的深度，也就是说时间复杂度为 <span
+class="math inline">\(O(\log n)\)</span>。</p>
+<h2 id="区间修改">区间修改</h2>
+<p>这是，我们就要引入一个新的东西，<span
+class="math inline">\(lazy\)</span>
+标记，如果我们像单点修改一样直接将所有的区间点更改，会牵扯到很多的点，使复杂度原地爆炸，而
+<span class="math inline">\(lazy\)</span>
+标记则是为了来降低时间复杂度（当然也让常数飙升），到了我们需要再求的时候，再用
+<span class="math inline">\(lazy\)</span> 更新儿子，并且传递下去。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//下放编号为 id 的点。</span>
 <span class="token keyword">void</span> <span class="token function">pushDown</span><span class="token punctuation">(</span>ll id<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -423,7 +434,9 @@
     Tree<span class="token punctuation">[</span>id <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>v <span class="token operator">+=</span> Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">;</span>
     Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>lazy <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<p>这是其下放操作的代码，先将儿子的 $lazy$ 改为父亲的，再将其值更改，后将父亲的 <code>lazy</code> 值清掉。</p>
+<p>这是其下放操作的代码，先将儿子的 <span
+class="math inline">\(lazy\)</span> 改为父亲的，再将其值更改，后将父亲的
+<code>lazy</code> 值清掉。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//将区间 [l,r] 内的数都增加 x。</span>
 <span class="token keyword">void</span> <span class="token function">change</span><span class="token punctuation">(</span>ll id<span class="token punctuation">,</span> ll l<span class="token punctuation">,</span> ll r<span class="token punctuation">,</span> ll x<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -448,8 +461,11 @@
     <span class="token punctuation">&#125;</span>
     Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>v <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">,</span> Tree<span class="token punctuation">[</span>id <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<p>这段代码中，先检测有没有下放的必要，再更新，如果这段点包含在了 <code>[l,r]</code> 中，就将该点更新，同时也要将 $lazy$ 值更新。</p>
-<h2 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h2><p>这个简单，只需要查询其树上连续的值拼接在一起就行了。</p>
+<p>这段代码中，先检测有没有下放的必要，再更新，如果这段点包含在了
+<code>[l,r]</code> 中，就将该点更新，同时也要将 <span
+class="math inline">\(lazy\)</span> 值更新。</p>
+<h2 id="区间查询">区间查询</h2>
+<p>这个简单，只需要查询其树上连续的值拼接在一起就行了。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//求区间 [l,r] 的和。</span>
 ll <span class="token function">GetSum</span><span class="token punctuation">(</span>ll id<span class="token punctuation">,</span> ll l<span class="token punctuation">,</span> ll r<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -472,10 +488,18 @@ ll <span class="token function">GetSum</span><span class="token punctuation">(</
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>详见例题。</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="SCOI2010-序列操作"><a href="#SCOI2010-序列操作" class="headerlink" title="[SCOI2010] 序列操作"></a>[SCOI2010] 序列操作</h2><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2383&amp;tid=M">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2572">Link Luogu</a></p>
-<p>这道题是线段树的经典例题，但是就是按照题意模拟即可，再需要注意的是不同操作之间的 $lazy$ 值不一样，要替换或更改。</p>
-<h3 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h3><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<h2 id="更多">更多</h2>
+<p>详见例题。</p>
+<h1 id="例题">例题</h1>
+<h2 id="scoi2010-序列操作">[SCOI2010] 序列操作</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2383&amp;tid=M">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2572">Link
+Luogu</a></p>
+<p>这道题是线段树的经典例题，但是就是按照题意模拟即可，再需要注意的是不同操作之间的
+<span class="math inline">\(lazy\)</span> 值不一样，要替换或更改。</p>
+<h3 id="ac-code">AC code</h3>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N <span class="token operator">=</span> <span class="token number">1e6</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
