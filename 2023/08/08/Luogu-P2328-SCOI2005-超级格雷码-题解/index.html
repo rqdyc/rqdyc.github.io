@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目 题目链接。 简述 输出 \(B\) 进制 \(n\) 位的所有格雷码。">
+    <meta name="description" content="题目题目链接。 简述输出 $B$ 进制 $n$ 位的所有格雷码。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Luogu P2328 [SCOI2005] 超级格雷码 题解">
 <meta property="og:url" content="http://example.com/2023/08/08/Luogu-P2328-SCOI2005-%E8%B6%85%E7%BA%A7%E6%A0%BC%E9%9B%B7%E7%A0%81-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="题目 题目链接。 简述 输出 \(B\) 进制 \(n\) 位的所有格雷码。">
+<meta property="og:description" content="题目题目链接。 简述输出 $B$ 进制 $n$ 位的所有格雷码。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-08T07:49:15.000Z">
 <meta property="article:modified_time" content="2024-01-12T02:46:21.461Z">
@@ -42,6 +42,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -281,7 +283,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          303 字
+          307 字
         
       </span>
     
@@ -342,28 +344,47 @@
             
               <div class="markdown-body">
                 
-                <h1 id="题目">题目</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2328">题目链接。</a></p>
-<h1 id="简述">简述</h1>
-<p>输出 <span class="math inline">\(B\)</span> 进制 <span
-class="math inline">\(n\)</span> 位的所有格雷码。</p>
+                <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2328">题目链接。</a></p>
+<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>输出 $B$ 进制 $n$ 位的所有格雷码。</p>
 <span id="more"></span>
-<h1 id="思考">思考</h1>
-<p>通过观察，我们发现第 <span class="math inline">\(x\)</span>
-个格雷码的第 <span class="math inline">\(n\)</span> 位为 <span
-class="math inline">\(\lfloor \displaystyle \frac{x-1}{B^{n-1}}
-\rfloor\)</span>，第 <span class="math inline">\(n-i\)</span> 位 <span
-class="math inline">\((i&gt;0)\)</span> 其实要从第 <span
-class="math inline">\(n\)</span> 位到第 <span
-class="math inline">\(n-i+1\)</span> 位之和判断，如果第 <span
-class="math inline">\(n\)</span> 位到第 <span
-class="math inline">\(n-i+1\)</span> 位之和为偶数,则第 <span
-class="math inline">\(n-i\)</span> 位为 <span
-class="math inline">\(\lfloor \displaystyle \frac{(x-1) \bmod
-B^{n-i}}{B^{n-i-1}} \rfloor\)</span>，否则如果是奇数则 <span
-class="math inline">\(n-i\)</span> 位为 $B-1- $。</p>
-<h1 id="ac-code">AC code</h1>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br>ll n,B; <br>ll even_odd; <span class="hljs-comment">//判断前面的数的奇偶性。 </span><br>ll ans[<span class="hljs-number">1110</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//输出 </span><br>	<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>		<span class="hljs-keyword">if</span>(ans[i]&gt;<span class="hljs-number">9</span>)cout&lt;&lt;(<span class="hljs-type">char</span>)(ans[i]<span class="hljs-number">-10</span>+<span class="hljs-string">&#x27;A&#x27;</span>);<br>		<span class="hljs-keyword">else</span> cout&lt;&lt;ans[i];<br>	&#125;<br>	cout&lt;&lt;endl;<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;<span class="hljs-comment">//快速幂 </span><br>	ll ans=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(b&gt;<span class="hljs-number">0</span>)&#123;<br>		<span class="hljs-keyword">if</span>(b%<span class="hljs-number">2</span>)ans*=a;<br>		b/=<span class="hljs-number">2</span>;<br>		a*=a; <br>	&#125; <br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>	cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>	cin&gt;&gt;n&gt;&gt;B;<br>	<span class="hljs-keyword">for</span>(ll x=<span class="hljs-number">1</span>;x&lt;=<span class="hljs-built_in">qpow</span>(B,n);x++)&#123;<br>		ans[<span class="hljs-number">1</span>]=(x<span class="hljs-number">-1</span>)/<span class="hljs-built_in">qpow</span>(B,n<span class="hljs-number">-1</span>);<br>		even_odd=ans[<span class="hljs-number">1</span>]%<span class="hljs-number">2</span>;<br>		<span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i&lt;=n;i++)&#123;<br>			ans[i]=(even_odd%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>?(((x<span class="hljs-number">-1</span>)%<span class="hljs-built_in">qpow</span>(B,n-i+<span class="hljs-number">1</span>)))/<span class="hljs-built_in">qpow</span>(B,n-i):B<span class="hljs-number">-1</span>-(((x<span class="hljs-number">-1</span>)%<span class="hljs-built_in">qpow</span>(B,n-i+<span class="hljs-number">1</span>)))/<span class="hljs-built_in">qpow</span>(B,n-i));<span class="hljs-comment">//通过公式可知 </span><br>			even_odd+=(ans[i]%<span class="hljs-number">2</span>);<br>		&#125;<br>		<span class="hljs-built_in">print</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>通过观察，我们发现第 $x$ 个格雷码的第 $n$ 位为 $\lfloor \displaystyle \frac{x-1}{B^{n-1}} \rfloor$，第 $n-i$ 位 $(i&gt;0)$ 其实要从第 $n$ 位到第 $n-i+1$ 位之和判断，如果第 $n$ 位到第 $n-i+1$ 位之和为偶数,则第 $n-i$ 位为 $\lfloor \displaystyle \frac{(x-1) \bmod B^{n-i}}{B^{n-i-1}} \rfloor$，否则如果是奇数则 $n-i$ 位为 $B-1- \lfloor \displaystyle \frac{(x-1) \bmod B^{n-i}}{B^{n-i-1}} \rfloor $。 </p>
+<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
+ll n<span class="token punctuation">,</span>B<span class="token punctuation">;</span> 
+ll even_odd<span class="token punctuation">;</span> <span class="token comment">//判断前面的数的奇偶性。 </span>
+ll ans<span class="token punctuation">[</span><span class="token number">1110</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//输出 </span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span>ll i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>ans<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">></span><span class="token number">9</span><span class="token punctuation">)</span>cout<span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">(</span>ans<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">10</span><span class="token operator">+</span><span class="token char">'A'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">else</span> cout<span class="token operator">&lt;&lt;</span>ans<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+ll <span class="token function">qpow</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span>ll b<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//快速幂 </span>
+	ll ans<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>b<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>b<span class="token operator">%</span><span class="token number">2</span><span class="token punctuation">)</span>ans<span class="token operator">*=</span>a<span class="token punctuation">;</span>
+		b<span class="token operator">/=</span><span class="token number">2</span><span class="token punctuation">;</span>
+		a<span class="token operator">*=</span>a<span class="token punctuation">;</span> 
+	<span class="token punctuation">&#125;</span> 
+	<span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>cout<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	cin<span class="token operator">>></span>n<span class="token operator">>></span>B<span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span>ll x<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>x<span class="token operator">&lt;=</span><span class="token function">qpow</span><span class="token punctuation">(</span>B<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>x<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		ans<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">(</span>x<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">qpow</span><span class="token punctuation">(</span>B<span class="token punctuation">,</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		even_odd<span class="token operator">=</span>ans<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">%</span><span class="token number">2</span><span class="token punctuation">;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span>ll i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			ans<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">(</span>even_odd<span class="token operator">%</span><span class="token number">2</span><span class="token operator">==</span><span class="token number">0</span><span class="token operator">?</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token function">qpow</span><span class="token punctuation">(</span>B<span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">qpow</span><span class="token punctuation">(</span>B<span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token operator">:</span>B<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token function">qpow</span><span class="token punctuation">(</span>B<span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">qpow</span><span class="token punctuation">(</span>B<span class="token punctuation">,</span>n<span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通过公式可知 </span>
+			even_odd<span class="token operator">+=</span><span class="token punctuation">(</span>ans<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">%</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 
                 
               </div>
@@ -691,6 +712,8 @@ class="math inline">\(n-i\)</span> 位为 $B-1- $。</p>
   });
 </script>
 
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
