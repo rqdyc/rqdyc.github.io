@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":"/img/w700h350z1l10t10746.png","image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":"/img/Ham.png","image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -256,7 +256,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/w700h350z1l10t10746.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/Ham.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -369,7 +369,7 @@ class="math inline">\(v\)</span> 前有关键字
 <p>然后，我们用一个 <code>set</code>
 来进行维护，为了后面的操作，我们会根据左端点来进行排序。最终维护下来就是下图所展示的。</p>
 <figure>
-<img src="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png"
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/tx535itn.png" srcset="/img/loading.gif" lazyload
 alt="odt1" />
 <figcaption aria-hidden="true">odt1</figcaption>
 </figure>
@@ -382,7 +382,7 @@ alt="odt1" />
 <code>[pos,r]</code> 两个区间。如果说 <code>pos</code>
 正好在这段区间的开头的话，显然易见就不用分割了。</p>
 <figure>
-<img src="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png"
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/1ge627vx.png" srcset="/img/loading.gif" lazyload
 alt="odt2" />
 <figcaption aria-hidden="true">odt2</figcaption>
 </figure>
@@ -394,7 +394,7 @@ alt="odt2" />
 区间都给清空了，然后再插入一段新的区间，值为 <span
 class="math inline">\(v\)</span>。</p>
 <figure>
-<img src="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png"
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/yj4gwn8t.png" srcset="/img/loading.gif" lazyload
 alt="odt3" />
 <figcaption aria-hidden="true">odt3</figcaption>
 </figure>
@@ -493,7 +493,7 @@ class="math inline">\(x\)</span> 次方再乘上区间长度。</p>
             
   
   
-    <article id="comments">
+    <article id="comments" lazyload>
       
     <div id="giscus" class="giscus"></div>
     <script type="text/javascript">
@@ -703,6 +703,10 @@ class="math inline">\(x\)</span> 次方再乘上区间长度。</p>
 
 
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
 
 
 
@@ -805,7 +809,7 @@ class="math inline">\(x\)</span> 次方再乘上区间长度。</p>
               inlineMath: { '[+]': [['$', '$']] }
             },
             loader : {
-              
+              load: ['ui/lazy']
             },
             options: {
               renderActions: {
