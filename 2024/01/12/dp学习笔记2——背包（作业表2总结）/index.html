@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="主要是针对于背包问题的 dp 总结。 0&#x2F;1 背包 有 \(n\) 个物品，有两个属性：容积 \(w_i\) 和价值 \(v_i\)，要放入一个大小为 \(W\) 的容器，问最大价值。 设 \(dp_{i,j}\) 为装了前 \(i\) 个物品后总体积为 \(j\) 的最大价值。那么原来是 \(dp_{i-1,j-v_i}\)， 选了这个物品后体积增加，变成了 \(dp_{i-1+1,j">
+    <meta name="description" content="主要是针对于背包问题的 dp 总结。 0&#x2F;1 背包有 $n$ 个物品，有两个属性：容积 $w_i$ 和价值 $v_i$，要放入一个大小为 $W$ 的容器，问最大价值。 设 $dp_{i,j}$ 为装了前 $i$ 个物品后总体积为 $j$ 的最大价值。那么原来是 $dp_{i-1,j-v_i}$， 选了这个物品后体积增加，变成了 $dp_{i-1+1,j-v_i+v_i} &#x3D; dp_{i,j}$，或">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dp学习笔记2——背包（作业表2总结）">
 <meta property="og:url" content="http://example.com/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E8%83%8C%E5%8C%85%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A82%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="主要是针对于背包问题的 dp 总结。 0&#x2F;1 背包 有 \(n\) 个物品，有两个属性：容积 \(w_i\) 和价值 \(v_i\)，要放入一个大小为 \(W\) 的容器，问最大价值。 设 \(dp_{i,j}\) 为装了前 \(i\) 个物品后总体积为 \(j\) 的最大价值。那么原来是 \(dp_{i-1,j-v_i}\)， 选了这个物品后体积增加，变成了 \(dp_{i-1+1,j">
+<meta property="og:description" content="主要是针对于背包问题的 dp 总结。 0&#x2F;1 背包有 $n$ 个物品，有两个属性：容积 $w_i$ 和价值 $v_i$，要放入一个大小为 $W$ 的容器，问最大价值。 设 $dp_{i,j}$ 为装了前 $i$ 个物品后总体积为 $j$ 的最大价值。那么原来是 $dp_{i-1,j-v_i}$， 选了这个物品后体积增加，变成了 $dp_{i-1+1,j-v_i+v_i} &#x3D; dp_{i,j}$，或">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-12T01:52:12.000Z">
 <meta property="article:modified_time" content="2024-01-12T06:44:02.513Z">
@@ -71,6 +71,7 @@
 
   
 <link rel="stylesheet" href="/css/iconfont_Luogu/iconfont.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
 
@@ -231,6 +232,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/playlist/" target="_self">
+                <i class="iconfont icon-music"></i>
+                <span>音乐</span>
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -345,62 +358,21 @@
               <div class="markdown-body">
                 
                 <p>主要是针对于背包问题的 dp 总结。</p>
-<h1 id="背包">0/1 背包</h1>
-<p>有 <span class="math inline">\(n\)</span> 个物品，有两个属性：容积
-<span class="math inline">\(w_i\)</span> 和价值 <span
-class="math inline">\(v_i\)</span>，要放入一个大小为 <span
-class="math inline">\(W\)</span> 的容器，问最大价值。</p>
-<p>设 <span class="math inline">\(dp_{i,j}\)</span> 为装了前 <span
-class="math inline">\(i\)</span> 个物品后总体积为 <span
-class="math inline">\(j\)</span> 的最大价值。那么原来是 <span
-class="math inline">\(dp_{i-1,j-v_i}\)</span>，
-选了这个物品后体积增加，变成了 <span
-class="math inline">\(dp_{i-1+1,j-v_i+v_i} =
-dp_{i,j}\)</span>，或者不选于是就有 dp 方程：</p>
-<p><span class="math display">\[dp_{i,j}=
-\max(dp_{i-1,j},dp_{i-1,j-v_i})\]</span></p>
-<p>我们发现第一维只用到了 <span class="math inline">\(i\)</span> 和
-<span
-class="math inline">\(i-1\)</span>，我们就可以将第一维交替滚动或者原地的滚动，简化为：</p>
-<p><span
-class="math display">\[dp_{now,j}=\max(dp_{last,j},dp_{last,j-v_i})\]</span></p>
-<p>或</p>
-<p><span class="math display">\[dp_j=\max(dp_j,dp_{j-v_i})\]</span></p>
-<p>总体复杂度 <span class="math inline">\(O(nW)\)</span>。</p>
-<h1 id="完全背包">完全背包</h1>
-<p>跟 0/1 背包很想，只不过可以选很多次，我们对 dp 公式稍加更改就行：</p>
-<p><span class="math display">\[dp_{i,j}= \max(dp_{i-1,j},dp_{i-1,j-v_i
-\times c}+w_i \times c)(0 \le c \le \infty)\]</span></p>
-<p>滚动也很简单，考虑顺序就行。</p>
-<p>总体复杂度 <span class="math inline">\(O(nW)\)</span>。</p>
-<h1 id="多重背包">多重背包</h1>
-<p>前面两者的结合体，每个物品后 <span class="math inline">\(c_i\)</span>
-个，有以下三种方法：</p>
-<h2 id="暴力">暴力</h2>
-<p>将其每一个物品按照 0/1 背包考虑，总体复杂度 <span
-class="math inline">\(O(\sum c_iW)\)</span>。</p>
-<h2 id="二进制分组">二进制分组</h2>
-<p>我们发现将 <span class="math inline">\(c_i\)</span> 化成几个形如
-<span class="math inline">\(2^k\)</span> 的和的形式，最后也能够组合成
-<span class="math inline">\(0\)</span> 到 <span
-class="math inline">\(c_i\)</span> 的数，所以我们可以将每个 <span
-class="math inline">\(c_i\)</span> 分解，再 0/1 背包 dp。</p>
-<p>时间复杂度为 <span class="math inline">\(O(\sum \log c_i
-W)\)</span>。</p>
-<h2 id="单调队列">单调队列</h2>
-<p>我们来看，每一次转移，我们都是使用如下 dp 方程：</p>
-<p><span class="math display">\[dp_{i,j}=
-\max(dp_{i-1,j},dp_{i-1,j-v_ic}+w_ic)(0 \le c \le c_i)\]</span></p>
-<p>我们不妨将 <span class="math inline">\(j\)</span> 记为 <span
-class="math inline">\(pv_i+d\)</span>，而它在每一次转移中，都是转移的
-<span class="math inline">\(j- v_ic\)</span>，那么这个转移的数对 <span
-class="math inline">\(v_i\)</span> 满足 <span
-class="math inline">\((j-v_ic) \equiv (pv_i+d-cv_i) \equiv d(\bmod\
-v_i)\)</span>。</p>
-<p>有了这个性质，我们可以枚举他的余数，然后每次依次加 <span
-class="math inline">\(v\)</span>
-来枚举要更新的，然后发现他能够更新到的区间只有那么一部分（依托于 <span
-class="math inline">\(c_i\)</span>），而且是一个连续的，有增有减的操作，我们就可以用单调队列来进行优化最大值。</p>
+<h1 id="0-1-背包"><a href="#0-1-背包" class="headerlink" title="0/1 背包"></a>0/1 背包</h1><p>有 $n$ 个物品，有两个属性：容积 $w_i$ 和价值 $v_i$，要放入一个大小为 $W$ 的容器，问最大价值。</p>
+<p>设 $dp_{i,j}$ 为装了前 $i$ 个物品后总体积为 $j$ 的最大价值。那么原来是 $dp_{i-1,j-v_i}$， 选了这个物品后体积增加，变成了 $dp_{i-1+1,j-v_i+v_i} = dp_{i,j}$，或者不选于是就有 dp 方程：</p>
+<script type="math/tex; mode=display">dp_{i,j}= \max(dp_{i-1,j},dp_{i-1,j-v_i})</script><p>我们发现第一维只用到了 $i$ 和 $i-1$，我们就可以将第一维交替滚动或者原地的滚动，简化为：</p>
+<script type="math/tex; mode=display">dp_{now,j}=\max(dp_{last,j},dp_{last,j-v_i})</script><p>或</p>
+<script type="math/tex; mode=display">dp_j=\max(dp_j,dp_{j-v_i})</script><p>总体复杂度 $O(nW)$。</p>
+<h1 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h1><p>跟 0/1 背包很想，只不过可以选很多次，我们对 dp 公式稍加更改就行：</p>
+<script type="math/tex; mode=display">dp_{i,j}= \max(dp_{i-1,j},dp_{i-1,j-v_i \times c}+w_i \times c)(0 \le c \le \infty)</script><p>滚动也很简单，考虑顺序就行。</p>
+<p>总体复杂度 $O(nW)$。</p>
+<h1 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h1><p>前面两者的结合体，每个物品后 $c_i$ 个，有以下三种方法：</p>
+<h2 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h2><p>将其每一个物品按照 0/1 背包考虑，总体复杂度 $O(\sum c_iW)$。</p>
+<h2 id="二进制分组"><a href="#二进制分组" class="headerlink" title="二进制分组"></a>二进制分组</h2><p>我们发现将 $c_i$  化成几个形如 $2^k$ 的和的形式，最后也能够组合成 $0$ 到 $c_i$ 的数，所以我们可以将每个 $c_i$ 分解，再 0/1 背包 dp。</p>
+<p>时间复杂度为 $O(\sum \log c_i W)$。</p>
+<h2 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h2><p>我们来看，每一次转移，我们都是使用如下 dp 方程：</p>
+<script type="math/tex; mode=display">dp_{i,j}= \max(dp_{i-1,j},dp_{i-1,j-v_ic}+w_ic)(0 \le c \le c_i)</script><p>我们不妨将 $j$ 记为 $pv_i+d$，而它在每一次转移中，都是转移的 $j- v_ic$，那么这个转移的数对 $v_i$ 满足 $(j-v_ic) \equiv (pv_i+d-cv_i) \equiv d(\bmod\ v_i)$。</p>
+<p>有了这个性质，我们可以枚举他的余数，然后每次依次加 $v$ 来枚举要更新的，然后发现他能够更新到的区间只有那么一部分（依托于 $c_i$），而且是一个连续的，有增有减的操作，我们就可以用单调队列来进行优化最大值。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     cin <span class="token operator">>></span> v <span class="token operator">>></span> w <span class="token operator">>></span> c<span class="token punctuation">;</span>
@@ -853,6 +825,11 @@ class="math inline">\(c_i\)</span>），而且是一个连续的，有增有减�
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
 
 
 

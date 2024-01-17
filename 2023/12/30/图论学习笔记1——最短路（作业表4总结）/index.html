@@ -16,18 +16,21 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="算法 Floyd-Warshall 求全源最短路径。">
+    <meta name="description" content="算法Floyd-Warshall求全源最短路径。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图论学习笔记1——最短路（作业表4总结）">
 <meta property="og:url" content="http://example.com/2023/12/30/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="算法 Floyd-Warshall 求全源最短路径。">
+<meta property="og:description" content="算法Floyd-Warshall求全源最短路径。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png">
 <meta property="article:published_time" content="2023-12-30T00:58:46.000Z">
 <meta property="article:modified_time" content="2024-01-12T02:48:32.067Z">
 <meta property="article:author" content="Yucheng Deng">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -71,6 +74,7 @@
 
   
 <link rel="stylesheet" href="/css/iconfont_Luogu/iconfont.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
 
@@ -231,6 +235,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/playlist/" target="_self">
+                <i class="iconfont icon-music"></i>
+                <span>音乐</span>
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -344,158 +360,64 @@
             
               <div class="markdown-body">
                 
-                <h1 id="算法">算法</h1>
-<h2 id="floyd-warshall">Floyd-Warshall</h2>
-<p>求全源最短路径。</p>
+                <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="Floyd-Warshall"><a href="#Floyd-Warshall" class="headerlink" title="Floyd-Warshall"></a>Floyd-Warshall</h2><p>求全源最短路径。</p>
 <span id="more"></span>
 <p>流程：</p>
-<p>设 <span class="math inline">\(dp_{k,i,j}\)</span> 为经过 <span
-class="math inline">\(1\)</span> 到 <span
-class="math inline">\(k\)</span> 点的 <span
-class="math inline">\(i,j\)</span>
-之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程：</p>
-<p><span class="math display">\[dp_{k,i,j} = dp_{k-1,i,k} +
-dp_{k-1,k,j}\]</span></p>
-<p>可以滚动掉一维，设 <span class="math inline">\(dp_{i,j}\)</span> 为
-<span class="math inline">\(i,j\)</span> 之间的最短路，于是就有：</p>
-<p><span class="math display">\[dp_{i,j} = \min \limits_{1 \le k \le n}
-\{dp_{i,k} + dp_{k,j}\}\]</span></p>
-<p><strong>注意：顺序为 <span
-class="math inline">\(k,i,j\)</span>，顺序可调换，循环 <span
-class="math inline">\(6\)</span> 次也能得出答案。</strong></p>
-<p>时间复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
-<h2 id="dijkstra">Dijkstra</h2>
-<p>求单源最短路径。</p>
+<p>设 $dp_{k,i,j}$ 为经过 $1$ 到 $k$ 点的 $i,j$ 之间的最短路，每次转移找一个新的未被转移过的点转移，则有以下转移方程：</p>
+<script type="math/tex; mode=display">dp_{k,i,j} = dp_{k-1,i,k} + dp_{k-1,k,j}</script><p>可以滚动掉一维，设 $dp_{i,j}$ 为 $i,j$ 之间的最短路，于是就有：</p>
+<script type="math/tex; mode=display">dp_{i,j} = \min \limits_{1 \le k \le n} \{dp_{i,k} + dp_{k,j}\}</script><p><strong>注意：顺序为 $k,i,j$，顺序可调换，循环 $6$ 次也能得出答案。</strong></p>
+<p>时间复杂度 $O(n^3)$。</p>
+<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><p>求单源最短路径。</p>
 <p>本质：贪心+BFS+DP。</p>
 <p>流程：</p>
-<p>设起点为 <span class="math inline">\(s\)</span>，令 <span
-class="math inline">\(dis_i = +\infty(i \in n)\)</span>，并将 <span
-class="math inline">\(dis_s\)</span> 设为 <span
-class="math inline">\(0\)</span>。</p>
-<p>每一次，寻找 <span class="math inline">\(n\)</span> 个点中 <span
-class="math inline">\(dis_i\)</span>
-的最小值，并用这个最小值去更新它周围的边。</p>
+<p>设起点为 $s$，令 $dis_i = +\infty(i \in n)$，并将 $dis_s$ 设为 $0$。</p>
+<p>每一次，寻找 $n$ 个点中 $dis_i$ 的最小值，并用这个最小值去更新它周围的边。</p>
 <p>正确性证明：在正权图中，以当前权值最小的点去更新其他点，令有一点去更新会更优而又不是权值最小的点，因为边权为正，他更新一个点所花的花费会大于一个更近且权值更小的点，所以应用权值更小的点去更新，矛盾，故得证。</p>
-<p>时间复杂度 <span class="math inline">\(O(n^2)\)</span>（找最小点
-<span class="math inline">\(O(n)\)</span>，更新 <span
-class="math inline">\(n\)</span> 次 <span
-class="math inline">\(O(n)\)</span>）。</p>
-<p>可以用优先队列来找 <span class="math inline">\(dis_i\)</span>
-的最小值，时间复杂度可以优化到 <span class="math inline">\(O(m \log
-m)\)</span>。</p>
+<p>时间复杂度 $O(n^2)$（找最小点 $O(n)$，更新 $n$ 次 $O(n)$）。</p>
+<p>可以用优先队列来找 $dis_i$ 的最小值，时间复杂度可以优化到 $O(m \log m)$。</p>
 <p><strong>注意：不能处理含有负权边的图。</strong></p>
-<h2 id="bellman-ford">Bellman-Ford</h2>
-<p>让起点 <span class="math inline">\(dis_s = 0\)</span>。对每个点进行
-<span class="math inline">\(n-1\)</span> 次松弛操作，可得到关于 <span
-class="math inline">\(s\)</span> 的单源最短路。</p>
-<p>正确性证明：在图 <span class="math inline">\(G(V,E)\)</span>
-中，令一点 <span class="math inline">\(v \neq s\)</span> ，则到达 <span
-class="math inline">\(v\)</span> 的最短路至多经过 <span
-class="math inline">\(n-1\)</span> 个点，亦能通过 <span
-class="math inline">\(n-1\)</span> 次松弛（递推更新）去更新到点 <span
-class="math inline">\(v\)</span>，得证。</p>
-<p>时间复杂度 <span class="math inline">\(O(nm)\)</span>。</p>
+<h2 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h2><p>让起点 $dis_s = 0$。对每个点进行 $n-1$ 次松弛操作，可得到关于 $s$ 的单源最短路。</p>
+<p>正确性证明：在图 $G(V,E)$ 中，令一点 $v \neq s$ ，则到达 $v$ 的最短路至多经过 $n-1$ 个点，亦能通过 $n-1$ 次松弛（递推更新）去更新到点 $v$，得证。</p>
+<p>时间复杂度 $O(nm)$。</p>
 <p><strong>注意：可以处理含有负权边的图，且可以找负环。</strong></p>
-<h2 id="spfa">SPFA</h2>
-<p>是 Bellman-Ford 算法的优化。</p>
+<h2 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h2><p>是 Bellman-Ford 算法的优化。</p>
 <p>由于每次松弛操作都会有很多的<strong>不必要</strong>的边被松弛，于是我们可以只松弛<strong>那些被松驰过了的点</strong>的边。</p>
-<p>期望复杂度约为 <span class="math inline">\(O(kE)\)</span>，其中 <span
-class="math inline">\(k\)</span>
-是一个常数，但<strong>最坏</strong>复杂度为 <span
-class="math inline">\(O(nm)\)</span>（也就是退化为 Bellman-Ford
-算法）。</p>
-<h1 id="例题">例题</h1>
-<h2 id="c-usaco4.1.3fence-loops篱笆回路">C 【USACO4.1.3】Fence
-Loops篱笆回路</h2>
-<p><a
-target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link
-NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2738">Link
-Luogu</a></p>
-<p>这个题要求最小环，首先将点给离散化出来。要找最小环，因为数据范围很小，考虑
-Floyd-Warshall 算法，我们不妨正好在枚举 <span
-class="math inline">\(k\)</span> 的时候，因为 <span
-class="math inline">\(dp_{i,j}\)</span> 没有更新，所以当前的 <span
-class="math inline">\(dp_{i,k}+dp_{k,j}\)</span> 的路线肯定不会是 <span
-class="math inline">\(dp_{i,j}\)</span> 的路线（如下图），所以我们可以用
-<span class="math inline">\(dp_{i,j}+dp_{i,k}+dp_{k,j}\)</span>
-去更新最小环长度。</p>
-<p><img
-src="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png" srcset="/img/loading.gif" lazyload /></p>
+<p>期望复杂度约为 $O(kE)$，其中 $k$ 是一个常数，但<strong>最坏</strong>复杂度为 $O(nm)$（也就是退化为 Bellman-Ford 算法）。</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="C-【USACO4-1-3】Fence-Loops篱笆回路"><a href="#C-【USACO4-1-3】Fence-Loops篱笆回路" class="headerlink" title="C 【USACO4.1.3】Fence Loops篱笆回路"></a>C 【USACO4.1.3】Fence Loops篱笆回路</h2><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2738">Link Luogu</a></p>
+<p>这个题要求最小环，首先将点给离散化出来。要找最小环，因为数据范围很小，考虑 Floyd-Warshall 算法，我们不妨正好在枚举 $k$ 的时候，因为 $dp_{i,j}$ 没有更新，所以当前的 $dp_{i,k}+dp_{k,j}$ 的路线肯定不会是 $dp_{i,j}$ 的路线（如下图），所以我们可以用 $dp_{i,j}+dp_{i,k}+dp_{k,j}$ 去更新最小环长度。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/xrjvuou0.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/139791257">AC code</a></p>
-<h2 id="w-最短路">W 最短路</h2>
-<p><a
-target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link
-NKOJ</a> and <a
-target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1163/F">Link
-Codeforces</a> anf <a
-target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1163F">Link Luogu</a></p>
-<p>本题求的是在正权图 <span class="math inline">\(G(V,E)\)</span>
-中，选择一条边并更新他的边权，并对于每个询问求其修改后 <span
-class="math inline">\(1 \to n\)</span> 的最短路。</p>
+<h2 id="W-最短路"><a href="#W-最短路" class="headerlink" title="W 最短路"></a>W 最短路</h2><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2627&amp;tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1163/F">Link Codeforces</a> anf <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1163F">Link Luogu</a></p>
+<p>本题求的是在正权图 $G(V,E)$ 中，选择一条边并更新他的边权，并对于每个询问求其修改后 $1 \to n$ 的最短路。</p>
 <p>不妨分类讨论：</p>
-<ol type="1">
+<ol>
 <li>当这条被修改的边不在最短路上时，修改后的答案要么是原先的最短路，要么是从起点或终点到这条边的一端再从另一端出来的路径长度，因为如果我们考虑不经过这条边的路径长度，它们肯定是比原先求出的最短路要大，然后就只能考虑经过这条边。经过这条边显然最短的路径长度就是两端点到起点和终点的距离加上这条边自身的边权（如下图）。</li>
 </ol>
-<p><img
-src="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="2" type="1">
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/082xn1j8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<ol>
 <li><p>如果这条边本身就在最短路上：</p>
-<ol type="1">
+<ol>
 <li>这条边比原来的边要短，那肯定最短路就是原来的最短路减去这条边现在比以前短的长度。</li>
 <li>这条边比原来的边要长，这个有点难考虑，我会从以下方面说明：</li>
 </ol>
 <ul>
-<li>引理一：在正权图 <span class="math inline">\(G(V,E)\)</span>
-中最短路一定是一条链。</li>
+<li><p>引理一：在正权图 $G(V,E)$ 中最短路一定是一条链。</p>
+<p>证明：最短路因为要保证最短性，且图是正权图，不可能有 $0$ 环或负环，所以在最短路上一定不可能有环，得证。</p>
+</li>
+<li><p>引理二：在正权图 $G(V,E)$ 中，从起点 $s$ 出发，到达点 $t$，则路径 $s \to t$ <strong>用 dijkstra 算法找到的最短路</strong>必与其他从 $s$ 出发的路径共享一段前缀。    </p>
+<p>证明：假设这条<strong>最短</strong>路径它的共享的前缀中间有间隔，且产生作用与原最短路相等。由于中间间隔的部分又回到了最短路上，所以更新后面的点就无须考虑。而且由于 dijkstra 算法的特性，这种两条相等的最短路的终点 $v$ 只会访问一次，而假设的情况确是两次，矛盾，得证。</p>
+</li>
+<li><p>引理三：令集合 $S$ 为最短路上的点的点集，则含有两个点的点集 $S’ = \{u,v\}$ 满足 $S \cap S’ = \varnothing$，满足在 $1 \to u$ 与最短路的前缀在最短路上的最后一个点和 $v \to n$ 与最短路的后缀在最短路上的最后一个点中间的最短路上的边任删一条而它的删边最短路为 $dis_{1 \to u} + dis_{u \to v} + dis_{v \to n}$，如果有多个就取最小值。        </p>
+<p>证明：由引理二得，假设在最短路上的最后一个前缀和最后一个后缀的点分别记作 $x,y$。那么，假设有一条边 $(o,p)$ 删掉之后所根据引理三得出的答案是比正确答案更大的。那么一定有一条路径 $1 \to u_1 \to v_1 \to n$ 原来中间的最短路上的边并不经过 $(o,p)$ 但是有另一条路径使其从该路径中脱离出来并回到最短路时中间是有 $(o,p)$ 边的，并且答案肯定是最小的，那么这条路径肯定存在一条边，满足其与最短路上的前缀和后缀中间必经过 $(o,p)$，而后用其去更新答案一定比之前更优，而与之前的假设相悖，得证。</p>
+</li>
+<li><p>引理四：引理三中所设的 $\{u,v\}$ 可以在一条边上而引理三依旧成立。</p>
+<p>证明：可以用引理三的证明过程来证明。</p>
+</li>
 </ul>
-<p>证明：最短路因为要保证最短性，且图是正权图，不可能有 <span
-class="math inline">\(0\)</span>
-环或负环，所以在最短路上一定不可能有环，得证。</p>
-<ul>
-<li>引理二：在正权图 <span class="math inline">\(G(V,E)\)</span>
-中，从起点 <span class="math inline">\(s\)</span> 出发，到达点 <span
-class="math inline">\(t\)</span>，则路径 <span class="math inline">\(s
-\to t\)</span> <strong>用 dijkstra 算法找到的最短路</strong>必与其他从
-<span class="math inline">\(s\)</span> 出发的路径共享一段前缀。</li>
-</ul>
-<p>证明：假设这条<strong>最短</strong>路径它的共享的前缀中间有间隔，且产生作用与原最短路相等。由于中间间隔的部分又回到了最短路上，所以更新后面的点就无须考虑。而且由于
-dijkstra 算法的特性，这种两条相等的最短路的终点 <span
-class="math inline">\(v\)</span>
-只会访问一次，而假设的情况确是两次，矛盾，得证。</p>
-<ul>
-<li>引理三：令集合 <span class="math inline">\(S\)</span>
-为最短路上的点的点集，则含有两个点的点集 <span
-class="math inline">\(S&#39; = \{u,v\}\)</span> 满足 <span
-class="math inline">\(S \cap S&#39; = \varnothing\)</span>，满足在 <span
-class="math inline">\(1 \to u\)</span>
-与最短路的前缀在最短路上的最后一个点和 <span class="math inline">\(v \to
-n\)</span>
-与最短路的后缀在最短路上的最后一个点中间的最短路上的边任删一条而它的删边最短路为
-<span class="math inline">\(dis_{1 \to u} + dis_{u \to v} + dis_{v \to
-n}\)</span>，如果有多个就取最小值。</li>
-</ul>
-<p>证明：由引理二得，假设在最短路上的最后一个前缀和最后一个后缀的点分别记作
-<span class="math inline">\(x,y\)</span>。那么，假设有一条边 <span
-class="math inline">\((o,p)\)</span>
-删掉之后所根据引理三得出的答案是比正确答案更大的。那么一定有一条路径
-<span class="math inline">\(1 \to u_1 \to v_1 \to n\)</span>
-原来中间的最短路上的边并不经过 <span
-class="math inline">\((o,p)\)</span>
-但是有另一条路径使其从该路径中脱离出来并回到最短路时中间是有 <span
-class="math inline">\((o,p)\)</span>
-边的，并且答案肯定是最小的，那么这条路径肯定存在一条边，满足其与最短路上的前缀和后缀中间必经过
-<span
-class="math inline">\((o,p)\)</span>，而后用其去更新答案一定比之前更优，而与之前的假设相悖，得证。</p>
-<ul>
-<li>引理四：引理三中所设的 <span class="math inline">\(\{u,v\}\)</span>
-可以在一条边上而引理三依旧成立。</li>
-</ul>
-<p>证明：可以用引理三的证明过程来证明。</p></li>
+</li>
 </ol>
 <p>所以，综上所述，利用引理四，我们可以枚举每一条<strong>不在最短路上</strong>的边。然后因为其两点前后缀在同一最短路上且连续，我们可以给每条边编上号，用数据结构来维护其删掉这条边后路径长度的最小值。</p>
-<p><a
-target="_blank" rel="noopener" href="https://codeforces.com/problemset/submission/1163/240331475">AC
-code</a></p>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/submission/1163/240331475">AC code</a></p>
 
                 
               </div>
@@ -925,6 +847,11 @@ code</a></p>
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
 
 
 
