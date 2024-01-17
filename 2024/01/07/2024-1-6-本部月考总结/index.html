@@ -12,16 +12,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
+  <meta name="theme-color" content="#EEE9E9">
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="考的不好。 A 过关斩将Link NKOJ 学了快一个月最短路，见到这种裸的分层图题，轻松就切了。 具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。 AC code#include&lt;bits&#x2F;stdc++.h&gt; using namespace std; #define ll long long const ll N&#x3D;1e5+10; const ll M&#x3D;2e5+10; st">
+    <meta name="description" content="考的不好。 A 过关斩将 Link NKOJ 学了快一个月最短路，见到这种裸的分层图题，轻松就切了。 具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。 AC code #include&lt;bits&#x2F;stdc++.h&gt; using namespace std; #define ll long long const ll N&#x3D;1e5+10; const ll M&#x3D;2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024.1.6 本部月考总结">
 <meta property="og:url" content="http://example.com/2024/01/07/2024-1-6-%E6%9C%AC%E9%83%A8%E6%9C%88%E8%80%83%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="考的不好。 A 过关斩将Link NKOJ 学了快一个月最短路，见到这种裸的分层图题，轻松就切了。 具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。 AC code#include&lt;bits&#x2F;stdc++.h&gt; using namespace std; #define ll long long const ll N&#x3D;1e5+10; const ll M&#x3D;2e5+10; st">
+<meta property="og:description" content="考的不好。 A 过关斩将 Link NKOJ 学了快一个月最短路，见到这种裸的分层图题，轻松就切了。 具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。 AC code #include&lt;bits&#x2F;stdc++.h&gt; using namespace std; #define ll long long const ll N&#x3D;1e5+10; const ll M&#x3D;2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-07T13:15:03.000Z">
 <meta property="article:modified_time" content="2024-01-12T02:45:39.211Z">
@@ -345,10 +345,14 @@
               <div class="markdown-body">
                 
                 <p>考的不好。</p>
-<h1 id="A-过关斩将"><a href="#A-过关斩将" class="headerlink" title="A 过关斩将"></a>A 过关斩将</h1><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=A">Link NKOJ</a></p>
+<h1 id="a-过关斩将">A 过关斩将</h1>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=A">Link
+NKOJ</a></p>
 <p>学了快一个月最短路，见到这种裸的分层图题，轻松就切了。</p>
 <p>具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。</p>
-<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h2 id="ac-code">AC code</h2>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">1e5</span><span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span>
@@ -478,10 +482,33 @@ ll ans<span class="token operator">=</span><span class="token operator">-</span>
 		cout<span class="token operator">&lt;&lt;</span>ans<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h1 id="B-翻转游戏"><a href="#B-翻转游戏" class="headerlink" title="B 翻转游戏"></a>B 翻转游戏</h1><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=B">Link NKOJ</a></p>
-<p>赛上有想出来接近正解的思路，但是被我 <del>IQ=0</del> 的大脑否决了（也告诉我们做事要有决心）。</p>
-<p>思路：当 $k$ 为偶数是，显然是没有答案的（消除总和为 $S_n = 2^n - 1$），当 $k$ 是奇数时，消除的次数就为 $T = \lceil \log_2{n} \rceil$，我们记录当前<strong>从第 $T$ 次开始</strong>的消除次数为 $t$，只包含 $1$ 的区间左右端点为 $[l,r]$。当 $2^{T - t + 1} \leq r - l + 1$ 时，我们就可以直接消掉这个区间的一部分，我们就以左端点 $l$ 为起点去消掉一部分 $1$；否则我们不仅要消完整个区间，还要将外面的一些 $0$ 给化成 $1$，为了不受 $r$ 端点后面可能没有 $0$，我们就从右端点 $r$ 来开始消除。最后再将新的 $[l,r]$ 更新出来，继续这个过程。</p>
-<h2 id="AC-code-1"><a href="#AC-code-1" class="headerlink" title="AC code"></a>AC code</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h1 id="b-翻转游戏">B 翻转游戏</h1>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=B">Link
+NKOJ</a></p>
+<p>赛上有想出来接近正解的思路，但是被我 <del>IQ=0</del>
+的大脑否决了（也告诉我们做事要有决心）。</p>
+<p>思路：当 <span class="math inline">\(k\)</span>
+为偶数是，显然是没有答案的（消除总和为 <span class="math inline">\(S_n =
+2^n - 1\)</span>），当 <span class="math inline">\(k\)</span>
+是奇数时，消除的次数就为 <span class="math inline">\(T = \lceil
+\log_2{n} \rceil\)</span>，我们记录当前<strong>从第 <span
+class="math inline">\(T\)</span> 次开始</strong>的消除次数为 <span
+class="math inline">\(t\)</span>，只包含 <span
+class="math inline">\(1\)</span> 的区间左右端点为 <span
+class="math inline">\([l,r]\)</span>。当 <span
+class="math inline">\(2^{T - t + 1} \leq r - l + 1\)</span>
+时，我们就可以直接消掉这个区间的一部分，我们就以左端点 <span
+class="math inline">\(l\)</span> 为起点去消掉一部分 <span
+class="math inline">\(1\)</span>；否则我们不仅要消完整个区间，还要将外面的一些
+<span class="math inline">\(0\)</span> 给化成 <span
+class="math inline">\(1\)</span>，为了不受 <span
+class="math inline">\(r\)</span> 端点后面可能没有 <span
+class="math inline">\(0\)</span>，我们就从右端点 <span
+class="math inline">\(r\)</span> 来开始消除。最后再将新的 <span
+class="math inline">\([l,r]\)</span> 更新出来，继续这个过程。</p>
+<h2 id="ac-code-1">AC code</h2>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 ll <span class="token function">qpow</span><span class="token punctuation">(</span>ll x<span class="token punctuation">,</span>ll n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -554,11 +581,29 @@ ll ans<span class="token punctuation">[</span><span class="token number">1145</s
 		cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h1 id="C-大模法师"><a href="#C-大模法师" class="headerlink" title="C 大模法师"></a>C 大模法师</h1><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=C">Link NKOJ</a></p>
+<h1 id="c-大模法师">C 大模法师</h1>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=C">Link
+NKOJ</a></p>
 <p>考场上想正解想不出来，就开始乱搞，结果正解居然也是乱搞。</p>
 <p>思路：有很多乱搞思路能过，这里介绍一种。</p>
-<p>我们随机从 $a$ 序列里找两个<strong>不相等</strong>的数，记作 $a_l$ 和 $a_r$，假设这两个数对于序列中某个数同余，我们不妨对两个数换一种方式记录，记 $a_l = l’x + y$，$a_r = r’x + y$，则两数之差就为 $(l’ - r’)x$，也就是等于 $a_l - a_r$。我们就可以枚举这个 $x$，当 $(a_l - a_r) \equiv 0\  (\bmod x)$ 时，就说明 $x$ <strong>可能满足</strong>要求，我们再用 $O(n)$ 的时间去检查，如果是就更新答案。设进行了 $T$ 此操作，复杂度约为 $O(Tn\sqrt{n})$，当然跑不满，加点优化就可以很快过掉。</p>
-<h2 id="AC-code-2"><a href="#AC-code-2" class="headerlink" title="AC code"></a>AC code</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<p>我们随机从 <span class="math inline">\(a\)</span>
+序列里找两个<strong>不相等</strong>的数，记作 <span
+class="math inline">\(a_l\)</span> 和 <span
+class="math inline">\(a_r\)</span>，假设这两个数对于序列中某个数同余，我们不妨对两个数换一种方式记录，记
+<span class="math inline">\(a_l = l&#39;x + y\)</span>，<span
+class="math inline">\(a_r = r&#39;x + y\)</span>，则两数之差就为 <span
+class="math inline">\((l&#39; - r&#39;)x\)</span>，也就是等于 <span
+class="math inline">\(a_l - a_r\)</span>。我们就可以枚举这个 <span
+class="math inline">\(x\)</span>，当 <span class="math inline">\((a_l -
+a_r) \equiv 0\  (\bmod x)\)</span> 时，就说明 <span
+class="math inline">\(x\)</span> <strong>可能满足</strong>要求，我们再用
+<span class="math inline">\(O(n)\)</span>
+的时间去检查，如果是就更新答案。设进行了 <span
+class="math inline">\(T\)</span> 此操作，复杂度约为 <span
+class="math inline">\(O(Tn\sqrt{n})\)</span>，当然跑不满，加点优化就可以很快过掉。</p>
+<h2 id="ac-code-2">AC code</h2>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">1e6</span><span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span>
@@ -627,10 +672,15 @@ vector<span class="token operator">&lt;</span>ll<span class="token operator">></
 	cout<span class="token operator">&lt;&lt;</span>ans<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p><del>这种抽象的题写不出正解也可以去乱搞一下，说不定就过了</del>。</p>
-<h1 id="D-彩色的树"><a href="#D-彩色的树" class="headerlink" title="D 彩色的树"></a>D 彩色的树</h1><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=D">Link NKOJ</a></p>
+<h1 id="d-彩色的树">D 彩色的树</h1>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2661&amp;tid=D">Link
+NKOJ</a></p>
 <p>没怎么听懂，好像就是用 DFS 来考虑每个颜色的贡献。</p>
-<h2 id="AC-code-3"><a href="#AC-code-3" class="headerlink" title="AC code"></a>AC code</h2><p><del>还没 AC 怎么可能有 AC code</del></p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>要期末考试了，压力还是有点大，希望自己还是能够坚持下来，思维多练练，代码多敲点，套路多见见（最近也见了很多），希望考试和后面的时候能发挥出来。</p>
+<h2 id="ac-code-3">AC code</h2>
+<p><del>还没 AC 怎么可能有 AC code</del></p>
+<h1 id="后记">后记</h1>
+<p>要期末考试了，压力还是有点大，希望自己还是能够坚持下来，思维多练练，代码多敲点，套路多见见（最近也见了很多），希望考试和后面的时候能发挥出来。</p>
 
                 
               </div>
