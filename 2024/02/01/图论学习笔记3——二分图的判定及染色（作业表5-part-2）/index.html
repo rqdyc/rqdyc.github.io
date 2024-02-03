@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定义二分图可以用一个简单的定义来描述它： 在图 $G(V,E)$ 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。 判定 &amp; 染色上述定义也指出了判定和染色的一种方法： 我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图就不是二分图匹配，否">
+    <meta name="description" content="定义 二分图可以用一个简单的定义来描述它： 在图 \(G(V,E)\) 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。 判定 &amp; 染色 上述定义也指出了判定和染色的一种方法： 我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图论学习笔记3——二分图的判定及染色（作业表5 part 2）">
 <meta property="og:url" content="http://example.com/2024/02/01/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%88%A4%E5%AE%9A%E5%8F%8A%E6%9F%93%E8%89%B2%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A85-part-2%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="定义二分图可以用一个简单的定义来描述它： 在图 $G(V,E)$ 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。 判定 &amp; 染色上述定义也指出了判定和染色的一种方法： 我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图就不是二分图匹配，否">
+<meta property="og:description" content="定义 二分图可以用一个简单的定义来描述它： 在图 \(G(V,E)\) 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。 判定 &amp; 染色 上述定义也指出了判定和染色的一种方法： 我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-01T02:12:04.000Z">
 <meta property="article:modified_time" content="2024-02-03T09:18:44.383Z">
@@ -358,21 +358,48 @@
             
               <div class="markdown-body">
                 
-                <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>二分图可以用一个简单的定义来描述它：</p>
-<p>在图 $G(V,E)$ 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。</p>
-<h1 id="判定-amp-染色"><a href="#判定-amp-染色" class="headerlink" title="判定 &amp; 染色"></a>判定 &amp; 染色</h1><p>上述定义也指出了判定和染色的一种方法：</p>
+                <h1 id="定义">定义</h1>
+<p>二分图可以用一个简单的定义来描述它：</p>
+<p>在图 <span class="math inline">\(G(V,E)\)</span>
+中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。</p>
+<h1 id="判定-染色">判定 &amp; 染色</h1>
+<p>上述定义也指出了判定和染色的一种方法：</p>
 <p>我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图就不是二分图匹配，否则染完了他就是二分图，染色方案也就出来了。</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="K-双栈排序"><a href="#K-双栈排序" class="headerlink" title="K 双栈排序"></a>K 双栈排序</h2><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=K">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1155">Link Luogu</a></p>
-<p>题意简述：给定一个 $1$ 到 $n$ 的排列 $\{a_1,a_2,a_3……a_n\}$，并给定两个栈，让你将这个序列中的数放进两个栈中再弹出后完成对 $a$ 序列的排序。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>我们可以先将每一个数在哪个栈里的，然后在模拟出最小字典序。</p>
+<h1 id="例题">例题</h1>
+<h2 id="k-双栈排序">K 双栈排序</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=K">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1155">Link
+Luogu</a></p>
+<p>题意简述：给定一个 <span class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span> 的排列 <span
+class="math inline">\(\{a_1,a_2,a_3……a_n\}\)</span>，并给定两个栈，让你将这个序列中的数放进两个栈中再弹出后完成对
+<span class="math inline">\(a\)</span> 序列的排序。</p>
+<h2 id="思考">思考</h2>
+<p>我们可以先将每一个数在哪个栈里的，然后在模拟出最小字典序。</p>
 <p>但是我们正着去想哪几个数应该哪一个栈里是比较困难的，那我们可以想怎么去找哪两个数不在同一个栈里面。</p>
-<p>在 $a$ 序列中随便找两个数 $a_i,a_j(i &lt; j)$，有两种情况：</p>
+<p>在 <span class="math inline">\(a\)</span> 序列中随便找两个数 <span
+class="math inline">\(a_i,a_j(i &lt; j)\)</span>，有两种情况：</p>
 <ul>
-<li>如果 $a_i &gt; a_j$，这两个数肯定可以在同一个栈里，只需要 $a_i$ 先弹出然后再加入 $a_j$ 就行。</li>
-<li>但如果 $a_i &lt; a_j$，这个时候我们肯定要将 $a_j$ 放在 $a_i$ 上面，但是如果再 $a_j$ 后面有一个 $a_k(k&gt;j)$ 又比 $a_i$ 小，这时又回到了情况一，要先弹出 $a_i$ 才能加入 $a_k$，所以 $a_i$ 和 $a_j$ 不可能加入一个栈中。</li>
+<li>如果 <span class="math inline">\(a_i &gt;
+a_j\)</span>，这两个数肯定可以在同一个栈里，只需要 <span
+class="math inline">\(a_i\)</span> 先弹出然后再加入 <span
+class="math inline">\(a_j\)</span> 就行。</li>
+<li>但如果 <span class="math inline">\(a_i &lt;
+a_j\)</span>，这个时候我们肯定要将 <span
+class="math inline">\(a_j\)</span> 放在 <span
+class="math inline">\(a_i\)</span> 上面，但是如果再 <span
+class="math inline">\(a_j\)</span> 后面有一个 <span
+class="math inline">\(a_k(k&gt;j)\)</span> 又比 <span
+class="math inline">\(a_i\)</span> 小，这时又回到了情况一，要先弹出
+<span class="math inline">\(a_i\)</span> 才能加入 <span
+class="math inline">\(a_k\)</span>，所以 <span
+class="math inline">\(a_i\)</span> 和 <span
+class="math inline">\(a_j\)</span> 不可能加入一个栈中。</li>
 </ul>
 <p>然后我们就可以以这种关系来建边，因为只有两个栈，并且每个数只会加入到一个栈中，所以就是个二分图染色问题，最后模拟怎么弹出就行。</p>
-<h3 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h3><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h3 id="ac-code">AC code</h3>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">2010</span><span class="token punctuation">;</span>

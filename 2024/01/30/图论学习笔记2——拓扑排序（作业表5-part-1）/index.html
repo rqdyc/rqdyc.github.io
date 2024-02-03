@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="定义很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是拓扑序，求解方法就是拓扑排序。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 $u$ 要在事件 $v$ 之前完成，我们就可以再 $u,v$ 之间连一条单向边。显然，我们建出来的这个图一定是个有向无环图（DAG），因">
+    <meta name="description" content="定义 很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是拓扑序，求解方法就是拓扑排序。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 \(u\) 要在事件 \(v\) 之前完成，我们就可以再 \(u,v\) 之间连一条单向边。显然，我们建出来的这个图一定是个有向">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图论学习笔记2——拓扑排序（作业表5 part 1）">
 <meta property="og:url" content="http://example.com/2024/01/30/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A85-part-1%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="定义很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是拓扑序，求解方法就是拓扑排序。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 $u$ 要在事件 $v$ 之前完成，我们就可以再 $u,v$ 之间连一条单向边。显然，我们建出来的这个图一定是个有向无环图（DAG），因">
+<meta property="og:description" content="定义 很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是拓扑序，求解方法就是拓扑排序。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 \(u\) 要在事件 \(v\) 之前完成，我们就可以再 \(u,v\) 之间连一条单向边。显然，我们建出来的这个图一定是个有向">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-30T00:58:46.000Z">
 <meta property="article:modified_time" content="2024-02-03T06:45:27.083Z">
@@ -358,15 +358,33 @@
             
               <div class="markdown-body">
                 
-                <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是<strong>拓扑序</strong>，求解方法就是<strong>拓扑排序</strong>。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 $u$ 要在事件 $v$ 之前完成，我们就可以再 $u,v$ 之间连一条<strong>单向边</strong>。显然，我们建出来的这个图一定是个<strong>有向无环图（DAG）</strong>，因为如果有环了，那么就类似于数学中的循环论证，是肯定完成不了环中的事件的。目前主流的解法有两种：BFS 和 DFS。这里介绍 BFS 写法。</p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>当一个点的入度为 $0$ 时，这个点显然就是可以被选择地，我们可以从这个点出发，将从这个点出发的所有边删掉，然后再找入度为 $0$ 的点，依次类推。</p>
+                <h1 id="定义">定义</h1>
+<p>很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是<strong>拓扑序</strong>，求解方法就是<strong>拓扑排序</strong>。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件
+<span class="math inline">\(u\)</span> 要在事件 <span
+class="math inline">\(v\)</span> 之前完成，我们就可以再 <span
+class="math inline">\(u,v\)</span>
+之间连一条<strong>单向边</strong>。显然，我们建出来的这个图一定是个<strong>有向无环图（DAG）</strong>，因为如果有环了，那么就类似于数学中的循环论证，是肯定完成不了环中的事件的。目前主流的解法有两种：BFS
+和 DFS。这里介绍 BFS 写法。</p>
+<h1 id="做法">做法</h1>
+<h2 id="bfs">BFS</h2>
+<p>当一个点的入度为 <span class="math inline">\(0\)</span>
+时，这个点显然就是可以被选择地，我们可以从这个点出发，将从这个点出发的所有边删掉，然后再找入度为
+<span class="math inline">\(0\)</span> 的点，依次类推。</p>
 <p>正确性：因为每一次选择的都是可以选择的点，正确性也一定正确。</p>
-<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><p>（没学过，好像也没怎么用过）</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="B-HNOI2015-菜肴制作"><a href="#B-HNOI2015-菜肴制作" class="headerlink" title="B [HNOI2015] 菜肴制作"></a>B [HNOI2015] 菜肴制作</h2><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=B">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3243">Link Luogu</a></p>
+<h2 id="dfs">DFS</h2>
+<p>（没学过，好像也没怎么用过）</p>
+<h1 id="例题">例题</h1>
+<h2 id="b-hnoi2015-菜肴制作">B [HNOI2015] 菜肴制作</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=B">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3243">Link
+Luogu</a></p>
 <p>题意简述：就是求拓扑序，不过要求数字越小的位置越靠前。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>很明显，最小的字典序不一定是最优解，因为小的前面可能被很多大的所约束，这时最小字典序就不是最优解。</p>
+<h3 id="思考">思考</h3>
+<p>很明显，最小的字典序不一定是最优解，因为小的前面可能被很多大的所约束，这时最小字典序就不是最优解。</p>
 <p>但是，我们可以建反图，用反图跑出来的<strong>最大</strong>字典序反着来就是答案。因为我们是反着来跑拓扑的，所以里面较小的数一定是相较于其他是更靠后出现的，反转后就是最先出现的，所以这样跑就是最优答案，最后判一下有没有环就行了。</p>
-<h3 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h3><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h3 id="ac-code">AC code</h3>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">1e5</span><span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span>
@@ -453,11 +471,30 @@ vector<span class="token operator">&lt;</span>ll<span class="token operator">></
 		cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="C-POI2015-PUS-Pustynia"><a href="#C-POI2015-PUS-Pustynia" class="headerlink" title="C [POI2015] PUS (Pustynia)"></a>C [POI2015] PUS (Pustynia)</h2><p><a target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=C">Link NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3588">Link Luogu</a></p>
-<p>题意简述：给定一个长度为 $n$ 的序列，其中一些有数值，再给定其中 $m$ 个区间，其中每个区间有 $k$ 个数，大小大于该区间任何的其他的数，构造一个这样的序列或判断无解（$1\leq n \leq 10^5,1 \leq m \leq 2 \times 10^5,\sum k \leq 3 \times 10^5$）。</p>
-<h3 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h3><p>有点像差分约束（<del>好像就是差分约束</del>），就按差分约束的套路来，大的向小的连边，一条有向边就是一个大小关系，显然无解的情况就是这个大小关系有环。然后跑拓扑排序。</p>
-<p>但是如果暴力的建图，那么边的数量就会是 $n^2$ 级别，显然不可取，注意到本质上就是这 $k$ 个点指向他所在的区间，我们不妨将这 $k$ 个点连向一个虚拟节点，然后再用这个节点连向这个区间，那么现在的问题就是怎么让这个虚拟节点和区间连边。我们可以注意到，有一个数据结构专门维护的就是线段，也就是线段树（线段树优化建图）。我们可以借鉴这个思路，建的点表示一段区间，那大的区间就要向小的区间连边，可以用线段树的方法维护，于是边的数量就降低到了 $n \log n$ 级别，再跑拓扑排序确定大小，最后如果位置有原值在检查是否相等就行了。</p>
-<h3 id="AC-code-1"><a href="#AC-code-1" class="headerlink" title="AC code"></a>AC code</h3><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h2 id="c-poi2015-pus-pustynia">C [POI2015] PUS (Pustynia)</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=C">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3588">Link
+Luogu</a></p>
+<p>题意简述：给定一个长度为 <span class="math inline">\(n\)</span>
+的序列，其中一些有数值，再给定其中 <span
+class="math inline">\(m\)</span> 个区间，其中每个区间有 <span
+class="math inline">\(k\)</span>
+个数，大小大于该区间任何的其他的数，构造一个这样的序列或判断无解（<span
+class="math inline">\(1\leq n \leq 10^5,1 \leq m \leq 2 \times 10^5,\sum
+k \leq 3 \times 10^5\)</span>）。</p>
+<h3 id="思考-1">思考</h3>
+<p>有点像差分约束（<del>好像就是差分约束</del>），就按差分约束的套路来，大的向小的连边，一条有向边就是一个大小关系，显然无解的情况就是这个大小关系有环。然后跑拓扑排序。</p>
+<p>但是如果暴力的建图，那么边的数量就会是 <span
+class="math inline">\(n^2\)</span> 级别，显然不可取，注意到本质上就是这
+<span class="math inline">\(k\)</span>
+个点指向他所在的区间，我们不妨将这 <span
+class="math inline">\(k\)</span>
+个点连向一个虚拟节点，然后再用这个节点连向这个区间，那么现在的问题就是怎么让这个虚拟节点和区间连边。我们可以注意到，有一个数据结构专门维护的就是线段，也就是线段树（线段树优化建图）。我们可以借鉴这个思路，建的点表示一段区间，那大的区间就要向小的区间连边，可以用线段树的方法维护，于是边的数量就降低到了
+<span class="math inline">\(n \log n\)</span>
+级别，再跑拓扑排序确定大小，最后如果位置有原值在检查是否相等就行了。</p>
+<h3 id="ac-code-1">AC code</h3>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">6e6</span><span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span>
@@ -661,7 +698,11 @@ ll vs<span class="token punctuation">[</span>N<span class="token punctuation">]<
 	<span class="token punctuation">&#125;</span>
 	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h3 id="附：线段树优化建图"><a href="#附：线段树优化建图" class="headerlink" title="附：线段树优化建图"></a>附：线段树优化建图</h3><p>线段树优化建图在我看来是一个优化区间建边的工具，能将 $n^2$ 级别的建边优化到 $n \log n$ 级别，当建图方式跟区间有关，就可以用了，具体怎么用就跟上面一样，后面连通性专题也有一道要用线段树优化建图的。</p>
+<h3 id="附线段树优化建图">附：线段树优化建图</h3>
+<p>线段树优化建图在我看来是一个优化区间建边的工具，能将 <span
+class="math inline">\(n^2\)</span> 级别的建边优化到 <span
+class="math inline">\(n \log n\)</span>
+级别，当建图方式跟区间有关，就可以用了，具体怎么用就跟上面一样，后面连通性专题也有一道要用线段树优化建图的。</p>
 
                 
               </div>

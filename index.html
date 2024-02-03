@@ -309,7 +309,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/02/01/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%88%A4%E5%AE%9A%E5%8F%8A%E6%9F%93%E8%89%B2%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A85-part-2%EF%BC%89/" target="_blank">
         <div>
-          定义二分图可以用一个简单的定义来描述它： 在图 $G(V,E)$ 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。 判定 &amp; 染色上述定义也指出了判定和染色的一种方法： 我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图就不是二分图匹配，否
+          定义 二分图可以用一个简单的定义来描述它： 在图 \(G(V,E)\) 中，如果有一种方案使每个点染上不同的颜色并使得相邻两点之间的颜色互不相同，那么我们就称这张图为二分图。 判定 &amp; 染色 上述定义也指出了判定和染色的一种方法： 我们对每个点，初始时先不染色，给起点染色。每遍历到一个点，染上与它的前驱颜色相反的颜色，如果这个点有颜色且这个点的颜色与它的前驱的颜色一样，那这个图
         </div>
       </a>
 
@@ -370,7 +370,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/01/30/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A85-part-1%EF%BC%89/" target="_blank">
         <div>
-          定义很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是拓扑序，求解方法就是拓扑排序。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 $u$ 要在事件 $v$ 之前完成，我们就可以再 $u,v$ 之间连一条单向边。显然，我们建出来的这个图一定是个有向无环图（DAG），因
+          定义 很多的时候，做一件事情需要完成前面的一些事情后才能进行。就比如说数学证明，有的结论要用前面证明出来的结论再证明这个结论，而这个结论又会拿去证明其他的结论。这个证明的顺序就是拓扑序，求解方法就是拓扑排序。这个证明的顺序我们可以抽象成一个图论问题，如果当一个事件 \(u\) 要在事件 \(v\) 之前完成，我们就可以再 \(u,v\) 之间连一条单向边。显然，我们建出来的这个图一定是个有向
         </div>
       </a>
 
@@ -431,7 +431,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E5%8C%BA%E9%97%B4dp%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A83%E6%80%BB%E7%BB%93%EF%BC%89/" target="_blank">
         <div>
-          主要针对于区间 dp 的总结。 比较拿手（感觉有一种抽象的无从下手但又很智慧的美） 原理对于一个大区间，如果我们可以解决他的子区间问题，并且答案还能合并到大区间里，那这个问题就可以用区间 dp 解决。 就这么简单，但是扩展出去有亿点复杂。 例题K 祖玛游戏Link NKOJ and Link Lougu 一道经典题目（也开始难了）。 首先，我们现设 $dp_{i,j}$ 是消除区间 [i,j] 所
+          主要针对于区间 dp 的总结。 比较拿手（感觉有一种抽象的无从下手但又很智慧的美） 原理 对于一个大区间，如果我们可以解决他的子区间问题，并且答案还能合并到大区间里，那这个问题就可以用区间 dp 解决。 就这么简单，但是扩展出去有亿点复杂。 例题 K 祖玛游戏 Link NKOJ and Link Lougu 一道经典题目（也开始难了）。 首先，我们现设 \(dp_{i,j
         </div>
       </a>
 
@@ -492,7 +492,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E8%83%8C%E5%8C%85%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A82%E6%80%BB%E7%BB%93%EF%BC%89/" target="_blank">
         <div>
-          主要是针对于背包问题的 dp 总结。 0/1 背包有 $n$ 个物品，有两个属性：容积 $w_i$ 和价值 $v_i$，要放入一个大小为 $W$ 的容器，问最大价值。 设 $dp_{i,j}$ 为装了前 $i$ 个物品后总体积为 $j$ 的最大价值。那么原来是 $dp_{i-1,j-v_i}$， 选了这个物品后体积增加，变成了 $dp_{i-1+1,j-v_i+v_i} = dp_{i,j}$，或
+          主要是针对于背包问题的 dp 总结。 0/1 背包 有 \(n\) 个物品，有两个属性：容积 \(w_i\) 和价值 \(v_i\)，要放入一个大小为 \(W\) 的容器，问最大价值。 设 \(dp_{i,j}\) 为装了前 \(i\) 个物品后总体积为 \(j\) 的最大价值。那么原来是 \(dp_{i-1,j-v_i}\)， 选了这个物品后体积增加，变成了 \(dp_{i-1+1,j
         </div>
       </a>
 
@@ -553,7 +553,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/" target="_blank">
         <div>
-          LIS全名最长上升子序列。 做法一设 $dp_i$ 为字符串 $a$ 中以 $a_i$ 结尾的 LIS，当前的 $dp_i$ 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： dp_i = \max (1,dp_j+1)\ (i > j,a_i > a_j)枚举两维，时间复杂度 $O(n^2)$。 for (ll i = 1; i &lt;= n; i++) &#123;     for
+          LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i = \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 for (ll i = 1;
         </div>
       </a>
 
@@ -614,7 +614,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/01/07/2024-1-6-%E6%9C%AC%E9%83%A8%E6%9C%88%E8%80%83%E6%80%BB%E7%BB%93/" target="_blank">
         <div>
-          考的不好。 A 过关斩将Link NKOJ 学了快一个月最短路，见到这种裸的分层图题，轻松就切了。 具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。 AC code#include&lt;bits/stdc++.h> using namespace std; #define ll long long const ll N=1e5+10; const ll M=2e5+10; st
+          考的不好。 A 过关斩将 Link NKOJ 学了快一个月最短路，见到这种裸的分层图题，轻松就切了。 具体思路：Dijkstra 跑分层图，根据弱点类型来看更新哪一层。 AC code #include&lt;bits/stdc++.h> using namespace std; #define ll long long const ll N=1e5+10; const ll M=2
         </div>
       </a>
 
@@ -675,7 +675,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/12/30/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A84%E6%80%BB%E7%BB%93%EF%BC%89/" target="_blank">
         <div>
-          算法Floyd-Warshall求全源最短路径。
+          算法 Floyd-Warshall 求全源最短路径。
         </div>
       </a>
 
@@ -736,7 +736,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/11/25/Luogu-P3736-HAOI2016-%E5%AD%97%E7%AC%A6%E5%90%88%E5%B9%B6-%E9%A2%98%E8%A7%A3/" target="_blank">
         <div>
-          传送门传送门 思路题目要求一段数合并后的最大分数，看到合并，且 $n$ 的范围才 $300$，自然的想到复杂度 $O(n^3)$ 的区间 dp。 注意到 $k$ 的范围很小，我们就可以想到复杂度为 $O(2^k)$ 状压，状压字符当前的状态。
+          传送门 传送门 思路 题目要求一段数合并后的最大分数，看到合并，且 \(n\) 的范围才 \(300\)，自然的想到复杂度 \(O(n^3)\) 的区间 dp。 注意到 \(k\) 的范围很小，我们就可以想到复杂度为 \(O(2^k)\) 状压，状压字符当前的状态。
         </div>
       </a>
 
@@ -797,7 +797,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/11/05/Codeforces-CF896C-Willem-Chtholly-and-Seniorious-%E8%AF%A6%E8%A7%A3/" target="_blank">
         <div>
-          一道模板题。 传送门
+          一道模板题。 传送门
         </div>
       </a>
 
@@ -858,7 +858,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/10/05/9-24-10-5-%E6%9C%9F%E9%97%B4%E6%80%BB%E7%BB%93/" target="_blank">
         <div>
-          9.24 - 10.5 期间总结序言深窥自己的心，而后发觉一切的奇迹在你自己。  ——培根
+          9.24 - 10.5 期间总结 序言 深窥自己的心，而后发觉一切的奇迹在你自己。 ——培根
         </div>
       </a>
 

@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前置芝士 DFS  图论基础知识">
+    <meta name="description" content="前置芝士  DFS 图论基础知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Luogu P2986 [USACO10MAR] Great Cow Gathering G 题解">
 <meta property="og:url" content="http://example.com/2023/08/03/Luogu-P2986-USACO10MAR-Great-Cow-Gathering-G-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="前置芝士 DFS  图论基础知识">
+<meta property="og:description" content="前置芝士  DFS 图论基础知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-03T07:20:18.000Z">
 <meta property="article:modified_time" content="2024-01-12T06:20:55.119Z">
@@ -358,17 +358,32 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前置芝士"><a href="#前置芝士" class="headerlink" title="前置芝士"></a>前置芝士</h1><ul>
-<li><p>DFS</p>
-</li>
-<li><p>图论基础知识</p>
-</li>
+                <h1 id="前置芝士">前置芝士</h1>
+<ul>
+<li><p>DFS</p></li>
+<li><p>图论基础知识</p></li>
 </ul>
 <span id="more"></span>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2986">题目链接。</a></p>
-<h1 id="题目超短的简述"><a href="#题目超短的简述" class="headerlink" title="题目超短的简述"></a>题目<del>超短的</del>简述</h1><p>给出一棵树，每个节点都有一个权值。现选择一点 $X$ 作为根节点，则其不方便值为其它点的权值乘上距离点 $X$ 的长度之和，求最小的不方便值。</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>本题给出了一棵树，不妨设根节点为 $1$ ，先求出每个节点 $i$ 有多少头儿子奶牛 $sonnum_i$ （包括自己），在从根节点开始寻找，如果节点的儿子 $son_{i}$ 所包含的奶牛数量 $sonnum_{son_{i}}$ 大于其他奶牛的数量， 则代表如果选择这个点作为集会点，其 $son_{i}$ 的儿子少走的距离会比其他的点多走的距离要多，表明如果选择此点会让不方便值更小，我们就可以从这个点再次重复搜索过程，直到不能再搜索，表明这个点是<strong>目前搜索</strong>的最优值。这个过程可以用DFS来实现,最后搜索出来的点<strong>可能会有很多</strong>，可以一个一个搜索出它们的最小不方便值，也可用DFS来实现。对于那些还没有学过树形DP的人相对而言会易于理解（肯定会比树形DP要慢）。</p>
-<h1 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h1><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h1 id="题目">题目</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2986">题目链接。</a></p>
+<h1 id="题目超短的简述">题目<del>超短的</del>简述</h1>
+<p>给出一棵树，每个节点都有一个权值。现选择一点 <span
+class="math inline">\(X\)</span>
+作为根节点，则其不方便值为其它点的权值乘上距离点 <span
+class="math inline">\(X\)</span> 的长度之和，求最小的不方便值。</p>
+<h1 id="思考">思考</h1>
+<p>本题给出了一棵树，不妨设根节点为 <span
+class="math inline">\(1\)</span> ，先求出每个节点 <span
+class="math inline">\(i\)</span> 有多少头儿子奶牛 <span
+class="math inline">\(sonnum_i\)</span>
+（包括自己），在从根节点开始寻找，如果节点的儿子 <span
+class="math inline">\(son_{i}\)</span> 所包含的奶牛数量 <span
+class="math inline">\(sonnum_{son_{i}}\)</span> 大于其他奶牛的数量，
+则代表如果选择这个点作为集会点，其 <span
+class="math inline">\(son_{i}\)</span>
+的儿子少走的距离会比其他的点多走的距离要多，表明如果选择此点会让不方便值更小，我们就可以从这个点再次重复搜索过程，直到不能再搜索，表明这个点是<strong>目前搜索</strong>的最优值。这个过程可以用DFS来实现,最后搜索出来的点<strong>可能会有很多</strong>，可以一个一个搜索出它们的最小不方便值，也可用DFS来实现。对于那些还没有学过树形DP的人相对而言会易于理解（肯定会比树形DP要慢）。</p>
+<h1 id="ac-code">AC Code</h1>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">100010</span><span class="token punctuation">;</span>
@@ -452,7 +467,8 @@ ll <span class="token function">dfs1</span><span class="token punctuation">(</sp
 	<span class="token function">dfs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//求得有哪些点满足最优条件，这里一并求值。 </span>
 	cout<span class="token operator">&lt;&lt;</span>anss<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h1 id="附"><a href="#附" class="headerlink" title="附"></a>附</h1><p>这是本蒻的第一篇题解，有任何错误都可以在评论区指出。</p>
+<h1 id="附">附</h1>
+<p>这是本蒻的第一篇题解，有任何错误都可以在评论区指出。</p>
 
                 
               </div>
