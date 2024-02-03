@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前置芝士  并查集 Kruscal 重构树 图论基础知识  题目 链接地址">
+    <meta name="description" content="前置芝士 并查集  Kruscal 重构树  图论基础知识   题目链接地址">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Luogu P3623 [APIO2008] 免费道路 题解">
 <meta property="og:url" content="http://example.com/2023/08/04/Luogu-P3623-APIO2008-%E5%85%8D%E8%B4%B9%E9%81%93%E8%B7%AF-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="前置芝士  并查集 Kruscal 重构树 图论基础知识  题目 链接地址">
+<meta property="og:description" content="前置芝士 并查集  Kruscal 重构树  图论基础知识   题目链接地址">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-04T12:49:57.000Z">
 <meta property="article:modified_time" content="2024-01-12T02:47:02.947Z">
@@ -358,36 +358,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前置芝士">前置芝士</h1>
-<ul>
-<li><p>并查集</p></li>
-<li><p><strong>Kruscal</strong> 重构树</p></li>
-<li><p>图论基础知识</p></li>
+                <h1 id="前置芝士"><a href="#前置芝士" class="headerlink" title="前置芝士"></a>前置芝士</h1><ul>
+<li><p>并查集</p>
+</li>
+<li><p><strong>Kruscal</strong> 重构树</p>
+</li>
+<li><p>图论基础知识</p>
+</li>
 </ul>
-<h1 id="题目">题目</h1>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3623">链接地址</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3623">链接地址</a></p>
 <span id="more"></span>
-<h1 id="题目简述">题目简述</h1>
-<p>给定两种边 <span class="math inline">\(stone,cement\)</span>。现有
-<span class="math inline">\(n\)</span> 个节点，共有 <span
-class="math inline">\(m\)</span>
-条<strong>不同种类</strong>的边连接，现需选择一些边，使这些节点互相连通，其中
-<span class="math inline">\(stone\)</span> 边为 <span
-class="math inline">\(K\)</span> 条。求连接边的道路总和最小的方案。</p>
-<h1 id="思考">思考</h1>
-<p>我们可以设某一种边全部都连接，则如果另一种边选择一部分边连接一些使这个图连通，则这些边肯定是必要的，既然是连通性问题，我们就可以用<strong>并查集</strong>解决是否连通。必要的边求出后，再考虑连通性并选择边连接，注意其中
-<span class="math inline">\(stone\)</span> 边有 <span
-class="math inline">\(K\)</span> 条即可。</p>
-<h1 id="边界考虑">边界考虑</h1>
-<p>如果求出来的 <span class="math inline">\(stone\)</span> 边的数量大于
-<span class="math inline">\(K\)</span> 的数量，显然是与题意要求恰好有
-<span class="math inline">\(K\)</span> 条边不符的，如果除 <span
-class="math inline">\(cement\)</span> 边的数量是小于 <span
-class="math inline">\(K\)</span> 的，则说明其 <span
-class="math inline">\(stone\)</span> 边的数量再怎么增加都会小于 <span
-class="math inline">\(K\)</span> ，即输出 no solution。</p>
-<h1 id="ac-code">AC code</h1>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<h1 id="题目简述"><a href="#题目简述" class="headerlink" title="题目简述"></a>题目简述</h1><p>给定两种边 $stone,cement$。现有 $n$ 个节点，共有 $m$ 条<strong>不同种类</strong>的边连接，现需选择一些边，使这些节点互相连通，其中 $stone$ 边为 $K$ 条。求连接边的道路总和最小的方案。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>我们可以设某一种边全部都连接，则如果另一种边选择一部分边连接一些使这个图连通，则这些边肯定是必要的，既然是连通性问题，我们就可以用<strong>并查集</strong>解决是否连通。必要的边求出后，再考虑连通性并选择边连接，注意其中 $stone$ 边有 $K$ 条即可。</p>
+<h1 id="边界考虑"><a href="#边界考虑" class="headerlink" title="边界考虑"></a>边界考虑</h1><p>如果求出来的 $stone$ 边的数量大于 $K$ 的数量，显然是与题意要求恰好有 $K$ 条边不符的，如果除 $cement$ 边的数量是小于 $K$ 的，则说明其 $stone$ 边的数量再怎么增加都会小于 $K$ ，即输出 no solution。</p>
+<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll M<span class="token operator">=</span><span class="token number">1e5</span><span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span>

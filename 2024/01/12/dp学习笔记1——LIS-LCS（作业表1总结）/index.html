@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 for (ll i &#x3D; 1;">
+    <meta name="description" content="LIS全名最长上升子序列。 做法一设 $dp_i$ 为字符串 $a$ 中以 $a_i$ 结尾的 LIS，当前的 $dp_i$ 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)枚举两维，时间复杂度 $O(n^2)$。 for (ll i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;     for">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dp学习笔记1——LCS &amp; LIS（作业表1总结）">
 <meta property="og:url" content="http://example.com/2024/01/12/dp%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94LIS-LCS%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A81%E6%80%BB%E7%BB%93%EF%BC%89/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="LIS 全名最长上升子序列。 做法一 设 \(dp_i\) 为字符串 \(a\) 中以 \(a_i\) 结尾的 LIS，当前的 \(dp_i\) 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： \[dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)\] 枚举两维，时间复杂度 \(O(n^2)\)。 for (ll i &#x3D; 1;">
+<meta property="og:description" content="LIS全名最长上升子序列。 做法一设 $dp_i$ 为字符串 $a$ 中以 $a_i$ 结尾的 LIS，当前的 $dp_i$ 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来： dp_i &#x3D; \max (1,dp_j+1)\ (i &gt; j,a_i &gt; a_j)枚举两维，时间复杂度 $O(n^2)$。 for (ll i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;     for">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-11T23:28:12.000Z">
 <meta property="article:modified_time" content="2024-01-12T06:21:08.359Z">
@@ -297,7 +297,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          721 字
+          719 字
         
       </span>
     
@@ -358,18 +358,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="lis">LIS</h1>
-<p>全名最长上升子序列。</p>
-<h2 id="做法一">做法一</h2>
-<p>设 <span class="math inline">\(dp_i\)</span> 为字符串 <span
-class="math inline">\(a\)</span> 中以 <span
-class="math inline">\(a_i\)</span> 结尾的 LIS，当前的 <span
-class="math inline">\(dp_i\)</span> 肯定要从比他小的地方枚举，所以 dp
-方程可以简单推出来：</p>
-<p><span class="math display">\[dp_i = \max (1,dp_j+1)\ (i &gt; j,a_i
-&gt; a_j)\]</span></p>
-<p>枚举两维，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
+                <h1 id="LIS"><a href="#LIS" class="headerlink" title="LIS"></a>LIS</h1><p>全名最长上升子序列。</p>
+<h2 id="做法一"><a href="#做法一" class="headerlink" title="做法一"></a>做法一</h2><p>设 $dp_i$ 为字符串 $a$ 中以 $a_i$ 结尾的 LIS，当前的 $dp_i$ 肯定要从比他小的地方枚举，所以 dp 方程可以简单推出来：</p>
+<script type="math/tex; mode=display">dp_i = \max (1,dp_j+1)\ (i > j,a_i > a_j)</script><p>枚举两维，时间复杂度 $O(n^2)$。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>ll j <span class="token operator">=</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span>
@@ -380,48 +371,27 @@ class="math inline">\(O(n^2)\)</span>。</p>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="做法二">做法二</h2>
-<p>考虑修改做法一，我们发现上述 dp
-方程是一个<strong>二位偏序</strong>问题，所以考虑用树状数组来优化。每次去寻找比当前字符更小的最大
-<span class="math inline">\(dp\)</span> 值。</p>
-<p>第二维用树状数组优化掉了，时间复杂度 <span class="math inline">\(O(n
-\log n)\)</span>。</p>
+<h2 id="做法二"><a href="#做法二" class="headerlink" title="做法二"></a>做法二</h2><p>考虑修改做法一，我们发现上述 dp 方程是一个<strong>二位偏序</strong>问题，所以考虑用树状数组来优化。每次去寻找比当前字符更小的最大 $dp$ 值。</p>
+<p>第二维用树状数组优化掉了，时间复杂度 $O(n \log n)$。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">getmax</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ll<span class="token punctuation">)</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//树状数组优化</span>
     <span class="token function">modify</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="做法三">做法三</h2>
-<p>考虑另一种做法，设 <span class="math inline">\(dp_i\)</span> 为长度为
-<span class="math inline">\(i\)</span> 的 LIS
-中最后出现的最小的值，显然其具有单调性。对于 <span
-class="math inline">\(a\)</span>
-的每一个字符，我们可以二分找到比其大的第一个，然后用这个字符去更新。</p>
-<p>有一个二分查找的过程，时间复杂度 <span class="math inline">\(O(n \log
-n)\)</span>。</p>
+<h2 id="做法三"><a href="#做法三" class="headerlink" title="做法三"></a>做法三</h2><p>考虑另一种做法，设 $dp_i$ 为长度为 $i$ 的 LIS 中最后出现的最小的值，显然其具有单调性。对于 $a$ 的每一个字符，我们可以二分找到比其大的第一个，然后用这个字符去更新。</p>
+<p>有一个二分查找的过程，时间复杂度 $O(n \log n)$。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token operator">*</span><span class="token function">upper_bound</span><span class="token punctuation">(</span>dp <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> dp <span class="token operator">+</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h1 id="lcs">LCS</h1>
-<p>全名最长公共子序列。</p>
-<h2 id="做法一-1">做法一</h2>
-<p>设 <span class="math inline">\(dp_{i,j}\)</span> 为两个串 <span
-class="math inline">\(a,b\)</span> 其中 <span
-class="math inline">\(a\)</span> 的前 <span
-class="math inline">\(i\)</span> 个字符串与 <span
-class="math inline">\(b\)</span> 的前 <span
-class="math inline">\(j\)</span>
-个字符串的最长上升子序列，要么相等或不相等，所以 dp 递推式就为：</p>
-<p><span class="math display">\[
+<h1 id="LCS"><a href="#LCS" class="headerlink" title="LCS"></a>LCS</h1><p>全名最长公共子序列。</p>
+<h2 id="做法一-1"><a href="#做法一-1" class="headerlink" title="做法一"></a>做法一</h2><p>设 $dp_{i,j}$ 为两个串 $a,b$ 其中 $a$ 的前 $i$ 个字符串与 $b$ 的前 $j$ 个字符串的最长上升子序列，要么相等或不相等，所以 dp 递推式就为：</p>
+<script type="math/tex; mode=display">
 dp_{i,j} = \begin{cases}
    dp_{i-1,j-1} + 1\ (a_i = b_j)
    \\
    \max(dp_{i-1,j},dp_{i,j-1})\ (a_i  \neq b_j)
-\end{cases}
-\]</span></p>
-<p>同样是枚举两维，时间复杂度 <span
-class="math inline">\(O(n^2)\)</span>。</p>
+\end{cases}</script><p>同样是枚举两维，时间复杂度 $O(n^2)$。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>ll j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
@@ -436,21 +406,10 @@ class="math inline">\(O(n^2)\)</span>。</p>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="做法二-1">做法二</h2>
-<p><span class="math inline">\(O(n \log n)\)</span> 做法：</p>
+<h2 id="做法二-1"><a href="#做法二-1" class="headerlink" title="做法二"></a>做法二</h2><p>$O(n \log n)$ 做法：</p>
 <p>我们考虑将其转化为 LIS 来做。</p>
-<p>我们将串 <span class="math inline">\(a\)</span>
-里的每个元素按顺序依次编号，那么我们不妨假设其 LCS 为 <span
-class="math inline">\(c\)</span>。那么 <span
-class="math inline">\(c\)</span> 的元素按照编号重新计算就是一个
-IS，那么我们将 <span class="math inline">\(b\)</span>
-的元素重新编号，找到其中的 IS，它在 <span
-class="math inline">\(a\)</span> 中也必定存在一个 IS
-与之对应且是其转换后的字符为之前的
-CS。所以我们只需要将其离散化重新编号后在 <span
-class="math inline">\(b\)</span> 串里找其 LIS 即可求出答案。</p>
-<p>时间复杂度同 LIS 做法二或三，<span class="math inline">\(O(n \log
-n)\)</span>。</p>
+<p>我们将串 $a$ 里的每个元素按顺序依次编号，那么我们不妨假设其 LCS 为 $c$。那么 $c$ 的元素按照编号重新计算就是一个 IS，那么我们将 $b$ 的元素重新编号，找到其中的 IS，它在 $a$ 中也必定存在一个 IS 与之对应且是其转换后的字符为之前的 CS。所以我们只需要将其离散化重新编号后在 $b$ 串里找其 LIS 即可求出答案。</p>
+<p>时间复杂度同 LIS 做法二或三，$O(n \log n)$。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     cin <span class="token operator">>></span> x<span class="token punctuation">;</span>
@@ -473,7 +432,6 @@ last<span class="token punctuation">[</span><span class="token number">0</span><
         <span class="token operator">*</span><span class="token function">upper_bound</span><span class="token punctuation">(</span>dp <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> dp <span class="token operator">+</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> last<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span> last<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token comment">//LIS 做法三</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-
                 
               </div>
             

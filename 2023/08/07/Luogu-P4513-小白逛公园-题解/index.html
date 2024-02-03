@@ -16,12 +16,12 @@
   <meta name="author" content="Yucheng Deng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前置芝士  线段树 一定量的大脑  题目 链 接 地 址 (大雾 真 正 的 链 接">
+    <meta name="description" content="前置芝士 线段树  一定量的大脑    题目链 接 地 址 (大雾 真 正 的 链 接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Luogu P4513 小白逛公园 题解~">
 <meta property="og:url" content="http://example.com/2023/08/07/Luogu-P4513-%E5%B0%8F%E7%99%BD%E9%80%9B%E5%85%AC%E5%9B%AD-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="DYC的Blog">
-<meta property="og:description" content="前置芝士  线段树 一定量的大脑  题目 链 接 地 址 (大雾 真 正 的 链 接">
+<meta property="og:description" content="前置芝士 线段树  一定量的大脑    题目链 接 地 址 (大雾 真 正 的 链 接">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-07T11:34:55.000Z">
 <meta property="article:modified_time" content="2024-01-12T02:47:38.378Z">
@@ -308,7 +308,7 @@
         
         
         
-          10 分钟
+          11 分钟
         
       </span>
     
@@ -358,41 +358,26 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前置芝士">前置芝士</h1>
-<ul>
-<li><p>线段树</p></li>
-<li><p><del>一定量的大脑</del></p></li>
+                <h1 id="前置芝士"><a href="#前置芝士" class="headerlink" title="前置芝士"></a>前置芝士</h1><ul>
+<li><p>线段树</p>
+</li>
+<li><p><del>一定量的大脑</del> </p>
+</li>
 </ul>
-<h1 id="题目">题目</h1>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yL411K7CP/"><del>链 接 地
-址 (大雾</del></a></p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4513">真 正 的 链
-接</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yL411K7CP/"><del>链 接 地 址 (大雾</del></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4513">真 正 的 链 接</a></p>
 <span id="more"></span>
-<h1 id="简述">简述</h1>
-<p>给定一段共有 <span class="math inline">\(n\)</span>
-个点的线段，每个点都有一个值，现有 <span
-class="math inline">\(m\)</span> 次，<span
-class="math inline">\(2\)</span> 种操作：</p>
-<ol type="1">
-<li><p>形如 $ 1 a b $，求值操作，求 <span class="math inline">\([\ a ,b\
-]\)</span> 区间内最大子序列和。</p></li>
-<li><p>形如 $ 2 p s $，修改操作，将点 <span
-class="math inline">\(p\)</span> 的值修改为 <span
-class="math inline">\(s\)</span> 。</p></li>
+<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>给定一段共有 $n$ 个点的线段，每个点都有一个值，现有 $m$ 次，$2$ 种操作：</p>
+<ol>
+<li><p>形如 $ 1\ a\ b $，求值操作，求 $[\ a ,b\ ]$ 区间内最大子序列和。</p>
+</li>
+<li><p>形如 $ 2\ p\ s $，修改操作，将点 $p$ 的值修改为 $s$ 。</p>
+</li>
 </ol>
-<p>对于每次 <span class="math inline">\(1\)</span>
-号操作，输出其区间内最大子序列和 <span
-class="math inline">\(ans\)</span>。</p>
-<h1 id="思考">思考</h1>
-<!--more-->
-<p>如果我们用正常的方法求区间最大值，时间复杂度为 <span
-class="math inline">\(O(N)\)</span>，显然如果执行 <span
-class="math inline">\(m\)</span>
-次肯定会超时，我们就可以用一种高端大气时间复杂度仅为 <span
-class="math inline">\(O(log_2N)\)</span> 复杂度的算法：线段树。</p>
-<h2 id="建树">建树</h2>
-<p>不用多解释，上代码。</p>
+<p>对于每次 $1$ 号操作，输出其区间内最大子序列和 $ans$。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><!--more-->
+<p>如果我们用正常的方法求区间最大值，时间复杂度为 $O(N)$，显然如果执行 $m$ 次肯定会超时，我们就可以用一种高端大气时间复杂度仅为 $O(log_2N)$ 复杂度的算法：线段树。</p>
+<h2 id="建树"><a href="#建树" class="headerlink" title="建树"></a>建树</h2><p>不用多解释，上代码。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">up</span><span class="token punctuation">(</span>ll id<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//上提操作</span>
 	Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token operator">=</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token operator">+</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token punctuation">;</span>
 	Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>l1<span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token operator">+</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>l1<span class="token punctuation">,</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>l1<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//l1，r1作用下文会提及。</span>
@@ -410,9 +395,7 @@ class="math inline">\(O(log_2N)\)</span> 复杂度的算法：线段树。</p>
 	<span class="token function">build</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token function">up</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="修改操作">修改操作</h2>
-<p>既然只修改一个点的值，那肯定就用线段树的单点修改就 <span
-class="math inline">\(OK\)</span> 了。</p>
+<h2 id="修改操作"><a href="#修改操作" class="headerlink" title="修改操作"></a>修改操作</h2><p>既然只修改一个点的值，那肯定就用线段树的单点修改就 $OK$ 了。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">change</span><span class="token punctuation">(</span>ll id<span class="token punctuation">,</span>ll x<span class="token punctuation">,</span>ll num<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//单点修改</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">==</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>max<span class="token operator">=</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>l1<span class="token operator">=</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>r1<span class="token operator">=</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token operator">=</span>num<span class="token punctuation">;</span>
@@ -423,41 +406,34 @@ class="math inline">\(OK\)</span> 了。</p>
 	<span class="token keyword">else</span> <span class="token function">change</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>x<span class="token punctuation">,</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token function">up</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h2 id="求和操作">求和操作</h2>
-<p>枚举到一个节点时有如下几种情况：</p>
-<ol type="1">
+<h2 id="求和操作"><a href="#求和操作" class="headerlink" title="求和操作"></a>求和操作</h2><p>枚举到一个节点时有如下几种情况：</p>
+<ol>
 <li>该节点位于所求区间内，返回。</li>
 </ol>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">&lt;=</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">&amp;&amp;</span>r<span class="token operator">>=</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//位于区间内</span>
 	<span class="token keyword">return</span> Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>max<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
-<ol start="2" type="1">
+<ol>
 <li>区间位于该节点左儿子内部，枚举该节点左儿子。</li>
 </ol>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ll anss<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1e17</span><span class="token punctuation">;</span><span class="token comment">//答案</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">&lt;=</span>r<span class="token operator">&amp;&amp;</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token operator">>=</span>l<span class="token punctuation">)</span>anss<span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">GetSum</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">,</span>anss<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//左儿子包含所求区间</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
-<ol start="3" type="1">
+<ol>
 <li>区间位于该节点右儿子内部，枚举该节点右儿子。</li>
 </ol>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">&lt;=</span>r<span class="token operator">&amp;&amp;</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token operator">>=</span>l<span class="token punctuation">)</span>anss<span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">GetSum</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>l<span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">,</span>anss<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//右儿子包含所求区间</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
-<ol start="4" type="1">
-<li>区间与左儿子，右儿子都有交集，则我们设一个节点的 <span
-class="math inline">\(l1\)</span> 为从左起的一段最大值， <span
-class="math inline">\(r1\)</span>
-为从右起的一段最大值。随后可以用递归来求最大的从中间部分起左、右边部分区间和最大值，再合并求得最大值。</li>
+<ol>
+<li>区间与左儿子，右儿子都有交集，则我们设一个节点的 $l1$ 为从左起的一段最大值， $r1$ 为从右起的一段最大值。随后可以用递归来求最大的从中间部分起左、右边部分区间和最大值，再合并求得最大值。</li>
 </ol>
-<h3 id="递归过程">递归过程</h3>
-<p>有两侧的递归，这里分开来讲。</p>
-<h4 id="左递归">左递归</h4>
-<p>首先先看左儿子有如下情况：</p>
-<ol type="1">
-<li><p>如果这个节点的左儿子在所要求区间的左侧要小，递归结束，代表这个节点的
-<span class="math inline">\(r1\)</span>
-值即是其目前递归的值，返回。</p></li>
-<li><p>如果该节点的右儿子是被其要求区间完全覆盖（即所要求区间的左、右端点与其右儿子的左、右端点重合），则其最大值要么是其右儿子的
-<span class="math inline">\(r1\)</span>
-值，要么是右儿子的总和加上其左儿子的递归结果，从中取最大即可。</p></li>
-<li><p>如果该节点的右儿子是被其要求区间覆盖（但所要求区间的左端点与其右儿子的左端点不重合，也就是说该节点的左儿子并没有包含所要求区间），递归右儿子，取其值。</p></li>
+<h3 id="递归过程"><a href="#递归过程" class="headerlink" title="递归过程"></a>递归过程</h3><p>有两侧的递归，这里分开来讲。</p>
+<h4 id="左递归"><a href="#左递归" class="headerlink" title="左递归"></a>左递归</h4><p>首先先看左儿子有如下情况：</p>
+<ol>
+<li><p>如果这个节点的左儿子在所要求区间的左侧要小，递归结束，代表这个节点的 $r1$ 值即是其目前递归的值，返回。</p>
+</li>
+<li><p>如果该节点的右儿子是被其要求区间完全覆盖（即所要求区间的左、右端点与其右儿子的左、右端点重合），则其最大值要么是其右儿子的 $r1$ 值，要么是右儿子的总和加上其左儿子的递归结果，从中取最大即可。</p>
+</li>
+<li><p>如果该节点的右儿子是被其要求区间覆盖（但所要求区间的左端点与其右儿子的左端点不重合，也就是说该节点的左儿子并没有包含所要求区间），递归右儿子，取其值。</p>
+</li>
 </ol>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">Tree_num_l</span><span class="token punctuation">(</span>ll id<span class="token punctuation">,</span>ll l<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	ll mid<span class="token operator">=</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">+</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
@@ -471,8 +447,7 @@ class="math inline">\(r1\)</span>
 		<span class="token keyword">return</span> <span class="token function">Tree_num_l</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>l<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h4 id="右递归">右递归</h4>
-<p>和左递归差不多，不过要改点细节。</p>
+<h4 id="右递归"><a href="#右递归" class="headerlink" title="右递归"></a>右递归</h4><p>和左递归差不多，不过要改点细节。</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">Tree_num_r</span><span class="token punctuation">(</span>ll id<span class="token punctuation">,</span>ll r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	ll mid<span class="token operator">=</span><span class="token punctuation">(</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">+</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>r<span class="token operator">>=</span>Tree<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token comment">//情况1</span>
@@ -485,7 +460,7 @@ class="math inline">\(r1\)</span>
 		<span class="token keyword">return</span> <span class="token function">Tree_num_r</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<hr />
+<hr>
 <p>这是递归过程的代码：</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">&lt;=</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token operator">&amp;&amp;</span>Tree<span class="token punctuation">[</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">&lt;=</span>r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	ll ansss<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
@@ -493,9 +468,8 @@ class="math inline">\(r1\)</span>
 	ansss<span class="token operator">+=</span><span class="token function">Tree_num_r</span><span class="token punctuation">(</span>id<span class="token operator">*</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	anss<span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span>ansss<span class="token punctuation">,</span>anss<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<hr />
-<h1 id="ac-code">AC code</h1>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<hr>
+<h1 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h1><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
 <span class="token keyword">const</span> ll N<span class="token operator">=</span><span class="token number">500000</span><span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span>
