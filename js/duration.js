@@ -9,6 +9,6 @@ function createtime() {
     seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
     snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
     document.getElementById("timeDate").innerHTML = dnum+" days ";
-    document.getElementById("times").innerHTML = hnum + " hours " + mnum + " minutes and  " + snum + " seconds from beginning.";
+    document.getElementById("times").innerHTML = hnum + " hours " + mnum + " minutes and  " + snum + " seconds from the beginning.";
 }
 setInterval("createtime()",250);
