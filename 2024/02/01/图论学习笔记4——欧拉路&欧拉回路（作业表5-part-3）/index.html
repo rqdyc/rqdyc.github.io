@@ -24,7 +24,7 @@
 <meta property="og:description" content="定义 小的时候我们可能都玩过一个游戏：用一笔画出一个图形，这个问题就是一笔画问题。几百年前，欧拉也提出了一个问题：七桥问题，也就是有没有方法不经过重复的边走完所有的边，而如果可以，我们就称这个路径是欧拉路，而如果说这条路径恰好是环，我们就称这条路径是欧拉回路。 性质 欧拉路有很多有趣的性质：  如果一个图有欧拉路，那令一个点 \(i\) 的度数为 \(d_i\)，当且仅当 \(\sum^">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-01T04:09:23.000Z">
-<meta property="article:modified_time" content="2024-02-04T12:45:03.051Z">
+<meta property="article:modified_time" content="2024-02-04T13:03:11.760Z">
 <meta property="article:author" content="Yucheng Deng">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -366,7 +366,7 @@
 <li>如果一个图有欧拉路，那令一个点 <span
 class="math inline">\(i\)</span> 的度数为 <span
 class="math inline">\(d_i\)</span>，当且仅当 <span
-class="math inline">\(\sum^{n}_{i=1} \neg[2 \mid d_i] = 0 \or 2\)</span>
+class="math inline">\(\sum^{n}_{i=1} \neg[2 \mid d_i] = 0 / 2\)</span>
 时成立。</li>
 </ul>
 <p>充分性：
@@ -383,6 +383,10 @@ class="math inline">\(1\)</span>。所以删了边之后两端点有三种情况
 + m)\)</span>。</p>
 <h1 id="例题">例题</h1>
 <h2 id="m-垃圾运输">M 垃圾运输</h2>
+<p><a
+target="_blank" rel="noopener" href="http://oi.nks.edu.cn:19360/zh/Problem/Details?cid=2678&amp;tid=M">Link
+NKOJ</a> and <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3520">Link
+Luogu</a></p>
 <p><del>做了这个题后我才发现我就是Garbage</del>。</p>
 <p>这个题确实很板子，就是欧拉回路找简单环，只需要结合性质二做就行（<del>交了20多发最后发现数组开小了</del>），具体而言，对于每个点，记录是否访问过没有，如果访问过，我们就将中间形成的这个环删掉并记录答案，当它不存在，一直跑就行。</p>
 <h3 id="ac-code">AC code</h3>
@@ -566,6 +570,12 @@ vector<span class="token operator">&lt;</span>ll<span class="token operator">></
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/02/03/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05%E2%80%94%E2%80%94%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%88%E4%BD%9C%E4%B8%9A%E8%A1%A85-part-4%EF%BC%89/" title="图论学习笔记5——生成树（作业表5 part 4）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图论学习笔记5——生成树（作业表5 part 4）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
